@@ -23,21 +23,18 @@ public class Carte {
                 }
             }
             
-            for(int i=largeur/4;i<(3*largeur)/4;i++){
+            for( int i=largeur/4; i<(3*largeur)/4; i++){
                 int nb = (int) (Math.random() * 3 );
-                for(int t=longueur/4-nb;t<(3*longueur)/4+nb;t++){
-                    carte[t][i]=1;
+                for( int t=longueur/4-nb; t<(3*longueur)/4+nb; t++){
+                    carte[t][i]=1;            
                 }
-            for(int a=longueur/4;a<(3*longueur)/4;a++){
-                int alea = (int) (Math.random() * 1 );
-                for(int b=largeur/4-alea;b<(3*largeur)/4+alea;b++){
-                    carte[a][b]=1;
-                    
+            }
+            for(int p=longueur/4; p<(3*longueur)/4; p++){
+                int rdn = (int) (Math.random()*3);
+                for(int q=largeur/4-rdn; q<(3*largeur)/4+rdn; q++){
+                    carte[p][q]=1;
                 }
-                
-            }
-             
-            }
+        }
         }
         
         // Affichage de la matrice
