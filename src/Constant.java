@@ -15,10 +15,16 @@ import java.io.FileReader;
  * @author ISEN
  */
 public class Constant {
-    //Get .txt file to have more random fun
+    
+    //Constante pour génération du Terrain
     public static final String NAMETXTPATH = new java.io.File("").getAbsolutePath() + "\\src\\name.txt";
     public static final String [] TABLEAUNOM = txtToString(NAMETXTPATH) ;
 
+    //Constante pour le soin
+    public static final int MAXSOIN =4;
+    public static final int MINSOIN = 1;
+            
+    //Get .txt file to have more random fun
 public static String[] txtToString(String path){
     try{
             //Open file
