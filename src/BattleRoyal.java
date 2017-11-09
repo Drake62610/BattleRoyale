@@ -23,6 +23,8 @@ public class BattleRoyal {
         // TODO code application logic here
         Carte carte = new Carte(LONGUEUR,LARGEUR);
         carte.afficher();
+        
+        
         Constant constante = new Constant();
         
         Personnage perso1 = new Personnage(0,0);

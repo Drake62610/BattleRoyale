@@ -4,23 +4,11 @@
  * and open the template in the editor.
  */
 
-
 /**
  *
  * @author Loïc
  */
-public class Terrain {
+public class Plaine extends Terrain{
     
-    
-    private boolean piege;
-
-    public void setPiege(boolean piege) {
-        this.piege = piege;
-    }
-
-    public boolean isPiege() {
-        return piege;
-    }
-    
-    
+   
 }
