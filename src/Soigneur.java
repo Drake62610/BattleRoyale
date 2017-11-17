@@ -1,4 +1,3 @@
-
 /**
  * DATE 09/11/17
  * @author MATTE Florian
@@ -14,6 +13,7 @@ public class Soigneur extends Personnage{
      */
     public Soigneur( int position_x, int position_y) {
         super(position_x,position_y);
+        
         this.capacité = Constant.MINSOIN + (int)(Math.random()*(Constant.MAXSOIN));
     }
     
@@ -39,11 +39,12 @@ public class Soigneur extends Personnage{
     
     void soigner(){
         if (this.getPVMAX()-this.getPv()>=capacité){
-        System.out.println(this.getName() + " se soigne de "+ capacité + " ! ");
-        this.setPv(this.getPv() + capacité);
+            System.out.println(this.getName() + " se soigne de "+ capacité + " ! ");
+            this.setPv(this.getPv() + capacité);
         }
         else{
-            
+            System.out.println(this.getName() + " se soigne de "+ Integer.toString(this.getPVMAX()-this.getPv()) + " !");
+            this.setPv(this.getPVMAX());
         }
             
     }
