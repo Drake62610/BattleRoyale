@@ -11,7 +11,7 @@
  */
 public class Terrain {
     
-    
+    private Object perso; //Le personnage qui est sur le terrain OU la team
     private boolean piege;
 
     public void setPiege(boolean piege) {
