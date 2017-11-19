@@ -13,11 +13,12 @@ public class Personnage {
     private final int PVMAX;
     private int pv;
     private int force;
+    private int critique;
     private int deplacement;
     private int position_x;
     private int position_y;
     //private Arme arme;
-    //private Team team;
+    private Team team;
 
     
     public Personnage( int position_x, int position_y) {
@@ -25,8 +26,10 @@ public class Personnage {
         this.name = tabNom[(int)(Math.random()*(tabNom.length))];
         this.pv = 5 + (int)(Math.random()*(10-5));
         this.PVMAX = this.pv;
+        this.force = 1 + (int)(Math.random()*(10-5)); //Force à définir sur les différences classe plus tard
         this.position_x = position_x;
         this.position_y = position_y;
+        this.team = null;
     }
     
     //GETTER
@@ -41,12 +44,19 @@ public class Personnage {
     public int getPVMAX() {
         return PVMAX;
     }
-    
+
+    public int getCritique() {
+        return critique;
+    }
 
     //SETTER
     public void setPv(int pv) {
         this.pv = pv;
     } 
+
+    public void setCritique(int critique) {
+        this.critique = critique;
+    }
     
     @Override
     public String toString() {
@@ -63,4 +73,33 @@ public class Personnage {
         System.out.println(name + " dit : " + text);
     }
     
+    public void attaquer(Personnage passif){
+        //Notion de coup critique
+        if((int)(Math.random()*100)<this.getCritique()){
+            this.parler("COUP CRITIQUE");
+            passif.enquaisser(this.force * 2);
+        }
+        else{
+            //Augmenter le ratio 
+            passif.enquaisser(this.force);
+            
+            
+        }
+    }
+    
+    public void enquaisser(int dmg){
+        if(this.getPv()<dmg){
+            this.setPv(0);
+            this.parler("Monde de merde ! x|");
+        }
+        else{
+            this.setPv(this.getPv()-dmg);
+            this.parler("Aie");
+            //Augmenter ratio critique
+        }
+    }
+    
+    public void deplacement(Carte carte){
+        
+    }   
 }

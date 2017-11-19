@@ -27,14 +27,7 @@ public class BattleRoyal {
         Constant constante = new Constant();
         
         Personnage perso1 = new Personnage(0,0);
-        System.out.println(perso1.toString());
-        
-        Soigneur perso2  = new Soigneur(0,0);
-        
-        perso1.setPv(perso1.getPVMAX()-perso2.getCapacité()+1);
-        perso2.soigner(perso1);
-        perso1.setPv(perso1.getPVMAX()-perso2.getCapacité()-1);
-        perso2.soigner(perso1);
+        Personnage perso2 = new Personnage(0,1);
     }
     
 }
