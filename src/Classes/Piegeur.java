@@ -3,12 +3,6 @@ package Classes;
 
 import Carte.Terrain;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
  * Projet JAVA Semestre1 M1
  * @author MATTE FLORIAN, MARISSAL LOIC
@@ -16,7 +10,7 @@ import Carte.Terrain;
 public class Piegeur extends Personnage {
 
     /**
-     *
+     * Classe Piegeur possede le même constructeur que la classe Personnage, les statisitque sont établie en bas d'arbres
      * @param position_x
      * @param position_y
      */
@@ -25,8 +19,8 @@ public class Piegeur extends Personnage {
     }
     
     /**
-     *
-     * @param carte
+     * Permet de poser un piège sur la carte
+     * @param carte Terrain de jeu du battle royale
      */
     public void posePiege(Terrain[][] carte){
         Terrain terrain = carte[this.getPosition_x()][this.getPosition_y()];

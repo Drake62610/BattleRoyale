@@ -8,6 +8,6 @@ import java.util.ArrayList;
  * @author MATTE FLORIAN, MARISSAL LOIC
  */
 public class Team {
-    ArrayList <Personnage> membres = new ArrayList <Personnage>();
-    Personnage leader;
-}
+    ArrayList <Personnage> membres = new ArrayList <Personnage>();  //Liste des membre de la Team
+    Personnage leader;                                              //Leader de la Team qui agit pour les autres
+}  

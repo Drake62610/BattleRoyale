@@ -5,11 +5,11 @@ package Carte;
  * @author MATTE FLORIAN, MARISSAL LOIC
  */
 public class Montagne extends Terrain{
-    
-    
-    private final int pratictabilite;
+    //VARIABLE DE CLASSE
+    private final int pratictabilite;   //Definie si la montagne est escaladable
     
     /**
+     * Constructeur de la classe Montagne
      * genère aléatoirement la pratictabilite d'une montagne entre 0 et 100%
      */
     public Montagne(){
@@ -18,12 +18,12 @@ public class Montagne extends Terrain{
    }
    
     /**
-     *
-     * @return la capacite d'un joueur à escalader la montagne
+     * Le terrain peut être impraticable
+     * @return True si la capacite d'un joueur à escalader la montagne, False sinon
      */
     public boolean estGrimpable(){
        
-       return pratictabilite<35;
+       return pratictabilite>33;
    }
     
 }

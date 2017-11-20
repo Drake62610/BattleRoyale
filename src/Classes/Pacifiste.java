@@ -6,5 +6,10 @@ package Classes;
  */
 
 public interface Pacifiste {
-    void raisonner(Personnage attaquant);
+
+    /**
+     * Capacité spéciale de la caractéristique Pacifiste, permet de convaincre n'importe quelle autre classe de rejoindre sa team ou de créer une team
+     * @param cible qui pourrait rejoindre la Team
+     */
+    abstract void raisonner(Personnage cible);
 }

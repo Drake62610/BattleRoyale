@@ -7,7 +7,8 @@ import BattleRoyale.Constant;
  * @author MATTE FLORIAN, MARISSAL LOIC
  */
 public class Soigneur extends Personnage{
-    private int capacité;
+    //Variable de classe
+    private int capacité; //Capacité de soin qui intervient lors du gain de PV de la methode soigner()
 
     //CONSTRUCTOR
     /**
@@ -22,19 +23,18 @@ public class Soigneur extends Personnage{
     }
     
     //GETTER
-
     /**
-     *
+     * Getter de la variable capacité
      * @return
      */
     public int getCapacité() {
         return capacité;
     }
     
-    
     //METHODS
-    //Se soigner de sa capacitée de soin
-    //On peut soigner un ami ou soi-même
+    /**
+     * Permet de soigner un Personnage en fonction de la capacité de soin du soigneur
+     */
     void soigner(Personnage Ami){
         if (Ami.getPVMAX()-Ami.getPv()>=capacité){
             Ami.setPv(Ami.getPv()+capacité);
@@ -46,6 +46,9 @@ public class Soigneur extends Personnage{
         }
     }
     
+    /**
+     * Polymorphisme de la methode soigner pour se l'aplliquer à soi même
+     */
     void soigner(){
         if (this.getPVMAX()-this.getPv()>=capacité){
             System.out.println(this.getName() + " se soigne de "+ capacité + " ! ");

@@ -5,20 +5,19 @@ package Carte;
  * @author MATTE FLORIAN, MARISSAL LOIC
  */
 public class Foret extends Terrain{
-    
-    private final int densiteArbre;
-    
+    //VARIABLE DE CLASSE
+    private final int densiteArbre;   //Permet de pouvoir se cacher ou non dans la forêt
+
     /**
-     * genère aleatoire la densité d'une case foret entre 0 et 100%
+     * Genère aleatoire la densité d'une case foret entre 0 et 100%
      */
     public Foret(){
-        
         densiteArbre = (int) (Math.random() * 100 );
     }
         
     /**
-     *
-     * @return si un personnage sur cette case peut se cacher
+     * 
+     * @return True si un personnage sur cette case peut se cacher, False sinon
      */
     public boolean seCacher(){
         

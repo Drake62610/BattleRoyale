@@ -17,6 +17,7 @@ public class BattleRoyal {
         // Generation Carte
         Carte carte = new Carte(Constant.LONGUEUR,Constant.LARGEUR);
         carte.afficher();
+        carte.afficher2();
         
         //Generation Perso
         Personnage perso1 = new Personnage(0,0);
