@@ -3,8 +3,8 @@ package Classes;
 import BattleRoyale.Constant;
 
 /**
- * DATE 09/11/17
- * @author MATTE Florian
+ * Projet JAVA Semestre1 M1
+ * @author MATTE FLORIAN, MARISSAL LOIC
  */
 public class Soigneur extends Personnage{
     private int capacité;
@@ -22,6 +22,11 @@ public class Soigneur extends Personnage{
     }
     
     //GETTER
+
+    /**
+     *
+     * @return
+     */
     public int getCapacité() {
         return capacité;
     }

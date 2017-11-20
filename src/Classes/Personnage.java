@@ -4,30 +4,31 @@ package Classes;
 import BattleRoyale.Constant;
 import Carte.Carte;
 
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
- *
- * @author ISEN
+ * Projet JAVA Semestre1 M1
+ * @author MATTE FLORIAN, MARISSAL LOIC
  */
+
 public class Personnage {
-    private String name;
-    private final int PVMAX;
-    private int pv;
-    private int force;
-    private int critique;
-    private int deplacement;
-    private int position_x;
-    private int position_y;
-    //private Arme arme;
+    private final String name;//Nom du Personnage
+    private final int PVMAX;  //Constante contenant les PV maximum du personnages, au début de la partie le personnage possède le maximum
+    private int pv;           //Stat de pv actuels du personnage
+    private final int force;  //Stat de force du personnage influant sur les dégat qu'il cause
+    private int critique;     //Pourcentage d'infliger un coup critique
+    private int deplacement;  //Nombre de cases maximum que peut parcourir un personnage durant la phase déplacement
+    private int position_x;   //Position x sur la carte (Horizontale)
+    private int position_y;   //Position y sur la carte (Verticale)
+    //private Arme arme;      //Arme que possède le personnage (octroie un bonus de portée et/ou de force)
     private Team team;
 
-    
+    /**
+     * Constucteur de Personnage, 
+     * il n'initialise pas PVMAX, pv, force, deplacement car ces caractéristiques sont initialisées dans les classes filles
+     * il initialise le nom qui sera choisit aléatoirement dans une liste configurable grace à name.txt
+     *               la team du personnage n'appartient à aucune team donc elle est initialisée à null
+     * @param position_x Position x du personnage sur la carte générée pour le Battle Royale
+     * @param position_y Position y du personnage sur la carte générée pour le Battle Royale
+     */
     public Personnage( int position_x, int position_y) {
         String[] tabNom = Constant.TABLEAUNOM;
         this.name = tabNom[(int)(Math.random()*(tabNom.length))];
@@ -40,39 +41,77 @@ public class Personnage {
     }
     
     //GETTER
+    /**
+     * Getter de la variable name
+     * @return
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Getter de la variable pv
+     * @return
+     */
     public int getPv() {
         return pv;
     }
 
+    /**
+     * Getter de la variable PVMAX
+     * @return
+     */
     public int getPVMAX() {
         return PVMAX;
     }
 
+    /**
+     * Getter de la variable critique
+     * @return
+     */
     public int getCritique() {
         return critique;
     }
 
+    /**
+     * Getter de la variable position horizontale
+     * @return
+     */
     public int getPosition_x() {
         return position_x;
     }
 
+    /**
+     * Getter de la variable position verticale
+     * @return
+     */
     public int getPosition_y() {
         return position_y;
     }
 
     //SETTER
+
+    /**
+     * Setter pour la variable pv
+     * @param pv
+     */
     public void setPv(int pv) {
         this.pv = pv;
     } 
 
+    /**
+     * Setter pour la variable critique
+     * @param critique
+     */
     public void setCritique(int critique) {
         this.critique = critique;
     }
     
+    //METHODS
+    /**
+     * Overide de la methode toString de la classe Object
+     * @return 
+     */
     @Override
     public String toString() {
         return "Fiche Personnage de " + name +".\n"
@@ -83,25 +122,43 @@ public class Personnage {
                 + "Team : à implémenter";
     }
     
-    //METHODS
+    /**
+     * Affiche un log pour faire parler le personnage
+     * ex: "Nom du personnage dit : message"
+     * @param text texte parlé par le personnage
+     */
     public void parler(String text){
         System.out.println(name + " dit : " + text);
     }
     
-    public void attaquer(Personnage passif){
+    /**
+     * LE PERSONNAGE POSSEDE 3 ACTIONS EN PLUS DU DEPLACEMENT : 
+     *         -Attaquer
+     *         -Action spéciale de classe héritée
+     *         -Action spéciale de caractéristique paramétrée graçe à l'implémentation d'interface
+     */
+    /**
+     * Action de base que tout les personnage possède permettant d'infiger des dégats à une cible
+     * @param cible de l'attaque
+     */
+    public void attaquer(Personnage cible){
         //Notion de coup critique
         if((int)(Math.random()*100)<this.getCritique()){
             this.parler("COUP CRITIQUE");
-            passif.enquaisser(this.force * 2);
+            cible.enquaisser(this.force * 2);
         }
         else{
             //Augmenter le ratio 
-            passif.enquaisser(this.force);
+            cible.enquaisser(this.force);
             
             
         }
     }
     
+    /**
+     * Methode invoquer lorque le personnage reçoit des dégat, met à jour les PV et gère la mort
+     * @param dmg dommage brut pris par le personnage
+     */
     public void enquaisser(int dmg){
         if(this.getPv()<dmg){
             this.setPv(0);
@@ -114,6 +171,10 @@ public class Personnage {
         }
     }
     
+    /**
+     * Unique action effectuable durant la phase de déplacement, se situe jsute avant la phase d'action.
+     * @param carte La carte utilisée pour la partie
+     */
     public void deplacement(Carte carte){
         
     }   

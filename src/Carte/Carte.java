@@ -1,24 +1,13 @@
 package Carte;
 
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-
 /**
- *
- * @author Loïc
+ * Projet JAVA Semestre1 M1
+ * @author MATTE FLORIAN, MARISSAL LOIC
  */
 public class Carte {
-
+    //VARIABLE DE CLASSE
     Terrain[][] carte_Terrain;
-    
-
-    public void carte(){}
-
+ 
     public Carte(int longueur,int largeur) {
         //Génération aléatoire du terrain
         carte_Terrain = this.genererCarte(longueur, largeur);

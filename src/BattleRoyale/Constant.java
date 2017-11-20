@@ -3,21 +3,15 @@ package BattleRoyale;
 import java.io.BufferedReader;
 import java.io.FileReader;
 
-
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
- *
- * @author ISEN
+ * Projet JAVA Semestre1 M1
+ * @author MATTE FLORIAN, MARISSAL LOIC
  */
 public class Constant {
     
     //Constante pour génération du Terrain
+    public static final int LARGEUR=50;
+    public static final int LONGUEUR=12;
     public static final String NAMETXTPATH = new java.io.File("").getAbsolutePath() + "\\src\\name.txt";
     public static final String [] TABLEAUNOM = txtToString(NAMETXTPATH) ;
 
