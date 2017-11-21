@@ -23,6 +23,7 @@ public class BattleRoyal {
         Personnage perso1 = new Personnage(0,0);
         System.out.println(perso1);
         Personnage perso2 = new Personnage(0,1);
+        System.out.println((int)(Math.random()*100));
     }
     
 }

@@ -6,6 +6,7 @@
 package Classes.Pacifiste;
 
 import Classes.Personnage;
+import Classes.Team;
 
 /**
  *
@@ -13,13 +14,27 @@ import Classes.Personnage;
  */
 public class PacifisteNormal extends Personnage implements Pacifiste {
 
+    int raison;
+    
     public PacifisteNormal(int position_x, int position_y) {
         super(position_x, position_y);
+        this.raison = 100; //Un pacifiste normal est en fait un diplomate qui saura ralier la première personne qu'il croise
     }
 
     @Override
     public void raisonner(Personnage cible) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.parler("Rejoint moi ! "+ cible.getName()); //Inspirational speech
+        
+        boolean success = false;
+        if((int)(Math.random()*100)<raison){
+            success = true;
+        }
+        
+        if(success){
+            if(this.getTeam() == null){
+                this.setTeam(new Team(this));
+            }
+        }
     }
     
 }

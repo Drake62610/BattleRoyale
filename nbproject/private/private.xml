@@ -3,17 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/PortableGit/Projet/BattleRoyale/src/Pacifiste.java</file>
-            <file>file:/C:/PortableGit/Projet/BattleRoyale/src/Traitre.java</file>
-            <file>file:/C:/PortableGit/Projet/BattleRoyale/src/BattleRoyal.java</file>
-            <file>file:/C:/PortableGit/Projet/BattleRoyale/src/Trouillard.java</file>
-            <file>file:/C:/PortableGit/Projet/BattleRoyale/src/Soigneur.java</file>
-            <file>file:/C:/PortableGit/Projet/BattleRoyale/src/Personnage.java</file>
-            <file>file:/C:/PortableGit/Projet/BattleRoyale/src/Team.java</file>
+            <file>file:/C:/PortableGit/Projet/BattleRoyale/src/Classes/Soigneur.java</file>
+            <file>file:/C:/PortableGit/Projet/BattleRoyale/src/BattleRoyale/BattleRoyal.java</file>
+            <file>file:/C:/PortableGit/Projet/BattleRoyale/src/Classes/Pacifiste/PacifisteNormal.java</file>
             <file>file:/C:/PortableGit/Projet/BattleRoyale/src/Carte/Plaine.java</file>
+            <file>file:/C:/PortableGit/Projet/BattleRoyale/src/Classes/Pacifiste/Pacifiste.java</file>
             <file>file:/C:/PortableGit/Projet/BattleRoyale/src/Carte/Foret.java</file>
-            <file>file:/C:/PortableGit/Projet/BattleRoyale/src/Constant.java</file>
-            <file>file:/C:/PortableGit/Projet/BattleRoyale/src/Tueur.java</file>
+            <file>file:/C:/PortableGit/Projet/BattleRoyale/src/Classes/Piegeur.java</file>
+            <file>file:/C:/PortableGit/Projet/BattleRoyale/src/Classes/Personnage.java</file>
+            <file>file:/C:/PortableGit/Projet/BattleRoyale/src/Classes/Pacifiste/PacifisteSoigneur.java</file>
+            <file>file:/C:/PortableGit/Projet/BattleRoyale/src/Classes/Team.java</file>
         </group>
     </open-files>
 </project-private>

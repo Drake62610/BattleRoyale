@@ -88,6 +88,14 @@ public class Personnage {
     public int getPosition_y() {
         return position_y;
     }
+    
+    /**
+     * Getter de la variable team
+     * @return
+     */
+    public Team getTeam() {
+        return team;
+    }
 
     //SETTER
 
@@ -100,12 +108,38 @@ public class Personnage {
     } 
 
     /**
+     * Setter pour la variable position_x
+     * @param position_x
+     */
+    public void setPosition_x(int position_x) {
+        this.position_x = position_x;
+    }
+
+    /**
+     * Setter pour la variable position_y
+     * @param position_y
+     */
+    public void setPosition_y(int position_y) {
+        this.position_y = position_y;
+    }
+    
+    /**
      * Setter pour la variable critique
      * @param critique
      */
     public void setCritique(int critique) {
         this.critique = critique;
     }
+
+    /**
+     * Setter pour la variable team
+     * @param team
+     */
+    public void setTeam(Team team) {
+        this.team = team;
+    }
+    
+    
     
     //METHODS
     /**
