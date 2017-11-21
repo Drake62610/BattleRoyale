@@ -14,7 +14,11 @@ public class Carte {
     //VARIABLE DE CLASSE
     Terrain[][] carte_Terrain;  //Contient une île entourée de mer sur lequel le jeus e déroulera
 
-    //CONSTRUCTEUR de la classe Carte, prends en paramètre la longueur et la largeur de la map à générer
+    /**
+     * CONSTRUCTEUR de la classe Carte, prends en paramètre la longueur et la largeur de la map à générer
+     * @param longueur
+     * @param largeur
+     */
     public Carte(int longueur,int largeur) {
         //Génération aléatoire du terrain
         carte_Terrain = this.genererCarte(longueur, largeur);
@@ -23,6 +27,10 @@ public class Carte {
     }
 
     // Affichage de la carte dans la console
+
+    /**
+     * Methode permettant d'afficher dans la console la carte
+     */
     public void afficher(){
         for (Terrain[] carte1 : carte_Terrain) {
             for (int j = 0; j < carte1.length; j++) {
@@ -37,46 +45,54 @@ public class Carte {
         }
     }
     
+    /**
+     * Methode permettant d'afficher dans une fenetre à part la carte à l'iade de JFrame et JPanel
+     */
     public void afficher2(){
         JFrame fenetre = new JFrame();
-        fenetre.setTitle("Carte");
-        fenetre.setSize((Constant.LARGEUR)*Constant.ZOOM_RESO,(Constant.LONGUEUR+2)*Constant.ZOOM_RESO);
-        fenetre.setLocationRelativeTo(null);
-        fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        fenetre.setContentPane(new Panneau());
-        fenetre.setVisible(true);
+        fenetre.setTitle("Carte");  //Titre de la fenetre
+        fenetre.setSize((Constant.LARGEUR)*Constant.ZOOM_RESO,(Constant.LONGUEUR+2)*Constant.ZOOM_RESO); // Definition de la resolution de la fenêtre
+        fenetre.setLocationRelativeTo(null); //Centre la fenetre 
+        fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //Permet l'arret du JFrame en cliquand sur la croix rouge
+        fenetre.setContentPane(new Panneau()); //Fait appel à la fonction paintComponent de la classe Panneau et lit le JFrame au JPanel
+        fenetre.setVisible(true); //Fait apparaitre la fenêtre
     }
     
+    /**
+     * Classe gerrant la génération de la carte en utilisant un JPanel
+     */
     public class Panneau extends JPanel { 
+
+        /**
+         * Methode appelée lors de la creation d'une instance Panneau
+         * @param g sera généré automatiquement grace à JPanel, cet objet sert nottament au traçage de figure dans la fenêtre
+         */
         public void paintComponent(Graphics g){
-            int x=0;
-            int y=0;
-            int pas_x = Constant.ZOOM_RESO;
-            int pas_y = Constant.ZOOM_RESO;
-            for (Terrain[] carte1 : carte_Terrain) {
+            int x=0; //coordonnée x de départ (en haut à gauche de l'écran)
+            int y=0; //coordonnée y de départ
+            int pas_x = Constant.ZOOM_RESO;  //Zoom reso est la longueur d'une case de la carte en pixel
+            int pas_y = Constant.ZOOM_RESO;  //Ainsi correspond au pas pour x et pour y
+            //On parcours la carte
+            for (Terrain[] carte1 : carte_Terrain) { 
                 for (int j = 0; j < carte1.length; j++) {
                     //Set color
                     if(carte1[j] instanceof Mer){
-                        System.out.println("yo");
-                        g.setColor(Color.BLUE);
+                        g.setColor(Color.blue);
                     }
                     else{
-                        g.setColor(Color.RED);
+                        g.setColor(Color.lightGray);
                     }
                     //Draw
                     g.fillRect(x,y,pas_x,pas_y);
                     
                     //Increment
                     x+=pas_x;
-                    if(j==carte1.length -1){
-                        y+=pas_y;
-                        x=0;
+                    if(j==carte1.length -1){ //Cas extrème où on est en bout de ligne
+                        y+=pas_y; //O passe à la ligne cad on incremente le y
+                        x=0;      //Et on reset le x
                     }
                 }
             }
-          //g.setColor((Color.BLUE));
-          //g.fillRect(0,0,100,100);
-
         }               
       }
     
