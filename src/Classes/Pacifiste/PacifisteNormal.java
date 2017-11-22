@@ -23,16 +23,21 @@ public class PacifisteNormal extends Personnage implements Pacifiste {
 
     @Override
     public void raisonner(Personnage cible) {
-        this.parler("Rejoint moi ! "+ cible.getName()); //Inspirational speech
+        this.parler("Rejoint moi "+ cible.getName() + " !"); //Inspirational speech
         
         boolean success = false;
         if((int)(Math.random()*100)<raison){
             success = true;
+            //Travailler sur la raison ici
         }
         
         if(success){
             if(this.getTeam() == null){
                 this.setTeam(new Team(this));
+                this.getTeam().addMember(cible);
+            }
+            else{
+                this.getTeam().addMember(cible);
             }
         }
     }

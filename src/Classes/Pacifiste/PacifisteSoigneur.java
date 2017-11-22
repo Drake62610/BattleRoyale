@@ -7,6 +7,7 @@ package Classes.Pacifiste;
 
 import Classes.Personnage;
 import Classes.Soigneur;
+import Classes.Team;
 
 /**
  *
@@ -14,13 +15,30 @@ import Classes.Soigneur;
  */
 public class PacifisteSoigneur extends Soigneur implements Pacifiste {
 
+    int raison;
+    
     public PacifisteSoigneur(int position_x, int position_y) {
         super(position_x, position_y);
     }
 
     @Override
     public void raisonner(Personnage cible) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.parler("Rejoint moi ! "+ cible.getName()); //Inspirational speech
+        
+        boolean success = false;
+        if((int)(Math.random()*100)<raison){
+            success = true;
+            //Travailler sur la raison ici
+        }
+        
+        if(success){
+            if(this.getTeam() == null){
+                this.setTeam(new Team(this));
+            }
+            else{
+                this.getTeam().addMember(cible);
+            }
+        }
     }
     
 }

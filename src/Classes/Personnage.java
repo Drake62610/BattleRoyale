@@ -10,15 +10,45 @@ import Carte.Carte;
  */
 
 public class Personnage {
-    private final String name;//Nom du Personnage
-    private final int PVMAX;  //Constante contenant les PV maximum du personnages, au début de la partie le personnage possède le maximum
-    private int pv;           //Stat de pv actuels du personnage
-    private final int force;  //Stat de force du personnage influant sur les dégat qu'il cause
-    private int critique;     //Pourcentage d'infliger un coup critique
-    private int deplacement;  //Nombre de cases maximum que peut parcourir un personnage durant la phase déplacement
-    private int position_x;   //Position x sur la carte (Horizontale)
-    private int position_y;   //Position y sur la carte (Verticale)
-    //private Arme arme;      //Arme que possède le personnage (octroie un bonus de portée et/ou de force)
+    /**
+     * Nom du Personnage
+     */
+    private final String name;
+    /**
+     * Constante contenant les PV maximum du personnages, au début de la partie le personnage possède le maximum
+     */
+    private final int PVMAX;  
+    /**
+     * Stat de pv actuels du personnage
+     */
+    private int pv;           
+    /**
+     * Stat de force du personnage influant sur les dégat qu'il cause
+     */
+    private final int force;  
+    /**
+     * Pourcentage d'infliger un coup critique
+     */
+    private int critique;     
+    /**
+     * Nombre de cases maximum que peut parcourir un personnage durant la phase déplacement
+     */
+    private int deplacement;  
+    /**
+     * Position x sur la carte (Horizontale)
+     */
+    private int position_x;   
+    /**
+     * Position y sur la carte (Verticale)
+     */
+    private int position_y;   
+    /**
+     * Arme que possède le personnage (octroie un bonus de portée et/ou de force)
+     */
+    //private Arme arme;   
+    /**
+     * Team dans laquelle il appartient
+     */
     private Team team;
 
     /**
@@ -48,7 +78,6 @@ public class Personnage {
     public String getName() {
         return name;
     }
-
     /**
      * Getter de la variable pv
      * @return
@@ -56,7 +85,6 @@ public class Personnage {
     public int getPv() {
         return pv;
     }
-
     /**
      * Getter de la variable PVMAX
      * @return
@@ -64,7 +92,6 @@ public class Personnage {
     public int getPVMAX() {
         return PVMAX;
     }
-
     /**
      * Getter de la variable critique
      * @return
@@ -72,7 +99,6 @@ public class Personnage {
     public int getCritique() {
         return critique;
     }
-
     /**
      * Getter de la variable position horizontale
      * @return
@@ -80,15 +106,13 @@ public class Personnage {
     public int getPosition_x() {
         return position_x;
     }
-
     /**
      * Getter de la variable position verticale
      * @return
      */
     public int getPosition_y() {
         return position_y;
-    }
-    
+    }   
     /**
      * Getter de la variable team
      * @return
@@ -98,7 +122,6 @@ public class Personnage {
     }
 
     //SETTER
-
     /**
      * Setter pour la variable pv
      * @param pv
@@ -106,7 +129,6 @@ public class Personnage {
     public void setPv(int pv) {
         this.pv = pv;
     } 
-
     /**
      * Setter pour la variable position_x
      * @param position_x
@@ -114,15 +136,13 @@ public class Personnage {
     public void setPosition_x(int position_x) {
         this.position_x = position_x;
     }
-
     /**
      * Setter pour la variable position_y
      * @param position_y
      */
     public void setPosition_y(int position_y) {
         this.position_y = position_y;
-    }
-    
+    }   
     /**
      * Setter pour la variable critique
      * @param critique
@@ -130,7 +150,6 @@ public class Personnage {
     public void setCritique(int critique) {
         this.critique = critique;
     }
-
     /**
      * Setter pour la variable team
      * @param team
@@ -139,8 +158,6 @@ public class Personnage {
         this.team = team;
     }
     
-    
-    
     //METHODS
     /**
      * Overide de la methode toString de la classe Object
@@ -148,12 +165,14 @@ public class Personnage {
      */
     @Override
     public String toString() {
+        String strTeam = new String();
+        if(this.team== null){strTeam="Aucune";}else{strTeam=team.toString();}
         return "Fiche Personnage de " + name +".\n"
                 + "PV : " + pv +"\n"
                 + "FORCE : "+ force+"\n"
                 + "DEPLACEMENT : " + deplacement+"\n"
                 + "Armes : à implémenter" + "\n"
-                + "Team : à implémenter";
+                + "Team : " + strTeam;
     }
     
     /**
@@ -197,6 +216,10 @@ public class Personnage {
         if(this.getPv()<dmg){
             this.setPv(0);
             this.parler("Monde de merde ! x|");
+            if(this.team != null){
+                team.removeMember(this);
+            }
+            
         }
         else{
             this.setPv(this.getPv()-dmg);

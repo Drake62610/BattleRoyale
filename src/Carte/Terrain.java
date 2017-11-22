@@ -6,8 +6,18 @@ package Carte;
  */
 public class Terrain {
     //VARIABLE DE CLASSE
-    private Object perso;  //Le personnage qui est sur le terrain OU la team
-    private boolean piege; //Indique si le terrain est piégé ou non
+    /**
+     * Le personnage qui est sur le terrain OU la team
+     */
+    private Object perso; 
+    /**
+     * Indique si le terrain est piégé ou non
+     */
+    private boolean piege; 
+    /**
+     * Indique si la zone va devenri rouge à la fin du tour de jeu
+     */
+    private boolean dangerImminant; 
 
     //SETTER
     /**
