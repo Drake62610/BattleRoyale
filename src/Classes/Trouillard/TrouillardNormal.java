@@ -6,16 +6,30 @@
 package Classes.Trouillard;
 
 import Carte.Carte;
+import Carte.Foret;
+import Carte.Terrain;
+import Classes.Personnage;
 
 /**
  *
  * @author ISEN
  */
-public class TrouillardNormal implements Trouillard {
+public class TrouillardNormal extends Personnage implements Trouillard {
 
+    private boolean hidden;
+
+    public TrouillardNormal(int position_x, int position_y) {
+        super(position_x, position_y);
+        hidden = false;
+    }
+    
     @Override
     public void seCamoufler(Carte carte) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Terrain terrainActuel = carte.getCarte_Terrain()[this.getPosition_x()][this.getPosition_y()];
+        if(terrainActuel instanceof Foret){
+           // Foret terrainForet = terrainActuel;
+            
+        }
     }
     
 }

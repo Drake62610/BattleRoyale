@@ -93,6 +93,13 @@ public class Personnage {
         return PVMAX;
     }
     /**
+     * Getter de la variable force
+     * @return
+     */
+    public int getForce() {
+        return force;
+    }
+    /**
      * Getter de la variable critique
      * @return
      */

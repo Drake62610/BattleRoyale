@@ -34,9 +34,15 @@ public class Team {
     public Personnage getLeader() {
         return leader;
     }
+    /**
+     * Getter de la variable Membres
+     * @return 
+     */
+    public ArrayList<Personnage> getMembres() {
+        return membres;
+    }
     
     //METHODS
-
     @Override
     public String toString() {
         String str = new String();
@@ -47,7 +53,6 @@ public class Team {
         }  
         return "Leader : "+ leader.getName() +"\n" + "       Membres :" + str;
     }
-    
     
     /**
      * Enlève le personnage ciblé de la Team
@@ -90,4 +95,5 @@ public class Team {
          }  
          return -1;
     }
+
 }  

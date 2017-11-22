@@ -14,6 +14,7 @@ public class Carte {
     //VARIABLE DE CLASSE
     Terrain[][] carte_Terrain;  //Contient une île entourée de mer sur lequel le jeus e déroulera
 
+    //CONSTRUCTOR
     /**
      * CONSTRUCTEUR de la classe Carte, prends en paramètre la longueur et la largeur de la map à générer
      * @param longueur
@@ -26,8 +27,16 @@ public class Carte {
         //Constante de Carte qui contiendra
     }
 
-    // Affichage de la carte dans la console
-
+    //GETTER
+    /**
+ * Getter de la variable carte_Terrain
+ * @return 
+ */
+    public Terrain[][] getCarte_Terrain() {
+        return carte_Terrain;
+    }
+       
+    //METHODS
     /**
      * Methode permettant d'afficher dans la console la carte
      */
@@ -96,7 +105,9 @@ public class Carte {
         }               
       }
     
-    //Methode appellée pour générer la carte
+    /**
+     * Methode appellée pour générer la carte
+     */
     private Terrain[][] genererCarte(int longueur,int largeur){
         carte_Terrain = new Terrain[longueur][largeur];
         for (Terrain[] carte1 : carte_Terrain) {

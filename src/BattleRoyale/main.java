@@ -3,6 +3,8 @@ package BattleRoyale;
 
 import Classes.Personnage;
 import Carte.Carte;
+import Carte.Foret;
+import Carte.Terrain;
 import Classes.Pacifiste.PacifisteNormal;
 
 /**
@@ -28,6 +30,12 @@ public class main {
         pacifiste.raisonner(perso1);
         pacifiste.raisonner(perso2);
         System.out.println(perso1);
+        
+        Foret terrain = new Foret();
+        Terrain memeterrain = terrain;
+        if (memeterrain instanceof Foret){
+            System.out.println("Good");
+        }
     }
     
 }
