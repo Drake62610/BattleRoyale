@@ -31,11 +31,7 @@ public class main {
         pacifiste.raisonner(perso2);
         System.out.println(perso1);
         
-        Foret terrain = new Foret();
-        Terrain memeterrain = terrain;
-        if (memeterrain instanceof Foret){
-            System.out.println("Good");
-        }
-    }
-    
+        
+        carte.getCarte_Terrain()[Constant.LONGUEUR/2][Constant.LARGEUR/2].setPerso(perso2);
+    }  
 }

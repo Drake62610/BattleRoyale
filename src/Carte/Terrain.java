@@ -27,6 +27,14 @@ public class Terrain {
     public void setPiege(boolean piege) {
         this.piege = piege;
     }
+    /**
+     * Setter pour la variable Perso
+     * @param piege
+     */
+    public void setPerso(Object perso) {
+        this.perso = perso;
+    }
+    
 
     //GETTER
     /**

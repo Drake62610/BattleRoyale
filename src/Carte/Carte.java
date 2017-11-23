@@ -100,6 +100,14 @@ public class Carte {
                     //Draw
                     g.fillRect(x,y,pas_x,pas_y);
                     
+                    //If there is a Personnage
+                    if(carte1[j].getPerso() != null){
+                        //Set color
+                        g.setColor(Color.BLACK);
+                        //Draw
+                        g.fillRect((x+pas_x)/2,(y+pas_y)/2,pas_x/2,pas_y/2);
+                    }
+                    
                     //Increment
                     x+=pas_x;
                     if(j==carte1.length -1){ //Cas extrème où on est en bout de ligne
