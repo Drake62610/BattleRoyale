@@ -23,8 +23,8 @@ public class main {
 
          // deploiement
          
-         BattleRoyale broyale = new BattleRoyale (5);
-         broyale.deploiement(5, carte);
+         BattleRoyale broyale = new BattleRoyale (20);
+         broyale.deploiement(20, carte);
         carte.afficher2();
         
     }  

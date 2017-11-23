@@ -1,6 +1,7 @@
 package Classes;
 
 
+import Carte.Mer;
 import java.util.ArrayList;
 
 /**
@@ -94,6 +95,51 @@ public class Team {
             }  
          }  
          return -1;
+    }
+    
+        void deplacementHaut(){
+        if (this.leader.getCarteTerrain().getCarte_Terrain()[this.position_x+1][this.position_y] instanceof Mer){
+            //throw Exception
+        }
+        else{
+            this.carteTerrain.getCarte_Terrain()[this.position_x][this.position_y].setPerso(null);
+            this.carteTerrain.getCarte_Terrain()[this.position_x+1][this.position_y].setPerso(this);
+        }
+    }
+    void deplacementBas(){
+        if (this.carteTerrain.getCarte_Terrain()[this.position_x-1][this.position_y] instanceof Mer){
+            //throw Exception
+        }
+        else{
+            this.carteTerrain.getCarte_Terrain()[this.position_x][this.position_y].setPerso(null);
+            this.carteTerrain.getCarte_Terrain()[this.position_x-1][this.position_y].setPerso(null);
+        }
+    }
+    void deplacementGauche(){
+        if (this.carteTerrain.getCarte_Terrain()[this.position_x][this.position_y-1] instanceof Mer){
+            //throw Exception
+        }
+        else{
+            this.carteTerrain.getCarte_Terrain()[this.position_x][this.position_y].setPerso(null);
+            this.carteTerrain.getCarte_Terrain()[this.position_x][this.position_y-1].setPerso(null);
+        }
+    }
+    void deplacementDroite(){
+        if (this.carteTerrain.getCarte_Terrain()[this.position_x][this.position_y+1] instanceof Mer){
+            //throw Exception
+        }
+        else{
+            this.carteTerrain.getCarte_Terrain()[this.position_x][this.position_y].setPerso(null);
+            this.carteTerrain.getCarte_Terrain()[this.position_x][this.position_y+1].setPerso(null);
+        }
+    }
+    
+    void phaseDeplacement(){
+        
+    }
+    
+    void phaseAction(){
+        
     }
 
 }  

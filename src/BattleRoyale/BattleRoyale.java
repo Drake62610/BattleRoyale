@@ -55,16 +55,12 @@ public class BattleRoyale {
                 x=x+1;
                 y=Constant.LONGUEUR-1;
             }
-        }
-        
+        }        
         // on place notre premier participant
-        
         tmp = new Personnage(y,x,carte);
         participants.add(tmp);
         carte.getCarte_Terrain()[y][x].setPerso(tmp);
-        
         // a partir du premier on place les autres
-        
         while (i<nbr_Perso){         
             int rngY = (int) (Math.random() * 6);
             int rngX = (int) (Math.random() * 20);
