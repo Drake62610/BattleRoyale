@@ -7,6 +7,7 @@ import Carte.Mer;
 import Carte.Terrain;
 import Classes.Pacifiste.Pacifiste;
 import Classes.Traitre.Traitre;
+import Classes.Traitre.TraitreNormal;
 import Classes.Trouillard.Trouillard;
 import Classes.Tueur.Tueur;
 
@@ -85,6 +86,7 @@ public class Personnage {
         this.PVMAX = this.pv;
         this.force = force; 
         this.vitesse = vitesse;
+        this.deplacement = deplacement;
         this.carte = carte;
         this.position_x = position_x;
         this.position_y = position_y;
@@ -263,57 +265,65 @@ public class Personnage {
         }
     }
     
-    void jouer(){
+    public void jouer(){
         this.phaseDeplacement();
         this.phaseAction();
     }
     
-    /**
-     * Unique action effectuable durant la phase de déplacement, se situe jsute avant la phase d'action.
-     * @param carte La carte utilisée pour la partie
-     */
-    void deplacementHaut(){
+    public void choix(){}
+    
+    public void deplacementDroite(){
         if (this.carte.getCarte_Terrain()[this.position_x+1][this.position_y] instanceof Mer){
             //throw Exception
         }
         else{
             this.carte.getCarte_Terrain()[this.position_x][this.position_y].setPerso(null);
             this.carte.getCarte_Terrain()[this.position_x+1][this.position_y].setPerso(this);
+            position_x++;
         }
     }
-    void deplacementBas(){
+    public void deplacementGauche(){
         if (this.carte.getCarte_Terrain()[this.position_x-1][this.position_y] instanceof Mer){
             //throw Exception
         }
         else{
             this.carte.getCarte_Terrain()[this.position_x][this.position_y].setPerso(null);
-            this.carte.getCarte_Terrain()[this.position_x-1][this.position_y].setPerso(null);
+            this.carte.getCarte_Terrain()[this.position_x-1][this.position_y].setPerso(this);
+            position_x--;
         }
     }
-    void deplacementGauche(){
+    public void deplacementBas(){
         if (this.carte.getCarte_Terrain()[this.position_x][this.position_y-1] instanceof Mer){
             //throw Exception
         }
         else{
             this.carte.getCarte_Terrain()[this.position_x][this.position_y].setPerso(null);
-            this.carte.getCarte_Terrain()[this.position_x][this.position_y-1].setPerso(null);
+            this.carte.getCarte_Terrain()[this.position_x][this.position_y-1].setPerso(this);
+            position_y++;
         }
     }
-    void deplacementDroite(){
+    public void deplacementHaut(){
         if (this.carte.getCarte_Terrain()[this.position_x][this.position_y+1] instanceof Mer){
             //throw Exception
         }
         else{
             this.carte.getCarte_Terrain()[this.position_x][this.position_y].setPerso(null);
-            this.carte.getCarte_Terrain()[this.position_x][this.position_y+1].setPerso(null);
+            this.carte.getCarte_Terrain()[this.position_x][this.position_y+1].setPerso(this);
+            position_y--;
+        }
+    }
+    public void deplacementRien(){
+        
+    }
+    
+    public void phaseDeplacement(){
+        for (int i=0;i<deplacement;i++){
+            this.choix();
         }
     }
     
-    void phaseDeplacement(){
+    public void phaseAction(){
         
     }
-    
-    void phaseAction(){
-        
-    }
+
 }

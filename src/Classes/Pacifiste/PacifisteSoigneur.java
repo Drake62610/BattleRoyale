@@ -20,7 +20,7 @@ public class PacifisteSoigneur extends Soigneur implements Pacifiste {
     
     public PacifisteSoigneur(int position_x, int position_y, Carte carte) {
         super(5+(int)(Math.random()*(10-5)) //PV
-                ,(int)(Math.random()*(3-1))//Force
+                ,1 + (int)(Math.random()*(3-1))//Force
                 ,1                        //Deplacement
                 ,2                        //Vitesse
                 ,position_x, position_y,carte);

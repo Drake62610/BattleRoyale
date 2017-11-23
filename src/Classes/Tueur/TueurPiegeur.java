@@ -17,7 +17,7 @@ public class TueurPiegeur extends Piegeur implements Tueur {
     
     public TueurPiegeur(int position_x, int position_y, Carte carte) {
         super(5+(int)(Math.random()*(5-1)) //PV
-                ,(int)(Math.random()*(6-3))//Force
+                ,3 + (int)(Math.random()*(6-3))//Force
                 ,1                        //Deplacement
                 ,1                        //Vitesse
                 ,position_x, position_y,carte);

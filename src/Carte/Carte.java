@@ -1,10 +1,13 @@
 package Carte;
 
 import BattleRoyale.Constant;
+import BattleRoyale.main;
 import Classes.Personnage;
 import Classes.Team;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -59,14 +62,15 @@ public class Carte {
     /**
      * Methode permettant d'afficher dans une fenetre à part la carte à l'iade de JFrame et JPanel
      */
-    public void afficher2(){
-        JFrame fenetre = new JFrame();
+    public JFrame getIntG(){
+        final JFrame fenetre = new JFrame();
         fenetre.setTitle("Carte");  //Titre de la fenetre
         fenetre.setSize((Constant.LARGEUR)*Constant.ZOOM_RESO,(Constant.LONGUEUR+2)*Constant.ZOOM_RESO); // Definition de la resolution de la fenêtre
         fenetre.setLocationRelativeTo(null); //Centre la fenetre 
         fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //Permet l'arret du JFrame en cliquand sur la croix rouge
         fenetre.setContentPane(new Panneau()); //Fait appel à la fonction paintComponent de la classe Panneau et lit le JFrame au JPanel
         fenetre.setVisible(true); //Fait apparaitre la fenêtre
+        return fenetre;
     }
     
     /**
@@ -105,7 +109,7 @@ public class Carte {
                     //If there is a Personnage
                     if(carte1[j].getPerso() != null){
                         //Set color
-                        if(carte1[j].getPerso() instanceof Personnage){g.setColor(Color.BLACK);}
+                        if(carte1[j].getPerso() instanceof Personnage){g.setColor(Color.RED);}
                         if(carte1[j].getPerso() instanceof Team){g.setColor(Color.RED);}
                         //Draw
                         g.fillRect((x+x+pas_x)/2,(y+y+pas_y)/2,pas_x/2,pas_y/2);

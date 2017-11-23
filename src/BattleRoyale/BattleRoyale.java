@@ -11,10 +11,6 @@ import Classes.Pacifiste.PacifisteNormal;
 import Classes.Personnage;
 import java.util.ArrayList;
 
-/**
- *
- * @author ISEN
- */
 public class BattleRoyale {
     private ArrayList <Personnage> participants = new ArrayList <Personnage>();  
     private ArrayList <Personnage> morts = new ArrayList <Personnage>(); 
