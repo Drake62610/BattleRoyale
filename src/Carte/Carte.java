@@ -29,9 +29,9 @@ public class Carte {
 
     //GETTER
     /**
- * Getter de la variable carte_Terrain
- * @return 
- */
+    * Getter de la variable carte_Terrain
+    * @return 
+    */
     public Terrain[][] getCarte_Terrain() {
         return carte_Terrain;
     }
@@ -105,7 +105,7 @@ public class Carte {
                         //Set color
                         g.setColor(Color.BLACK);
                         //Draw
-                        g.fillRect((x+pas_x)/2,(y+pas_y)/2,pas_x/2,pas_y/2);
+                        g.fillRect((x+x+pas_x)/2,(y+y+pas_y)/2,pas_x/2,pas_y/2);
                     }
                     
                     //Increment
@@ -147,17 +147,16 @@ public class Carte {
             for (int n=0; n<largeur; n++){
                 int type_terrain = (int) (Math.random() * 3);
                 if(!(carte_Terrain[m][n] instanceof Mer)){
-                    if(type_terrain == 0){
-                        System.out.println("Foret");
-                        carte_Terrain[m][n]= new Foret();
-                    }
-                    else if(type_terrain == 1){
-                        System.out.println("Montagne");
-                        carte_Terrain[m][n]= new Montagne();
-                    }
-                    else{
-                        System.out.println("YO");
-                        carte_Terrain[m][n]= new Plaine();
+                    switch (type_terrain) {
+                        case 0:
+                            carte_Terrain[m][n]= new Foret();
+                            break;
+                        case 1:
+                            carte_Terrain[m][n]= new Montagne();
+                            break;
+                        default:
+                            carte_Terrain[m][n]= new Plaine();
+                            break;
                     }
                 }
             }
@@ -166,5 +165,3 @@ public class Carte {
         return carte_Terrain;
     }
 }
-
-
