@@ -44,44 +44,40 @@ public class BattleRoyale {
     public void deploiement(int nbr_Perso, Carte carte){
         Personnage tmp;
         int x=1;
+        int i =1;
         int y=Constant.LONGUEUR-1;
         
         // on recupère notre (0;0) i.e le point le plus en bas a gauche de la carte
         
         while(carte.getCarte_Terrain()[y][x] instanceof Mer){
-            y = y-1;
-            x = x+5;
-            System.out.println(x);
-            System.out.println(y);
-        }
-
-        
-        for (int i=0;i<nbr_Perso;i++){
-         
-            int rng = (int) (Math.random() * 3 );
-            int rng2 = (int) (Math.random() * 3);
-            
-            if (!(carte.getCarte_Terrain()[y-rng2][x+rng] instanceof Mer)){
-                if (carte.getCarte_Terrain()[y-rng2][x+rng].getPerso()!=null){
-                    //tmp = new Personnage(x+rng,y-rng2,carte);
-                    //participants.add(tmp);
-                  //  carte.getCarte_Terrain()[x+rng][y-rng2].setPerso(tmp);
-                }
-                else{
-                    for (int m=0; m<Constant.LONGUEUR; m++){
-                        for (int n=0; n<Constant.LARGEUR; n++){
-                            if (!(carte.getCarte_Terrain()[m][n] instanceof Mer)){
-                                 if (carte.getCarte_Terrain()[m][n].getPerso()==null){
-                                     tmp = new Personnage(m,n,carte);
-                                     participants.add(tmp);
-                                     carte.getCarte_Terrain()[m][n].setPerso(tmp);
-                                 }
-                            }
-                        }
-                    }
-                }    
+            y=y-1;
+            if (y<1){
+                x=x+1;
+                y=Constant.LONGUEUR-1;
             }
+        }
         
+        // on place notre premier participant
+        
+        tmp = new Personnage(y,x,carte);
+        participants.add(tmp);
+        carte.getCarte_Terrain()[y][x].setPerso(tmp);
+        
+        // a partir du premier on place les autres
+        
+        while (i<nbr_Perso){         
+            int rngY = (int) (Math.random() * 6);
+            int rngX = (int) (Math.random() * 20);
+            if (carte.getCarte_Terrain()[y-rngY][x+rngX].getPerso()==null ){
+                if (!(carte.getCarte_Terrain()[y-rngY][x+rngX] instanceof Mer)){
+                    System.out.println(x+rngX);
+                    System.out.println(y-rngY);
+                    tmp = new Personnage(y-rngY,x+rngX,carte);
+                    participants.add(tmp);
+                    carte.getCarte_Terrain()[y-rngY][x+rngX].setPerso(tmp);
+                    i = i+1;
+                }
+            }  
         }
     }
 }
