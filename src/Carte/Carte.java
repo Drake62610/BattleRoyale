@@ -89,13 +89,13 @@ public class Carte {
                         g.setColor(Color.blue);
                     }
                     if(carte1[j] instanceof Foret){
-                        g.setColor(Color.green);
+                        g.setColor(Color.DARK_GRAY);
                     }
                     if(carte1[j] instanceof Montagne){
-                        g.setColor(Color.white);
+                        g.setColor(Color.lightGray);
                     }
                     if(carte1[j] instanceof Plaine){
-                        g.setColor(Color.lightGray);
+                        g.setColor(Color.green);
                     }
                     //Draw
                     g.fillRect(x,y,pas_x,pas_y);
@@ -125,33 +125,36 @@ public class Carte {
             for( int i=largeur/4; i<(3*largeur)/4; i++){
                 int nb = (int) (Math.random() * 3 );
                 for( int t=longueur/4-nb; t<(3*longueur)/4+nb; t++){
-                    carte_Terrain[t][i]= new Foret();            
+                    carte_Terrain[t][i]= new Terrain();            
                 }
             }
             for(int p=longueur/4; p<(3*longueur)/4; p++){
                 int rdn = (int) (Math.random()*3);
                 for(int q=largeur/4-rdn; q<(3*largeur)/4+rdn; q++){
-                    carte_Terrain[p][q]= new Foret();
+                    carte_Terrain[p][q]= new Terrain();
                 }
             }
-            
             
         for (int m=0; m<longueur; m++){
             for (int n=0; n<largeur; n++){
                 int type_terrain = (int) (Math.random() * 3);
-                System.out.println(type_terrain);
                 if(!(carte_Terrain[m][n] instanceof Mer)){
-                    switch (type_terrain){
-                        case 0:
-                            // le type de base est foret on le laisse ainsi
-                        case 1:
-                            carte_Terrain[m][n]= new Montagne();
-                        case 2:
-                            carte_Terrain[m][n]= new Plaine();
+                    if(type_terrain == 0){
+                        System.out.println("Foret");
+                        carte_Terrain[m][n]= new Foret();
+                    }
+                    else if(type_terrain == 1){
+                        System.out.println("Montagne");
+                        carte_Terrain[m][n]= new Montagne();
+                    }
+                    else{
+                        System.out.println("YO");
+                        carte_Terrain[m][n]= new Plaine();
                     }
                 }
             }
         }
+    
         return carte_Terrain;
     }
 }
