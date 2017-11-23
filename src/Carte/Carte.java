@@ -88,7 +88,13 @@ public class Carte {
                     if(carte1[j] instanceof Mer){
                         g.setColor(Color.blue);
                     }
-                    else{
+                    if(carte1[j] instanceof Foret){
+                        g.setColor(Color.green);
+                    }
+                    if(carte1[j] instanceof Montagne){
+                        g.setColor(Color.white);
+                    }
+                    if(carte1[j] instanceof Plaine){
                         g.setColor(Color.lightGray);
                     }
                     //Draw
@@ -127,6 +133,24 @@ public class Carte {
                 for(int q=largeur/4-rdn; q<(3*largeur)/4+rdn; q++){
                     carte_Terrain[p][q]= new Foret();
                 }
+            }
+            
+            
+        for (int m=0; m<longueur; m++){
+            for (int n=0; n<largeur; n++){
+                int type_terrain = (int) (Math.random() * 3);
+                System.out.println(type_terrain);
+                if(!(carte_Terrain[m][n] instanceof Mer)){
+                    switch (type_terrain){
+                        case 0:
+                            // le type de base est foret on le laisse ainsi
+                        case 1:
+                            carte_Terrain[m][n]= new Montagne();
+                        case 2:
+                            carte_Terrain[m][n]= new Plaine();
+                    }
+                }
+            }
         }
         return carte_Terrain;
     }
