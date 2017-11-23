@@ -17,8 +17,8 @@ public class Soigneur extends Personnage{
      * @param position_x sur la Carte
      * @param position_y sur la Carte
      */
-    public Soigneur( int position_x, int position_y,Carte carte) {
-        super(position_x,position_y,carte);
+    public Soigneur(int pv, int force, int deplacement, int vitesse, int position_x, int position_y, Carte carte) {
+        super(pv,force,deplacement,vitesse,position_x, position_y,carte);
         
         this.capacité = Constant.MINSOIN + (int)(Math.random()*(Constant.MAXSOIN));
     }

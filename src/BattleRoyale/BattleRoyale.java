@@ -7,6 +7,7 @@ package BattleRoyale;
 
 import Carte.Carte;
 import Carte.Mer;
+import Classes.Pacifiste.PacifisteNormal;
 import Classes.Personnage;
 import java.util.ArrayList;
 
@@ -57,7 +58,7 @@ public class BattleRoyale {
             }
         }        
         // on place notre premier participant
-        tmp = new Personnage(y,x,carte);
+        tmp = new PacifisteNormal(y,x,carte);
         participants.add(tmp);
         carte.getCarte_Terrain()[y][x].setPerso(tmp);
         // a partir du premier on place les autres
@@ -68,7 +69,7 @@ public class BattleRoyale {
                 if (!(carte.getCarte_Terrain()[y-rngY][x+rngX] instanceof Mer)){
                     System.out.println(x+rngX);
                     System.out.println(y-rngY);
-                    tmp = new Personnage(y-rngY,x+rngX,carte);
+                    tmp = new PacifisteNormal(y-rngY,x+rngX,carte);
                     participants.add(tmp);
                     carte.getCarte_Terrain()[y-rngY][x+rngX].setPerso(tmp);
                     i = i+1;

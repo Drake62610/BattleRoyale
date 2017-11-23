@@ -98,39 +98,39 @@ public class Team {
     }
     
         void deplacementHaut(){
-        if (this.leader.getCarteTerrain().getCarte_Terrain()[this.position_x+1][this.position_y] instanceof Mer){
+        if (this.leader.getCarte().getCarte_Terrain()[this.getLeader().getPosition_x()+1][this.getLeader().getPosition_y()] instanceof Mer){
             //throw Exception
         }
         else{
-            this.carteTerrain.getCarte_Terrain()[this.position_x][this.position_y].setPerso(null);
-            this.carteTerrain.getCarte_Terrain()[this.position_x+1][this.position_y].setPerso(this);
+            this.leader.getCarte().getCarte_Terrain()[this.getLeader().getPosition_x()][this.getLeader().getPosition_y()].setPerso(null);
+            this.leader.getCarte().getCarte_Terrain()[this.getLeader().getPosition_x()+1][this.getLeader().getPosition_y()].setPerso(this);
         }
     }
     void deplacementBas(){
-        if (this.carteTerrain.getCarte_Terrain()[this.position_x-1][this.position_y] instanceof Mer){
+        if (this.leader.getCarte().getCarte_Terrain()[this.getLeader().getPosition_x()][this.getLeader().getPosition_y()] instanceof Mer){
             //throw Exception
         }
         else{
-            this.carteTerrain.getCarte_Terrain()[this.position_x][this.position_y].setPerso(null);
-            this.carteTerrain.getCarte_Terrain()[this.position_x-1][this.position_y].setPerso(null);
+            this.leader.getCarte().getCarte_Terrain()[this.getLeader().getPosition_x()][this.getLeader().getPosition_y()].setPerso(null);
+            this.leader.getCarte().getCarte_Terrain()[this.getLeader().getPosition_x()-1][this.getLeader().getPosition_y()].setPerso(this);
         }
     }
     void deplacementGauche(){
-        if (this.carteTerrain.getCarte_Terrain()[this.position_x][this.position_y-1] instanceof Mer){
+        if (this.leader.getCarte().getCarte_Terrain()[this.getLeader().getPosition_x()][this.getLeader().getPosition_y()-1] instanceof Mer){
             //throw Exception
         }
         else{
-            this.carteTerrain.getCarte_Terrain()[this.position_x][this.position_y].setPerso(null);
-            this.carteTerrain.getCarte_Terrain()[this.position_x][this.position_y-1].setPerso(null);
+            this.leader.getCarte().getCarte_Terrain()[this.getLeader().getPosition_x()][this.getLeader().getPosition_y()].setPerso(null);
+            this.leader.getCarte().getCarte_Terrain()[this.getLeader().getPosition_x()][this.getLeader().getPosition_y()-1].setPerso(this);
         }
     }
     void deplacementDroite(){
-        if (this.carteTerrain.getCarte_Terrain()[this.position_x][this.position_y+1] instanceof Mer){
+        if (this.leader.getCarte().getCarte_Terrain()[this.getLeader().getPosition_x()][this.getLeader().getPosition_y()+1] instanceof Mer){
             //throw Exception
         }
         else{
-            this.carteTerrain.getCarte_Terrain()[this.position_x][this.position_y].setPerso(null);
-            this.carteTerrain.getCarte_Terrain()[this.position_x][this.position_y+1].setPerso(null);
+            this.leader.getCarte().getCarte_Terrain()[this.getLeader().getPosition_x()][this.getLeader().getPosition_y()].setPerso(null);
+            this.leader.getCarte().getCarte_Terrain()[this.getLeader().getPosition_x()][this.getLeader().getPosition_y()+1].setPerso(this);
         }
     }
     
@@ -139,7 +139,8 @@ public class Team {
     }
     
     void phaseAction(){
-        
+        //Le leader fait l'action pour le groupe
+        //SI il y a des soigneurs dans els non actifs ils soignent
     }
 
 }  

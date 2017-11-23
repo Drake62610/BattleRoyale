@@ -14,8 +14,13 @@ public class TrouillardSoigneur extends Soigneur implements Trouillard {
 
     private boolean hidden = false;
     
-    public TrouillardSoigneur(int position_x, int position_y,Carte carte) {
-        super(position_x, position_y,carte);
+    public TrouillardSoigneur(int position_x, int position_y, Carte carte) {
+        super(5+(int)(Math.random()*(5-1)) //PV
+                ,(int)(Math.random()*(3-1))//Force
+                ,2                        //Deplacement
+                ,4                        //Vitesse
+                ,position_x, position_y,carte);
+        hidden = false;
     }
 
     /**

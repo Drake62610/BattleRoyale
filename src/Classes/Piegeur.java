@@ -15,8 +15,8 @@ public class Piegeur extends Personnage {
      * @param position_x
      * @param position_y
      */
-    public Piegeur(int position_x, int position_y, Carte carte) {
-        super(position_x, position_y,carte);
+    public Piegeur(int pv, int force, int deplacement, int vitesse, int position_x, int position_y, Carte carte) {
+        super(pv,force,deplacement,vitesse,position_x, position_y,carte);
     }
     
     /**

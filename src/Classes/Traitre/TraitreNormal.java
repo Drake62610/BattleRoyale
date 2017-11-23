@@ -19,8 +19,12 @@ import java.util.ArrayList;
  */
 public class TraitreNormal extends Personnage implements Traitre {
 
-    public TraitreNormal(int position_x, int position_y,Carte carte) {
-        super(position_x, position_y,carte);
+    public TraitreNormal(int position_x, int position_y, Carte carte) {
+        super(5+(int)(Math.random()*(10-5)) //PV
+                ,(int)(Math.random()*(3-1))//Force
+                ,1                        //Deplacement
+                ,3                        //Vitesse
+                ,position_x, position_y,carte);
     }
 
     /**

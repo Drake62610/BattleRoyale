@@ -1,6 +1,8 @@
 package Carte;
 
 import BattleRoyale.Constant;
+import Classes.Personnage;
+import Classes.Team;
 import java.awt.Color;
 import java.awt.Graphics;
 import javax.swing.JFrame;
@@ -103,7 +105,8 @@ public class Carte {
                     //If there is a Personnage
                     if(carte1[j].getPerso() != null){
                         //Set color
-                        g.setColor(Color.BLACK);
+                        if(carte1[j].getPerso() instanceof Personnage){g.setColor(Color.BLACK);}
+                        if(carte1[j].getPerso() instanceof Team){g.setColor(Color.RED);}
                         //Draw
                         g.fillRect((x+x+pas_x)/2,(y+y+pas_y)/2,pas_x/2,pas_y/2);
                     }

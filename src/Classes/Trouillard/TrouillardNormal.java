@@ -18,8 +18,12 @@ public class TrouillardNormal extends Personnage implements Trouillard {
 
     private boolean hidden;
 
-    public TrouillardNormal(int position_x, int position_y,Carte carte) {
-        super(position_x, position_y,carte);
+    public TrouillardNormal(int position_x, int position_y, Carte carte) {
+        super(5+(int)(Math.random()*(5-1)) //PV
+                ,(int)(Math.random()*(3-1))//Force
+                ,2                        //Deplacement
+                ,4                        //Vitesse
+                ,position_x, position_y,carte);
         hidden = false;
     }
     /**

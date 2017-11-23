@@ -33,6 +33,10 @@ public class Personnage {
      */
     private final int force;  
     /**
+     * Stat de vitesse qui gère l'ordre des tours
+     */
+    private final int vitesse;
+    /**
      * Pourcentage d'infliger un coup critique
      */
     private int critique;     
@@ -66,15 +70,21 @@ public class Personnage {
      * il n'initialise pas PVMAX, pv, force, deplacement car ces caractéristiques sont initialisées dans les classes filles
      * il initialise le nom qui sera choisit aléatoirement dans une liste configurable grace à name.txt
      *               la team du personnage n'appartient à aucune team donc elle est initialisée à null
+     * @param pv
+     * @param force
+     * @param deplacement
+     * @param vitesse
      * @param position_x Position x du personnage sur la carte générée pour le Battle Royale
      * @param position_y Position y du personnage sur la carte générée pour le Battle Royale
+     * @param carte
      */
-    public Personnage( int position_x, int position_y, Carte carte) {
+    public Personnage(int pv, int force, int deplacement, int vitesse, int position_x, int position_y, Carte carte) {
         String[] tabNom = Constant.TABLEAUNOM;
         this.name = tabNom[(int)(Math.random()*(tabNom.length))];
-        this.pv = 5 + (int)(Math.random()*(10-5));
+        this.pv = pv;
         this.PVMAX = this.pv;
-        this.force = 1 + (int)(Math.random()*(10-5)); //Force à définir sur les différences classe plus tard
+        this.force = force; 
+        this.vitesse = vitesse;
         this.carte = carte;
         this.position_x = position_x;
         this.position_y = position_y;
@@ -121,7 +131,7 @@ public class Personnage {
      * Getter de la variable Terrain
      * @return 
      */
-    public Carte getCarteTerrain() {
+    public Carte getCarte() {
         return carte;
     }    
     /**
