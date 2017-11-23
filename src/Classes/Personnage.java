@@ -35,6 +35,10 @@ public class Personnage {
      */
     private int deplacement;  
     /**
+     * Carte sur laquelle il se trouve, utilisé pour reflechir et choisir une action
+     */
+    private Carte carteTerrain;
+    /**
      * Position x sur la carte (Horizontale)
      */
     private int position_x;   
@@ -59,7 +63,7 @@ public class Personnage {
      * @param position_x Position x du personnage sur la carte générée pour le Battle Royale
      * @param position_y Position y du personnage sur la carte générée pour le Battle Royale
      */
-    public Personnage( int position_x, int position_y) {
+    public Personnage( int position_x, int position_y, Carte carte) {
         String[] tabNom = Constant.TABLEAUNOM;
         this.name = tabNom[(int)(Math.random()*(tabNom.length))];
         this.pv = 5 + (int)(Math.random()*(10-5));
@@ -106,6 +110,13 @@ public class Personnage {
     public int getCritique() {
         return critique;
     }
+    /**
+     * Getter de la variable Terrain
+     * @return 
+     */
+    public Carte getCarteTerrain() {
+        return carteTerrain;
+    }    
     /**
      * Getter de la variable position horizontale
      * @return
