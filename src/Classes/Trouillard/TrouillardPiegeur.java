@@ -14,8 +14,8 @@ import Classes.Piegeur;
  */
 public class TrouillardPiegeur extends Piegeur implements Trouillard {
 
-    public TrouillardPiegeur(int position_x, int position_y) {
-        super(position_x, position_y);
+    public TrouillardPiegeur(int position_x, int position_y,Carte carte) {
+        super(position_x, position_y,carte);
     }
 
     @Override

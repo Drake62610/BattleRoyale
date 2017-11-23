@@ -5,6 +5,7 @@
  */
 package Classes.Traitre;
 
+import Carte.Carte;
 import Classes.Pacifiste.Pacifiste;
 import Classes.Personnage;
 import Classes.Soigneur;
@@ -19,8 +20,8 @@ import java.util.ArrayList;
  */
 public class TraitreSoigneur extends Soigneur implements Traitre {
 
-    public TraitreSoigneur(int position_x, int position_y) {
-        super(position_x, position_y);
+    public TraitreSoigneur(int position_x, int position_y,Carte carte) {
+        super(position_x, position_y,carte);
     }
     
     /**

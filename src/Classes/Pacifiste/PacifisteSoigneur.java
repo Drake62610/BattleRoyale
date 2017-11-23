@@ -5,6 +5,7 @@
  */
 package Classes.Pacifiste;
 
+import Carte.Carte;
 import Classes.Personnage;
 import Classes.Soigneur;
 import Classes.Team;
@@ -17,8 +18,8 @@ public class PacifisteSoigneur extends Soigneur implements Pacifiste {
 
     int raison;
     
-    public PacifisteSoigneur(int position_x, int position_y) {
-        super(position_x, position_y);
+    public PacifisteSoigneur(int position_x, int position_y,Carte carte) {
+        super(position_x, position_y,carte);
     }
 
     @Override

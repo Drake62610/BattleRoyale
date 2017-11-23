@@ -1,6 +1,7 @@
 package Classes;
 
 
+import Carte.Carte;
 import Carte.Terrain;
 
 /**
@@ -14,8 +15,8 @@ public class Piegeur extends Personnage {
      * @param position_x
      * @param position_y
      */
-    public Piegeur(int position_x, int position_y) {
-        super(position_x, position_y);
+    public Piegeur(int position_x, int position_y, Carte carte) {
+        super(position_x, position_y,carte);
     }
     
     /**

@@ -14,8 +14,8 @@ import Classes.Soigneur;
  */
 public class TrouillardSoigneur extends Soigneur implements Trouillard {
 
-    public TrouillardSoigneur(int position_x, int position_y) {
-        super(position_x, position_y);
+    public TrouillardSoigneur(int position_x, int position_y,Carte carte) {
+        super(position_x, position_y,carte);
     }
 
     @Override

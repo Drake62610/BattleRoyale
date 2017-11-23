@@ -1,6 +1,7 @@
 package Classes;
 
 import BattleRoyale.Constant;
+import Carte.Carte;
 
 /**
  * Projet JAVA Semestre1 M1
@@ -16,8 +17,8 @@ public class Soigneur extends Personnage{
      * @param position_x sur la Carte
      * @param position_y sur la Carte
      */
-    public Soigneur( int position_x, int position_y) {
-        super(position_x,position_y);
+    public Soigneur( int position_x, int position_y,Carte carte) {
+        super(position_x,position_y,carte);
         
         this.capacité = Constant.MINSOIN + (int)(Math.random()*(Constant.MAXSOIN));
     }

@@ -5,6 +5,7 @@
  */
 package Classes.Pacifiste;
 
+import Carte.Carte;
 import Classes.Personnage;
 import Classes.Team;
 
@@ -16,8 +17,8 @@ public class PacifisteNormal extends Personnage implements Pacifiste {
 
     int raison;
     
-    public PacifisteNormal(int position_x, int position_y) {
-        super(position_x, position_y);
+    public PacifisteNormal(int position_x, int position_y,Carte carte) {
+        super(position_x, position_y,carte);
         this.raison = 100; //Un pacifiste normal est en fait un diplomate qui saura ralier la première personne qu'il croise
     }
 

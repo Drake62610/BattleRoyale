@@ -18,17 +18,19 @@ public class TrouillardNormal extends Personnage implements Trouillard {
 
     private boolean hidden;
 
-    public TrouillardNormal(int position_x, int position_y) {
-        super(position_x, position_y);
+    public TrouillardNormal(int position_x, int position_y,Carte carte) {
+        super(position_x, position_y,carte);
         hidden = false;
     }
-    
+    /**
+     * Pour l'instant il ne peut se cacher que dans la Forêt
+     * @param carte 
+     */
     @Override
     public void seCamoufler(Carte carte) {
         Terrain terrainActuel = carte.getCarte_Terrain()[this.getPosition_x()][this.getPosition_y()];
-        if(terrainActuel instanceof Foret){
-           // Foret terrainForet = terrainActuel;
-            
+        if(terrainActuel instanceof Foret && ((Foret)terrainActuel).seCacher()){
+           hidden = true;            
         }
     }
     

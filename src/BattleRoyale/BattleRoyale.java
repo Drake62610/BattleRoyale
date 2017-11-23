@@ -5,6 +5,7 @@
  */
 package BattleRoyale;
 
+import Carte.Carte;
 import Classes.Personnage;
 import java.util.ArrayList;
 
@@ -14,7 +15,8 @@ import java.util.ArrayList;
  */
 public class BattleRoyale {
     private ArrayList <Personnage> participants = new ArrayList <Personnage>();  
-    private ArrayList <Personnage> morts = new ArrayList <Personnage>();  
+    private ArrayList <Personnage> morts = new ArrayList <Personnage>(); 
+    private Carte carteTerrain;
 
     public BattleRoyale(int nbParticipant) {
         //Generer la carte

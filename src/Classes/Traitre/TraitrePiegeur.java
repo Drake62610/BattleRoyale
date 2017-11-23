@@ -5,6 +5,7 @@
  */
 package Classes.Traitre;
 
+import Carte.Carte;
 import Classes.Pacifiste.Pacifiste;
 import Classes.Personnage;
 import Classes.Piegeur;
@@ -19,8 +20,8 @@ import java.util.ArrayList;
  */
 public class TraitrePiegeur extends Piegeur implements Traitre {
 
-    public TraitrePiegeur(int position_x, int position_y) {
-        super(position_x, position_y);
+    public TraitrePiegeur(int position_x, int position_y,Carte carte) {
+        super(position_x, position_y,carte);
     }
     
     /**

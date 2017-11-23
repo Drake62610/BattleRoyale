@@ -5,6 +5,7 @@
  */
 package Classes.Tueur;
 
+import Carte.Carte;
 import Classes.Piegeur;
 
 /**
@@ -13,8 +14,8 @@ import Classes.Piegeur;
  */
 public class TueurPiegeur extends Piegeur implements Tueur {
 
-    public TueurPiegeur(int position_x, int position_y) {
-        super(position_x, position_y);
+    public TueurPiegeur(int position_x, int position_y,Carte carte) {
+        super(position_x, position_y,carte);
     }
 
     @Override

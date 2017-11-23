@@ -5,6 +5,7 @@
  */
 package Classes.Tueur;
 
+import Carte.Carte;
 import Classes.Personnage;
 
 /**
@@ -12,14 +13,20 @@ import Classes.Personnage;
  * @author ISEN
  */
 public class TueurNormal extends Personnage implements Tueur{
-
-    public TueurNormal(int position_x, int position_y) {
-        super(position_x, position_y);
+    /**
+     * Afin de limiter les dégats il ne peut utiliser son attaque spéciale que tout les X tours
+     */
+    private boolean ravageReady = true;
+    public TueurNormal(int position_x, int position_y,Carte carte) {
+        super(position_x, position_y,carte);
     }
 
     @Override
     public void ravage() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //coder un truc qui regarde le carré autour si il y a des gens, les mets dans une liste et leurs enlève autant de pv.
+        //Flemme de le coder
+        int x = this.getPosition_x();
+        int y = this.getPosition_y();
     }
     
 }
