@@ -19,19 +19,13 @@ public class main {
     public static void main(String[] args) {
         // Generation Carte
         Carte carte = new Carte(Constant.LONGUEUR,Constant.LARGEUR);
-        carte.afficher();
+        //carte.afficher();
+
+         // deploiement
+         
+         BattleRoyale broyale = new BattleRoyale (5);
+         broyale.deploiement(5, carte);
         carte.afficher2();
         
-        //Generation Perso
-        Personnage perso1 = new Personnage(0,0,carte);
-        System.out.println(perso1);
-        Personnage perso2 = new Personnage(0,1,carte);
-        PacifisteNormal pacifiste = new PacifisteNormal(2,3,carte);
-        pacifiste.raisonner(perso1);
-        pacifiste.raisonner(perso2);
-        System.out.println(perso1);
-        
-        
-        carte.getCarte_Terrain()[Constant.LONGUEUR/2][Constant.LARGEUR/2].setPerso(perso2);
     }  
 }

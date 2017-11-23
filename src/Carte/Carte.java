@@ -147,6 +147,7 @@ public class Carte {
             for (int n=0; n<largeur; n++){
                 int type_terrain = (int) (Math.random() * 3);
                 if(!(carte_Terrain[m][n] instanceof Mer)){
+
                     switch (type_terrain) {
                         case 0:
                             carte_Terrain[m][n]= new Foret();
@@ -157,6 +158,7 @@ public class Carte {
                         default:
                             carte_Terrain[m][n]= new Plaine();
                             break;
+
                     }
                 }
             }
