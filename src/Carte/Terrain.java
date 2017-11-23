@@ -36,6 +36,21 @@ public class Terrain {
     public boolean isPiege() {
         return piege;
     }
+    /**
+     * Getter pour la variable Personnage
+     * @return si le terrain est piègé ou non.
+     */
+    public Object getPerso() {
+        return perso;
+    }
+    /**
+     * Getter pour la variable DangerImminant
+     * @return si le terrain est piègé ou non.
+     */
+    public boolean isDangerImminant() {
+        return dangerImminant;
+    }
+    
     
     
 }

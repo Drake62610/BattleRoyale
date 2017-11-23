@@ -69,6 +69,7 @@ public class Personnage {
         this.pv = 5 + (int)(Math.random()*(10-5));
         this.PVMAX = this.pv;
         this.force = 1 + (int)(Math.random()*(10-5)); //Force à définir sur les différences classe plus tard
+        this.carteTerrain = carte;
         this.position_x = position_x;
         this.position_y = position_y;
         this.team = null;

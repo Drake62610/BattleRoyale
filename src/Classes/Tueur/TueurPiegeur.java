@@ -6,12 +6,11 @@
 package Classes.Tueur;
 
 import Carte.Carte;
+import Carte.Terrain;
+import Classes.Personnage;
 import Classes.Piegeur;
+import Classes.Team;
 
-/**
- *
- * @author ISEN
- */
 public class TueurPiegeur extends Piegeur implements Tueur {
 
     public TueurPiegeur(int position_x, int position_y,Carte carte) {
@@ -20,7 +19,22 @@ public class TueurPiegeur extends Piegeur implements Tueur {
 
     @Override
     public void ravage() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+        int x = this.getPosition_x();
+        int y = this.getPosition_y();
+        Terrain[][] carte = this.getCarteTerrain().getCarte_Terrain();
+        
+        for(int i=-1;i<2;i++){ //On  parcourt le carré autour de lui
+            for(int j=-1;j<2;j++){
+                if(!(i==0 && j==0)){ //Attention il ne doit pas s'attaquer lui même !
+                    if(carte[i][j].getPerso() != null && carte[i][j].getPerso() instanceof Personnage){ //Si c'est un perso il l'attaque
+                        this.attaquer((Personnage)carte[i][j].getPerso());
+                    } 
+                    else if((carte[i][j].getPerso() != null && carte[i][j].getPerso() instanceof Team)){ //Si c'est une Team il attaque son leader
+                        this.attaquer(((Team)carte[i][j].getPerso()).getLeader());
+                    }
+                }
+            }
+        }
+    }    
     
 }
