@@ -306,6 +306,10 @@ public class Personnage {
         }
     }
     public void deplacementRien(){}
+    public void deplacementRandom(){
+        int rdm = (int)(Math.random()*(5));
+        
+    }
     
     /**
      * appel autant de deplacement qu'indique la variable deplacement

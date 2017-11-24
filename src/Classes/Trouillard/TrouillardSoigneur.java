@@ -83,4 +83,29 @@ public class TrouillardSoigneur extends Soigneur implements Trouillard {
         }
     }
     
+        @Override
+    public void phaseAction() {
+        int x =this.getPosition_x();
+        int y = this.getPosition_y();
+        Terrain[][] carte = this.getCarte().getCarte_Terrain();
+        if(carte[x][y] instanceof Foret && hidden == false){
+            this.seCamoufler();
+        }
+        else if (carte[x][y] instanceof Foret && hidden == true){
+            this.soigner();
+        }
+        else{
+            this.pleurer();
+        }
+    }
+
+    private void seCamoufler() {
+        if(((Foret)this.getCarte().getCarte_Terrain()[this.getPosition_x()][this.getPosition_y()]).seCacher()){
+            hidden = true;
+        }
+    }
+
+    private void pleurer() {
+        this.parler("NOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOON POURQUOI ??????");
+    }
 }

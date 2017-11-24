@@ -28,8 +28,7 @@ public class Piegeur extends Personnage {
      * Permet de poser un piège sur la carte
      * @param carte Terrain de jeu du battle royale
      */
-    public void posePiege(Terrain[][] carte){
-        Terrain terrain = carte[this.getPosition_x()][this.getPosition_y()];
-        terrain.setPiege(true);
+    public void posePiege(){
+        this.getCarte().getCarte_Terrain()[this.getPosition_x()][this.getPosition_y()].setPiege(true);
     }
 }

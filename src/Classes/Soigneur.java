@@ -36,7 +36,7 @@ public class Soigneur extends Personnage{
     /**
      * Permet de soigner un Personnage en fonction de la capacité de soin du soigneur
      */
-    void soigner(Personnage Ami){
+    public void soigner(Personnage Ami){
         if (Ami.getPVMAX()-Ami.getPv()>=capacité){
             Ami.setPv(Ami.getPv()+capacité);
             System.out.println(this.getName() + " a soigné "+Ami.getName()+" de "+ capacité + " !");
@@ -50,7 +50,7 @@ public class Soigneur extends Personnage{
     /**
      * Polymorphisme de la methode soigner pour se l'aplliquer à soi même
      */
-    void soigner(){
+    public void soigner(){
         if (this.getPVMAX()-this.getPv()>=capacité){
             System.out.println(this.getName() + " se soigne de "+ capacité + " ! ");
             this.setPv(this.getPv() + capacité);

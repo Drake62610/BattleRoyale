@@ -48,20 +48,20 @@ public class TrouillardPiegeur extends Piegeur implements Trouillard {
             this.deplacementRien();
         }
         else{
-            //Sinon priorités aux forêts vides aux alentours
-            if (carte[x+1][y] instanceof Foret && carte[x+1][y].getPerso()==null){
+            //Sinon priorités aux forêts vides aux alentours, le piègeur detecte les piège et ne se fait pas avoir 
+            if (carte[x+1][y] instanceof Foret && carte[x+1][y].getPerso()==null && !(carte[x+1][y].isPiege())){
                 this.deplacementDroite();
             }
-            else if (carte[x-1][y] instanceof Foret && carte[x-1][y].getPerso()==null){
+            else if (carte[x-1][y] instanceof Foret && carte[x-1][y].getPerso()==null && !(carte[x+1][y].isPiege())){
                 this.deplacementGauche();
             } 
-            else if (carte[x][y+1] instanceof Foret && carte[x][y+1].getPerso()==null){
+            else if (carte[x][y+1] instanceof Foret && carte[x][y+1].getPerso()==null && !(carte[x+1][y].isPiege())){
                 this.deplacementHaut();
             }
-            else if (carte[x][y-1] instanceof Foret && carte[x][y-1].getPerso()==null){
+            else if (carte[x][y-1] instanceof Foret && carte[x][y-1].getPerso()==null && !(carte[x+1][y].isPiege())){
                 this.deplacementBas();
             }
-            //Sinon si il y a quelqu'un il fuit à l'opposé
+            //Sinon si il y a quelqu'un il fuit à l'opposé sans même reflechir aux pièges
             else{
                 if(carte[x+1][y].getPerso() != null && carte[x-1][y].getPerso() == null){
                     this.deplacementGauche();
@@ -77,10 +77,35 @@ public class TrouillardPiegeur extends Piegeur implements Trouillard {
                 }
                 //Sinon il ne bouge pas !
                 else{
-                    this.deplacementRien();
+                    this.deplacementRien(); //Mettre un deplacement random
                 }
             }    
         }
     }
     
+    @Override
+    public void phaseAction() {
+        int x =this.getPosition_x();
+        int y = this.getPosition_y();
+        Terrain[][] carte = this.getCarte().getCarte_Terrain();
+        if(carte[x][y] instanceof Foret && hidden == false){
+            this.seCamoufler();
+        }
+        else if (!(carte[x][y] instanceof Foret)){
+            this.posePiege();
+        }
+        else{
+            this.pleurer();
+        }
+    }
+
+    private void seCamoufler() {
+        if(((Foret)this.getCarte().getCarte_Terrain()[this.getPosition_x()][this.getPosition_y()]).seCacher()){
+            hidden = true;
+        }
+    }
+
+    private void pleurer() {
+        this.parler("NOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOON POURQUOI ??????");
+    }
 }
