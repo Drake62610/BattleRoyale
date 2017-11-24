@@ -271,7 +271,8 @@ public class Personnage {
     }
     
     public void choixDeplacement(){}
-    public void deplacementDroite(){
+    public void moveSouth(){
+        System.out.println("South");
         if (this.carte.getCarte_Terrain()[this.position_x+1][this.position_y] instanceof Mer){
             throw new UnsupportedOperationException("Un personnage essaie de marcher sur l'eau !");
         }
@@ -281,7 +282,8 @@ public class Personnage {
             position_x++;
         }
     }
-    public void deplacementGauche(){
+    public void moveNorth(){
+        System.out.println("North");
         if (this.carte.getCarte_Terrain()[this.position_x-1][this.position_y] instanceof Mer){
             throw new UnsupportedOperationException("Un personnage essaie de marcher sur l'eau !");
         }
@@ -291,7 +293,8 @@ public class Personnage {
             position_x--;
         }
     }
-    public void deplacementBas(){
+    public void moveWest(){
+        System.out.println("West");
         if (this.carte.getCarte_Terrain()[this.position_x][this.position_y-1] instanceof Mer){
             throw new UnsupportedOperationException("Un personnage essaie de marcher sur l'eau !");
         }
@@ -301,7 +304,8 @@ public class Personnage {
             position_y--;
         }
     }
-    public void deplacementHaut(){
+    public void moveEast(){
+        System.out.println("East");
         if (this.carte.getCarte_Terrain()[this.position_x][this.position_y+1] instanceof Mer){
             throw new UnsupportedOperationException("Un personnage essaie de marcher sur l'eau !");
         }
@@ -311,26 +315,26 @@ public class Personnage {
             position_y++;
         }
     }
-    public void deplacementRien(){}
-    public void deplacementRandom(){
+    public void dontMove(){System.out.println("Nothing");}
+    public void moveRandom(){
         int rdm = (int)(Math.random()*(6));
         if (rdm == 0 && carte.getCarte_Terrain()[position_x-1][position_y].getPerso() == null){
-            deplacementDroite();
+            moveSouth();
         }
         else if (rdm == 1 && carte.getCarte_Terrain()[position_x+1][position_y].getPerso() == null){
-            deplacementGauche();
+            moveNorth();
         }
         else if (rdm == 2 && carte.getCarte_Terrain()[position_x][position_y+1].getPerso() == null){
-            deplacementHaut();
+            moveEast();
         }
         else if (rdm == 3 && carte.getCarte_Terrain()[position_x][position_y-1].getPerso() == null){
-            deplacementBas();
+            moveWest();
         }
         else if (rdm == 4){
-            deplacementRien();
+            dontMove();
         }
         else{
-            deplacementRandom();
+            moveRandom();
         }
     }
     

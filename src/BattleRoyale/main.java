@@ -38,7 +38,7 @@ public class main {
         intG.setVisible(true);
         Thread.sleep(1000);
         intG.dispose(); //Ferme l'interface graphique
-        //perso1.deplacementBas();
+        //perso1.moveWest();
         perso1.phaseDeplacement(); //Il ne faut surtout pas modifier la carte quand elle est affichée, ça fait bug le JFrame
         //perso1.phaseAction();
         intG= carte.getIntG(); //Toujours réinitialiser l'interface

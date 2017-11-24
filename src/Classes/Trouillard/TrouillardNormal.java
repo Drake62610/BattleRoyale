@@ -52,47 +52,47 @@ public class TrouillardNormal extends Personnage implements Trouillard {
         Terrain[][] carte = this.getCarte().getCarte_Terrain();
         //Si il y a personne autour alors il reste dans la Forêt pour se cacher
         if(carte[x][y] instanceof Foret && carte[x+1][y].getPerso()==null && carte[x-1][y].getPerso()==null && carte[x][y+1].getPerso()==null && carte[x][y-1].getPerso()==null){
-            this.deplacementRien();
+            this.dontMove();
         }
         else{
             //Sinon priorités aux forêts vides aux alentours
             if (carte[x+1][y] instanceof Foret && carte[x+1][y].getPerso()==null){
                 hidden = false;
-                this.deplacementDroite();
+                this.moveSouth();
             }
             else if (carte[x-1][y] instanceof Foret && carte[x-1][y].getPerso()==null){
                 hidden = false;
-                this.deplacementGauche();
+                this.moveNorth();
             } 
             else if (carte[x][y+1] instanceof Foret && carte[x][y+1].getPerso()==null){
                 hidden = false;
-                this.deplacementHaut();
+                this.moveEast();
             }
             else if (carte[x][y-1] instanceof Foret && carte[x][y-1].getPerso()==null){
                 hidden = false;
-                this.deplacementBas();
+                this.moveWest();
             }
             //Sinon si il y a quelqu'un il fuit à l'opposé
             else{
                 if(carte[x+1][y].getPerso() != null && carte[x-1][y].getPerso() == null){
                     hidden = false;
-                    this.deplacementGauche();
+                    this.moveNorth();
                 }
                 else if(carte[x-1][y].getPerso() != null && carte[x+1][y].getPerso() == null){
                     hidden = false;
-                    this.deplacementDroite();
+                    this.moveSouth();
                 }
                 else if(carte[x][y+1].getPerso() != null && carte[x][y-1].getPerso() == null){
                     hidden = false;
-                    this.deplacementBas();
+                    this.moveWest();
                 }
                 else if(carte[x][y-1].getPerso() != null && carte[x][y+1].getPerso() == null){
                     hidden = false;
-                    this.deplacementHaut();
+                    this.moveEast();
                 }
                 //Sinon pris de panique il va n'importe où !!
                 else{
-                    this.deplacementRandom();
+                    this.moveRandom();
                 }
             }    
         }

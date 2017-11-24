@@ -50,23 +50,23 @@ public class TueurPiegeur extends Piegeur implements Tueur {
         Terrain[][] carte = this.getCarte().getCarte_Terrain();
         //Si il est déjà au CaC alors il ne bouge pas pour attaquer
         if(carte[x+1][y].getPerso() != null || carte[x-1][y].getPerso() != null || carte[x][y+1].getPerso() != null || carte[x][y-1].getPerso() != null){
-            this.deplacementRien();
+            this.dontMove();
         }
         //Si y a quelqun d'atteignable à gauche etc
         else if(carte[x-1][y+1].getPerso() != null || carte[x-1][y-1].getPerso() != null || carte[x-2][y].getPerso() != null){
-            this.deplacementGauche();
+            this.moveNorth();
         }
         else if(carte[x+1][y+1].getPerso() != null || carte[x+1][y-1].getPerso() != null || carte[x+2][y].getPerso() != null){
-            this.deplacementDroite();
+            this.moveSouth();
         }
         else if(carte[x][y+2].getPerso() != null){
-            this.deplacementHaut();
+            this.moveEast();
         }
         else if(carte[x][y-2].getPerso() != null){
-            this.deplacementBas();
+            this.moveWest();
         }
         else{
-            this.deplacementRien(); //Changer par deplacementrandom (à coder)
+            this.dontMove(); //Changer par deplacementrandom (à coder)
         }
     }    
     
