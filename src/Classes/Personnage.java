@@ -4,12 +4,6 @@ package Classes;
 import BattleRoyale.Constant;
 import Carte.Carte;
 import Carte.Mer;
-import Carte.Terrain;
-import Classes.Pacifiste.Pacifiste;
-import Classes.Traitre.Traitre;
-import Classes.Traitre.TraitreNormal;
-import Classes.Trouillard.Trouillard;
-import Classes.Tueur.Tueur;
 
 /**
  * Projet JAVA Semestre1 M1
@@ -273,7 +267,7 @@ public class Personnage {
     public void choixDeplacement(){}
     public void deplacementDroite(){
         if (this.carte.getCarte_Terrain()[this.position_x+1][this.position_y] instanceof Mer){
-            //throw Exception
+            throw new UnsupportedOperationException("Un personnage essaie de marcher sur l'eau !");
         }
         else{
             this.carte.getCarte_Terrain()[this.position_x][this.position_y].setPerso(null);
@@ -283,7 +277,7 @@ public class Personnage {
     }
     public void deplacementGauche(){
         if (this.carte.getCarte_Terrain()[this.position_x-1][this.position_y] instanceof Mer){
-            //throw Exception
+            throw new UnsupportedOperationException("Un personnage essaie de marcher sur l'eau !");
         }
         else{
             this.carte.getCarte_Terrain()[this.position_x][this.position_y].setPerso(null);
@@ -293,7 +287,7 @@ public class Personnage {
     }
     public void deplacementBas(){
         if (this.carte.getCarte_Terrain()[this.position_x][this.position_y-1] instanceof Mer){
-            //throw Exception
+            throw new UnsupportedOperationException("Un personnage essaie de marcher sur l'eau !");
         }
         else{
             this.carte.getCarte_Terrain()[this.position_x][this.position_y].setPerso(null);
@@ -303,7 +297,7 @@ public class Personnage {
     }
     public void deplacementHaut(){
         if (this.carte.getCarte_Terrain()[this.position_x][this.position_y+1] instanceof Mer){
-            //throw Exception
+            throw new UnsupportedOperationException("Un personnage essaie de marcher sur l'eau !");
         }
         else{
             this.carte.getCarte_Terrain()[this.position_x][this.position_y].setPerso(null);
@@ -313,11 +307,17 @@ public class Personnage {
     }
     public void deplacementRien(){}
     
+    /**
+     * appel autant de deplacement qu'indique la variable deplacement
+     */
     public void phaseDeplacement(){
         for (int i=0;i<deplacement;i++){
             this.choixDeplacement();
         }
     }
+    /**
+     * Methode à overide pour implementer les différents comportements
+     */
     public void phaseAction(){}
 
 }

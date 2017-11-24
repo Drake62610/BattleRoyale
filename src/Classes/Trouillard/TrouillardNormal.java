@@ -38,6 +38,10 @@ public class TrouillardNormal extends Personnage implements Trouillard {
         }
     }
 
+    public void setHidden(boolean hidden) {
+        this.hidden = hidden;
+    }
+
     /**
      * Le trouillard cherche à se cacher dans les forêts et fuis sans réfléchir dès qu'une personne se trouve à coté de lui
      */
@@ -53,29 +57,37 @@ public class TrouillardNormal extends Personnage implements Trouillard {
         else{
             //Sinon priorités aux forêts vides aux alentours
             if (carte[x+1][y] instanceof Foret && carte[x+1][y].getPerso()==null){
+                hidden = false;
                 this.deplacementDroite();
             }
             else if (carte[x-1][y] instanceof Foret && carte[x-1][y].getPerso()==null){
+                hidden = false;
                 this.deplacementGauche();
             } 
             else if (carte[x][y+1] instanceof Foret && carte[x][y+1].getPerso()==null){
+                hidden = false;
                 this.deplacementHaut();
             }
             else if (carte[x][y-1] instanceof Foret && carte[x][y-1].getPerso()==null){
+                hidden = false;
                 this.deplacementBas();
             }
             //Sinon si il y a quelqu'un il fuit à l'opposé
             else{
                 if(carte[x+1][y].getPerso() != null && carte[x-1][y].getPerso() == null){
+                    hidden = false;
                     this.deplacementGauche();
                 }
                 else if(carte[x-1][y].getPerso() != null && carte[x+1][y].getPerso() == null){
+                    hidden = false;
                     this.deplacementDroite();
                 }
                 else if(carte[x][y+1].getPerso() != null && carte[x][y-1].getPerso() == null){
+                    hidden = false;
                     this.deplacementBas();
                 }
                 else if(carte[x][y-1].getPerso() != null && carte[x][y+1].getPerso() == null){
+                    hidden = false;
                     this.deplacementHaut();
                 }
                 //Sinon il ne bouge pas !
@@ -85,4 +97,28 @@ public class TrouillardNormal extends Personnage implements Trouillard {
             }    
         }
     }
+
+    @Override
+    public void phaseAction() {
+        int x =this.getPosition_x();
+        int y = this.getPosition_y();
+        Terrain[][] carte = this.getCarte().getCarte_Terrain();
+        if(carte[x][y] instanceof Foret){
+            this.seCamoufler();
+        }
+        else{
+            this.pleurer();
+        }
+    }
+
+    private void seCamoufler() {
+        if(((Foret)this.getCarte().getCarte_Terrain()[this.getPosition_x()][this.getPosition_y()]).seCacher()){
+            hidden = true;
+        }
+    }
+
+    private void pleurer() {
+        this.parler("NOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOON POURQUOI ??????");
+    }
+    
 }

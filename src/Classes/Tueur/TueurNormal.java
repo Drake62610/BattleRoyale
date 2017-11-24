@@ -75,6 +75,4 @@ public class TueurNormal extends Personnage implements Tueur{
             this.deplacementRien(); //Changer par deplacementrandom (à coder)
         }
     }
-
-    
 }
