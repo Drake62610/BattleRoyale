@@ -9,6 +9,7 @@ import Carte.Carte;
 import Carte.Terrain;
 import Classes.Personnage;
 import Classes.Team;
+import java.util.ArrayList;
 
 public class TueurNormal extends Personnage implements Tueur{
     /**
@@ -75,4 +76,18 @@ public class TueurNormal extends Personnage implements Tueur{
             this.deplacementRien(); //Changer par deplacementrandom (à coder)
         }
     }
+
+    @Override
+    public void phaseAction() {
+        int x =this.getPosition_x();
+        int y = this.getPosition_y();
+        Terrain[][] carte = this.getCarte().getCarte_Terrain();
+        if(carte[x][y].getPerso() != null){
+            this.attaquer((Personnage)carte[x][y].getPerso());
+        }
+        else if(carte[x][y].getPerso() != null){
+            this.attaquer(carte[x][y].getPerso());
+        }
+    }
+    
 }

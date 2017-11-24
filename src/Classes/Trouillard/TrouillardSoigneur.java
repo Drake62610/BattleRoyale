@@ -77,13 +77,13 @@ public class TrouillardSoigneur extends Soigneur implements Trouillard {
                 }
                 //Sinon il ne bouge pas !
                 else{
-                    this.deplacementRien();
+                    this.deplacementRandom();
                 }
             }    
         }
     }
     
-        @Override
+    @Override
     public void phaseAction() {
         int x =this.getPosition_x();
         int y = this.getPosition_y();

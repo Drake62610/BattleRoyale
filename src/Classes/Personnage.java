@@ -225,18 +225,24 @@ public class Personnage {
      * Action de base que tout les personnage possède permettant d'infiger des dégats à une cible
      * @param cible de l'attaque
      */
-    public void attaquer(Personnage cible){
-        //Notion de coup critique
+    public void attaquer(Object cible){
+        int dmg = force;
         if((int)(Math.random()*100)<this.getCritique()){
             this.parler("COUP CRITIQUE");
-            cible.enquaisser(this.force * 2);
+            dmg = force *2;
+        }
+        if (cible instanceof Personnage){
+            ((Personnage) cible).enquaisser(dmg);
+        }
+        else if (cible instanceof Team){
+            ((Team)cible).enquaisser(dmg);
         }
         else{
-            //Augmenter le ratio 
-            cible.enquaisser(this.force);
-            
-            
+            throw new UnsupportedOperationException("Un personnage essaie de marcher sur l'eau !");
         }
+        
+        //Notion de coup critique
+        
     }
     
     /**
@@ -292,7 +298,7 @@ public class Personnage {
         else{
             this.carte.getCarte_Terrain()[this.position_x][this.position_y].setPerso(null);
             this.carte.getCarte_Terrain()[this.position_x][this.position_y-1].setPerso(this);
-            position_y++;
+            position_y--;
         }
     }
     public void deplacementHaut(){
@@ -302,13 +308,30 @@ public class Personnage {
         else{
             this.carte.getCarte_Terrain()[this.position_x][this.position_y].setPerso(null);
             this.carte.getCarte_Terrain()[this.position_x][this.position_y+1].setPerso(this);
-            position_y--;
+            position_y++;
         }
     }
     public void deplacementRien(){}
     public void deplacementRandom(){
-        int rdm = (int)(Math.random()*(5));
-        
+        int rdm = (int)(Math.random()*(6));
+        if (rdm == 0 && carte.getCarte_Terrain()[position_x-1][position_y].getPerso() == null){
+            deplacementDroite();
+        }
+        else if (rdm == 1 && carte.getCarte_Terrain()[position_x+1][position_y].getPerso() == null){
+            deplacementGauche();
+        }
+        else if (rdm == 2 && carte.getCarte_Terrain()[position_x][position_y+1].getPerso() == null){
+            deplacementHaut();
+        }
+        else if (rdm == 3 && carte.getCarte_Terrain()[position_x][position_y-1].getPerso() == null){
+            deplacementBas();
+        }
+        else if (rdm == 4){
+            deplacementRien();
+        }
+        else{
+            deplacementRandom();
+        }
     }
     
     /**

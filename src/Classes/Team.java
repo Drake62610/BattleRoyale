@@ -134,13 +134,17 @@ public class Team {
         }
     }
     
-    void phaseDeplacement(){
+    public void phaseDeplacement(){
         
     }
     
-    void phaseAction(){
+    public void phaseAction(){
         //Le leader fait l'action pour le groupe
-        //SI il y a des soigneurs dans els non actifs ils soignent
+        //SI il y a des soigneurs dans les non actifs ils soignent
+    }
+    
+    public void enquaisser(int dmg){
+        leader.enquaisser(dmg);
     }
 
 }  

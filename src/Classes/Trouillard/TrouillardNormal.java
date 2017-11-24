@@ -90,9 +90,9 @@ public class TrouillardNormal extends Personnage implements Trouillard {
                     hidden = false;
                     this.deplacementHaut();
                 }
-                //Sinon il ne bouge pas !
+                //Sinon pris de panique il va n'importe où !!
                 else{
-                    this.deplacementRien();
+                    this.deplacementRandom();
                 }
             }    
         }

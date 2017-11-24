@@ -77,7 +77,7 @@ public class TrouillardPiegeur extends Piegeur implements Trouillard {
                 }
                 //Sinon il ne bouge pas !
                 else{
-                    this.deplacementRien(); //Mettre un deplacement random
+                    this.deplacementRandom(); //Mettre un deplacement random
                 }
             }    
         }
