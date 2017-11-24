@@ -270,8 +270,7 @@ public class Personnage {
         this.phaseAction();
     }
     
-    public void choix(){}
-    
+    public void choixDeplacement(){}
     public void deplacementDroite(){
         if (this.carte.getCarte_Terrain()[this.position_x+1][this.position_y] instanceof Mer){
             //throw Exception
@@ -312,18 +311,13 @@ public class Personnage {
             position_y--;
         }
     }
-    public void deplacementRien(){
-        
-    }
+    public void deplacementRien(){}
     
     public void phaseDeplacement(){
         for (int i=0;i<deplacement;i++){
-            this.choix();
+            this.choixDeplacement();
         }
     }
-    
-    public void phaseAction(){
-        
-    }
+    public void phaseAction(){}
 
 }

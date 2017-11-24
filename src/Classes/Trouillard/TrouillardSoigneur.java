@@ -35,4 +35,52 @@ public class TrouillardSoigneur extends Soigneur implements Trouillard {
         }
     }
     
+    /**
+     * Le trouillard cherche à se cacher dans les forêts et fuis sans réfléchir dès qu'une personne se trouve à coté de lui
+     */
+    @Override
+    public void choixDeplacement() {
+                int x =this.getPosition_x();
+        int y = this.getPosition_y();
+        Terrain[][] carte = this.getCarte().getCarte_Terrain();
+        //Si il y a personne autour alors il reste dans la Forêt pour se cacher
+        if(carte[x][y] instanceof Foret && carte[x+1][y].getPerso()==null && carte[x-1][y].getPerso()==null && carte[x][y+1].getPerso()==null && carte[x][y-1].getPerso()==null){
+            this.deplacementRien();
+        }
+        else{
+            //Sinon priorités aux forêts vides aux alentours
+            if (carte[x+1][y] instanceof Foret && carte[x+1][y].getPerso()==null){
+                this.deplacementDroite();
+            }
+            else if (carte[x-1][y] instanceof Foret && carte[x-1][y].getPerso()==null){
+                this.deplacementGauche();
+            } 
+            else if (carte[x][y+1] instanceof Foret && carte[x][y+1].getPerso()==null){
+                this.deplacementHaut();
+            }
+            else if (carte[x][y-1] instanceof Foret && carte[x][y-1].getPerso()==null){
+                this.deplacementBas();
+            }
+            //Sinon si il y a quelqu'un il fuit à l'opposé
+            else{
+                if(carte[x+1][y].getPerso() != null && carte[x-1][y].getPerso() == null){
+                    this.deplacementGauche();
+                }
+                else if(carte[x-1][y].getPerso() != null && carte[x+1][y].getPerso() == null){
+                    this.deplacementDroite();
+                }
+                else if(carte[x][y+1].getPerso() != null && carte[x][y-1].getPerso() == null){
+                    this.deplacementBas();
+                }
+                else if(carte[x][y-1].getPerso() != null && carte[x][y+1].getPerso() == null){
+                    this.deplacementHaut();
+                }
+                //Sinon il ne bouge pas !
+                else{
+                    this.deplacementRien();
+                }
+            }    
+        }
+    }
+    
 }

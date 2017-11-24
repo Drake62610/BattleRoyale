@@ -21,7 +21,7 @@ public class TrouillardNormal extends Personnage implements Trouillard {
     public TrouillardNormal(int position_x, int position_y, Carte carte) {
         super(5+(int)(Math.random()*(5-1)) //PV
                 ,0                          //Force
-                ,1                        //Deplacement
+                ,2                        //Deplacement
                 ,4                        //Vitesse
                 ,position_x, position_y,carte);
         hidden = false;
@@ -42,8 +42,8 @@ public class TrouillardNormal extends Personnage implements Trouillard {
      * Le trouillard cherche à se cacher dans les forêts et fuis sans réfléchir dès qu'une personne se trouve à coté de lui
      */
     @Override
-    public void choix() {
-                int x =this.getPosition_x();
+    public void choixDeplacement() { //Trouver solution pour avoir un mouvement cohérant (2 deplacements)
+        int x =this.getPosition_x();
         int y = this.getPosition_y();
         Terrain[][] carte = this.getCarte().getCarte_Terrain();
         //Si il y a personne autour alors il reste dans la Forêt pour se cacher

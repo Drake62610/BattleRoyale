@@ -47,5 +47,34 @@ public class TueurNormal extends Personnage implements Tueur{
                 }
             }
         }
-    }    
+    }
+
+    @Override
+    public void choixDeplacement() {
+        int x =this.getPosition_x();
+        int y = this.getPosition_y();
+        Terrain[][] carte = this.getCarte().getCarte_Terrain();
+        //Si il est déjà au CaC alors il ne bouge pas pour attaquer
+        if(carte[x+1][y].getPerso() != null || carte[x-1][y].getPerso() != null || carte[x][y+1].getPerso() != null || carte[x][y-1].getPerso() != null){
+            this.deplacementRien();
+        }
+        //Si y a quelqun d'atteignable à gauche etc
+        else if(carte[x-1][y+1].getPerso() != null || carte[x-1][y-1].getPerso() != null || carte[x-2][y].getPerso() != null){
+            this.deplacementGauche();
+        }
+        else if(carte[x+1][y+1].getPerso() != null || carte[x+1][y-1].getPerso() != null || carte[x+2][y].getPerso() != null){
+            this.deplacementDroite();
+        }
+        else if(carte[x][y+2].getPerso() != null){
+            this.deplacementHaut();
+        }
+        else if(carte[x][y-2].getPerso() != null){
+            this.deplacementBas();
+        }
+        else{
+            this.deplacementRien(); //Changer par deplacementrandom (à coder)
+        }
+    }
+
+    
 }
