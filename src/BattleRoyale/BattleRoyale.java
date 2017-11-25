@@ -97,6 +97,13 @@ public class BattleRoyale {
             int rngY = (int) (Math.random() * 6);
             int rngX = (int) (Math.random() * 25);
             
+            if (y-rngY<0 ){
+                y=Constant.LONGUEUR/2+rngY%2;
+            }
+            if (x-rngX<0 ){
+                x=Constant.LARGEUR/2+rngX%2;
+            }
+            
             if (carte.getCarte_Terrain()[y-rngY][x+rngX].getPerso()==null ){
                 if (!(carte.getCarte_Terrain()[y-rngY][x+rngX] instanceof Mer)){
                     System.out.println(x+rngX);
