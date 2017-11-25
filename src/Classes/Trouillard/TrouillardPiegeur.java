@@ -48,9 +48,11 @@ public class TrouillardPiegeur extends Piegeur implements Trouillard {
                 int x =this.getPosition_x();
         int y = this.getPosition_y();
         Terrain[][] carte = this.getCarte().getCarte_Terrain();
-        //Si il y a personne autour alors il reste dans la Forêt pour se cacher
-        if(carte[x][y] instanceof Foret && carte[x+1][y].getPerso()==null && carte[x-1][y].getPerso()==null && carte[x][y+1].getPerso()==null && carte[x][y-1].getPerso()==null){
-            this.dontMove();
+        if(carte[x][y].getPerso() != this){ //Si quelqun est dans sa forêt alors qu'il est caché
+            this.dontMove(); //Il ne bouge pas et reste caché
+        }
+        else if(carte[x][y] instanceof Foret && carte[x+1][y].getPerso()==null && carte[x-1][y].getPerso()==null && carte[x][y+1].getPerso()==null && carte[x][y-1].getPerso()==null){
+            this.dontMove(); //Si il y a personne autour alors il reste dans la Forêt pour se cacher
         }
         else{
             //Sinon priorités aux forêts vides aux alentours, le piègeur detecte les piège et ne se fait pas avoir 

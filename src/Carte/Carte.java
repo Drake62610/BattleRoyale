@@ -107,10 +107,10 @@ public class Carte {
                     g.fillRect(x,y,pas_x,pas_y);
                     
                     //If there is a Personnage
-                    if(carte1[j].getPerso() != null){
+                    if(carte1[j].getPerso(1) != null){
                         //Set color
-                        if(carte1[j].getPerso() instanceof Personnage){g.setColor(Color.RED);}
-                        if(carte1[j].getPerso() instanceof Team){g.setColor(Color.RED);}
+                        if(carte1[j].getPerso(1) instanceof Personnage){g.setColor(Color.RED);}
+                        if(carte1[j].getPerso(1) instanceof Team){g.setColor(Color.RED);}
                         //Draw
                         g.fillRect((x+x+pas_x)/2,(y+y+pas_y)/2,pas_x/2,pas_y/2);
                     }

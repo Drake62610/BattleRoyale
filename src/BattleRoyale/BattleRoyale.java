@@ -9,6 +9,7 @@ import Carte.Carte;
 import Carte.Mer;
 import Classes.Pacifiste.PacifisteNormal;
 import Classes.Personnage;
+import Classes.Trouillard.TrouillardNormal;
 import java.util.ArrayList;
 
 public class BattleRoyale {
@@ -17,12 +18,12 @@ public class BattleRoyale {
     private Carte carteTerrain;
 
     public BattleRoyale(int nbParticipant) {
-        carteTerrain = new Carte(Constant.LARGEUR,Constant.LONGUEUR);
+        carteTerrain = new Carte(Constant.LONGUEUR,Constant.LARGEUR);
         this.deploiement(nbParticipant, carteTerrain);
         //Generer les personnages sur la cartes
         //Distribuer les armes
     }
-    
+    //Getter
     public ArrayList<Personnage> getParticipants() {
         return participants;
     }
@@ -30,17 +31,32 @@ public class BattleRoyale {
     public ArrayList<Personnage> getMorts() {
         return morts;
     }
+
+    public Carte getCarteTerrain() {
+        return carteTerrain;
+    }
+    
     
     public void nextTurn(){
         //Parcourt la liste des vivants et joue leurs tours
         for(int i=0;i<participants.size();i++){
-            
+            participants.get(i).jouer();
         }
-        //Checker les morts et les ajouter à la liste tout en les suprimant des participants
-        //Restreint la zone
-        //Checker de nouveau les morts ? Ou le faire en dur à voir
-        //Annonce les zones en danger du prochian tour
-        //Recapitule les morts
+        //Checker les morts et les ajouter à la liste tout en les suprimant des 
+        Personnage tmp;
+        System.out.println("Sont mort ce tour :");
+        for(int i=0;i<participants.size();i++){
+            tmp = participants.get(i);            
+            if(tmp.getPv()==0){
+                System.out.println(tmp.getName() + ", ");
+                morts.add(tmp);
+                participants.remove(i);
+            }
+        }
+        //Restreint la zone Non implementé pour l'instant
+        //Checker de nouveau les morts ? Ou le faire en dur à voir non implementé pour l'instant
+        //Annonce les zones en danger du prochian tour non implémenté pour l'instant
+        //Recapitule les morts fait au dessus
     }
     public void deploiement(int nbr_Perso, Carte carte){
         Personnage tmp;
@@ -58,7 +74,7 @@ public class BattleRoyale {
             }
         }        
         // on place notre premier participant
-        tmp = new PacifisteNormal(y,x,carte);
+        tmp = new TrouillardNormal(y,x,carte);
         participants.add(tmp);
         carte.getCarte_Terrain()[y][x].setPerso(tmp);
         // a partir du premier on place les autres
@@ -69,7 +85,7 @@ public class BattleRoyale {
                 if (!(carte.getCarte_Terrain()[y-rngY][x+rngX] instanceof Mer)){
                     System.out.println(x+rngX);
                     System.out.println(y-rngY);
-                    tmp = new PacifisteNormal(y-rngY,x+rngX,carte);
+                    tmp = new TrouillardNormal(y-rngY,x+rngX,carte);
                     participants.add(tmp);
                     carte.getCarte_Terrain()[y-rngY][x+rngX].setPerso(tmp);
                     i = i+1;

@@ -49,7 +49,7 @@ public class PacifisteSoigneur extends Soigneur implements Pacifiste {
         }
     }    
     
-        @Override
+    @Override
     public void choixDeplacement() {
         int x =this.getPosition_x();
         int y = this.getPosition_y();

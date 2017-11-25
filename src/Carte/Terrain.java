@@ -1,5 +1,7 @@
 package Carte;
 
+import Classes.Personnage;
+import Classes.Piegeur;
 import Classes.Trouillard.Trouillard;
 
 /**
@@ -48,12 +50,21 @@ public class Terrain {
     }
     /**
      * Getter pour la variable Personnage
+     * Cette méthode est exclusivement utilisé par les joueurs car ils ne peuvent pas voir les Trouillards cachés
      * @return si le terrain est piègé ou non.
      */
     public Object getPerso() {
-        if (perso instanceof Trouillard && ((Trouillard)perso).){
-            
+        if (perso instanceof Trouillard && ((Trouillard)perso).isHidden()){
+            return null;
         }
+        return perso;
+    }
+        /**
+     * Getter pour la variable Personnage
+     * @param i si un paramètre est trouvé alors la requete vient d'un administrateur de la partie qui a le droit de voir les trouillard caché
+     * @return si le terrain est piègé ou non.
+     */
+    public Object getPerso(int i) {
         return perso;
     }
     /**
@@ -64,6 +75,17 @@ public class Terrain {
         return dangerImminant;
     }
     
-    
+    public boolean accecible(Personnage perso){
+        if (this instanceof Mer){
+            return false;
+        }
+        if (piege && perso instanceof Piegeur){
+            return false;
+        }
+        if (perso.equals(null)){
+            return false;
+        }
+        return true;
+    }
     
 }

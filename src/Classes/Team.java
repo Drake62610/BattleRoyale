@@ -97,7 +97,7 @@ public class Team {
          return -1;
     }
     
-    void moveNorth(){
+    void moveEast(){
     if (this.leader.getCarte().getCarte_Terrain()[this.getLeader().getPosition_x()+1][this.getLeader().getPosition_y()] instanceof Mer){
         //throw Exception
     }
@@ -106,7 +106,7 @@ public class Team {
         this.leader.getCarte().getCarte_Terrain()[this.getLeader().getPosition_x()+1][this.getLeader().getPosition_y()].setPerso(this);
     }
     }
-    void moveSouth(){
+    void moveWest(){
         if (this.leader.getCarte().getCarte_Terrain()[this.getLeader().getPosition_x()][this.getLeader().getPosition_y()] instanceof Mer){
             //throw Exception
         }
@@ -115,7 +115,7 @@ public class Team {
             this.leader.getCarte().getCarte_Terrain()[this.getLeader().getPosition_x()-1][this.getLeader().getPosition_y()].setPerso(this);
         }
     }
-    void moveWest(){
+    void moveNorth(){
         if (this.leader.getCarte().getCarte_Terrain()[this.getLeader().getPosition_x()][this.getLeader().getPosition_y()-1] instanceof Mer){
             //throw Exception
         }
@@ -124,7 +124,7 @@ public class Team {
             this.leader.getCarte().getCarte_Terrain()[this.getLeader().getPosition_x()][this.getLeader().getPosition_y()-1].setPerso(this);
         }
     }
-    void deplacementDroite(){
+    void moveSouth(){
         if (this.leader.getCarte().getCarte_Terrain()[this.getLeader().getPosition_x()][this.getLeader().getPosition_y()+1] instanceof Mer){
             //throw Exception
         }

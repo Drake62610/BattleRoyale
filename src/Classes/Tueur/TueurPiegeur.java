@@ -68,6 +68,28 @@ public class TueurPiegeur extends Piegeur implements Tueur {
         else{
             this.dontMove(); //Changer par deplacementrandom (à coder)
         }
-    }    
+    }
+
+    @Override
+    public void phaseAction() {
+        int x =this.getPosition_x();
+        int y = this.getPosition_y();
+        Terrain[][] carte = this.getCarte().getCarte_Terrain();
+        if(carte[x+1][y].getPerso() != null){
+            this.attaquer((Personnage)carte[x+1][y].getPerso());
+        }
+        else if(carte[x-1][y].getPerso() != null){
+            this.attaquer(carte[x-1][y].getPerso());
+        }
+        else if(carte[x][y+1].getPerso() != null){
+            this.attaquer(carte[x][y+1].getPerso());
+        }
+        else if(carte[x][y-1].getPerso() != null){
+            this.attaquer(carte[x][y-1].getPerso());
+        }
+        else{
+            carte[x][y].setPiege(true);
+        }
+    }
     
 }

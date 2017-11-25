@@ -44,7 +44,7 @@ public class PacifisteNormal extends Personnage implements Pacifiste {
         }
     }
     
-        @Override
+    @Override
     public void choixDeplacement() {
         int x =this.getPosition_x();
         int y = this.getPosition_y();
@@ -55,7 +55,7 @@ public class PacifisteNormal extends Personnage implements Pacifiste {
         }
         //Si y a quelqun d'atteignable à gauche etc
         else if(carte[x-1][y+1].getPerso() != null || carte[x-1][y-1].getPerso() != null || carte[x-2][y].getPerso() != null){
-            this.moveNorth();
+            this.moveNorth(); //Ajouter les accecibilité friendly
         }
         else if(carte[x+1][y+1].getPerso() != null || carte[x+1][y-1].getPerso() != null || carte[x+2][y].getPerso() != null){
             this.moveSouth();
