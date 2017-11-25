@@ -30,7 +30,7 @@ public class Personnage {
     /**
      * Stat de vitesse qui gère l'ordre des tours
      */
-    private final int vitesse;
+    private int vitesse;
     /**
      * Pourcentage d'infliger un coup critique
      */
@@ -124,6 +124,14 @@ public class Personnage {
         return critique;
     }
     /**
+     * Getter de la variable vitesse
+     * @return 
+     */
+    public int getVitesse() {
+        return vitesse;
+    }
+    
+    /**
      * Getter de la variable Terrain
      * @return 
      */
@@ -164,6 +172,11 @@ public class Personnage {
      * Setter pour la variable position_x
      * @param position_x
      */
+    
+    public void setVitesse(int vitesse) {
+        this.vitesse = vitesse;
+    }
+
     public void setPosition_x(int position_x) {
         this.position_x = position_x;
     }
@@ -267,7 +280,11 @@ public class Personnage {
     
     public void jouer(){
         if (team == null){
+            System.out.println("***************");
+            System.out.println("Tour de " + name);
+            System.out.println("Phase de déplacement");
             this.phaseDeplacement();
+            System.out.println("Phase d'action");
             this.phaseAction();
         }
         else{

@@ -44,47 +44,55 @@ public class TrouillardPiegeur extends Piegeur implements Trouillard {
      * Le trouillard cherche à se cacher dans les forêts et fuis sans réfléchir dès qu'une personne se trouve à coté de lui
      */
     @Override
-    public void choixDeplacement() {
-                int x =this.getPosition_x();
+    public void choixDeplacement() { //Trouver solution pour avoir un mouvement cohérant (2 deplacements)
+        int x =this.getPosition_x();
         int y = this.getPosition_y();
         Terrain[][] carte = this.getCarte().getCarte_Terrain();
-        if(carte[x][y].getPerso() != this){ //Si quelqun est dans sa forêt alors qu'il est caché
+        if(!carte[x][y].getPerso().equals(this)){ //Si quelqun est dans sa forêt alors qu'il est caché
             this.dontMove(); //Il ne bouge pas et reste caché
         }
         else if(carte[x][y] instanceof Foret && carte[x+1][y].getPerso()==null && carte[x-1][y].getPerso()==null && carte[x][y+1].getPerso()==null && carte[x][y-1].getPerso()==null){
             this.dontMove(); //Si il y a personne autour alors il reste dans la Forêt pour se cacher
         }
         else{
-            //Sinon priorités aux forêts vides aux alentours, le piègeur detecte les piège et ne se fait pas avoir 
-            if (carte[x+1][y] instanceof Foret && carte[x+1][y].getPerso()==null && !(carte[x+1][y].isPiege())){
+            //Sinon priorités aux forêts vides aux alentours
+            if (carte[x+1][y] instanceof Foret && carte[x+1][y].accecible(this)){
+                hidden = false;
                 this.moveSouth();
             }
-            else if (carte[x-1][y] instanceof Foret && carte[x-1][y].getPerso()==null && !(carte[x+1][y].isPiege())){
+            else if (carte[x-1][y] instanceof Foret && carte[x-1][y].accecible(this)){
+                hidden = false;
                 this.moveNorth();
             } 
-            else if (carte[x][y+1] instanceof Foret && carte[x][y+1].getPerso()==null && !(carte[x+1][y].isPiege())){
+            else if (carte[x][y+1] instanceof Foret && carte[x][y+1].accecible(this)){
+                hidden = false;
                 this.moveEast();
             }
-            else if (carte[x][y-1] instanceof Foret && carte[x][y-1].getPerso()==null && !(carte[x+1][y].isPiege())){
+            else if (carte[x][y-1] instanceof Foret && carte[x][y-1].accecible(this)){
+                hidden = false;
                 this.moveWest();
             }
-            //Sinon si il y a quelqu'un il fuit à l'opposé sans même reflechir aux pièges
+            //Sinon si il y a quelqu'un il fuit à l'opposé
             else{
-                if(carte[x+1][y].getPerso() != null && carte[x-1][y].getPerso() == null){
+                if(carte[x+1][y].getPerso() != null && carte[x-1][y].accecible(this)){
+                    hidden = false;
                     this.moveNorth();
                 }
-                else if(carte[x-1][y].getPerso() != null && carte[x+1][y].getPerso() == null){
+                else if(carte[x-1][y].getPerso() != null && carte[x+1][y].accecible(this)){
+                    hidden = false;
                     this.moveSouth();
                 }
-                else if(carte[x][y+1].getPerso() != null && carte[x][y-1].getPerso() == null){
+                else if(carte[x][y+1].getPerso() != null && carte[x][y-1].accecible(this)){
+                    hidden = false;
                     this.moveWest();
                 }
-                else if(carte[x][y-1].getPerso() != null && carte[x][y+1].getPerso() == null){
+                else if(carte[x][y-1].getPerso() != null && carte[x][y+1].accecible(this)){
+                    hidden = false;
                     this.moveEast();
                 }
-                //Sinon il ne bouge pas !
+                //Sinon pris de panique il va n'importe où !!
                 else{
-                    this.moveRandom(); //Mettre un deplacement random
+                    this.moveRandom();
                 }
             }    
         }

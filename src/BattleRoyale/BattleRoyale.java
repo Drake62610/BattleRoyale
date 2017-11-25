@@ -11,6 +11,8 @@ import Classes.Pacifiste.PacifisteNormal;
 import Classes.Personnage;
 import Classes.Trouillard.TrouillardNormal;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class BattleRoyale {
     private ArrayList <Personnage> participants = new ArrayList <Personnage>();  
@@ -20,6 +22,19 @@ public class BattleRoyale {
     public BattleRoyale(int nbParticipant) {
         carteTerrain = new Carte(Constant.LONGUEUR,Constant.LARGEUR);
         this.deploiement(nbParticipant, carteTerrain);
+        participants.get(4).setVitesse(5);
+        Collections.sort(participants, new Comparator<Personnage>() {
+            @Override
+            public int compare(Personnage tc1, Personnage tc2) {
+                if(tc1.getVitesse()<tc2.getVitesse()){
+                    return 1;
+                }
+                else if (tc1.getVitesse()>tc2.getVitesse()){ 
+                    return -1;
+                }
+                return 0;
+            }
+        });
         //Generer les personnages sur la cartes
         //Distribuer les armes
     }
