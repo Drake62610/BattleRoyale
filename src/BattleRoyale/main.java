@@ -45,7 +45,7 @@ public class main {
         //intG.setVisible(true); //Afficher
         //carte.afficher2();
         
-        BattleRoyale platinum = new BattleRoyale(5);
+        BattleRoyale platinum = new BattleRoyale(20);
         JFrame intG ;
         intG = platinum.getCarteTerrain().getIntG();
         intG.setVisible(true);

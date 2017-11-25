@@ -13,10 +13,6 @@ import Classes.Trouillard.Trouillard;
 import Classes.Tueur.Tueur;
 import java.util.ArrayList;
 
-/**
- *
- * @author ISEN
- */
 public class TraitreNormal extends Personnage implements Traitre {
 
     public TraitreNormal(int position_x, int position_y, Carte carte) {

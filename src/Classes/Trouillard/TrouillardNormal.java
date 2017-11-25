@@ -52,10 +52,10 @@ public class TrouillardNormal extends Personnage implements Trouillard {
      */
     @Override
     public void choixDeplacement() { //Trouver solution pour avoir un mouvement cohérant (2 deplacements)
-        int x =this.getPosition_x();
+    try{    int x =this.getPosition_x();
         int y = this.getPosition_y();
         Terrain[][] carte = this.getCarte().getCarte_Terrain();
-        if(!carte[x][y].getPerso().equals(this)){ //Si quelqun est dans sa forêt alors qu'il est caché
+        if(!carte[this.getPosition_x()][this.getPosition_y()].getPerso().equals(this)){ //Si quelqun est dans sa forêt alors qu'il est caché
             this.dontMove(); //Il ne bouge pas et reste caché
         }
         else if(carte[x][y] instanceof Foret && carte[x+1][y].getPerso()==null && carte[x-1][y].getPerso()==null && carte[x][y+1].getPerso()==null && carte[x][y-1].getPerso()==null){
@@ -103,6 +103,9 @@ public class TrouillardNormal extends Personnage implements Trouillard {
                 }
             }    
         }
+    }catch (Exception e){
+        System.out.println("Problem");
+    }
     }
 
     @Override
