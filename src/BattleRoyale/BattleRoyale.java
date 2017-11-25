@@ -74,7 +74,7 @@ public class BattleRoyale {
         //Recapitule les morts fait au dessus
     }
     public void deploiement(int nbr_Perso, Carte carte){
-        Personnage tmp;
+        TrouillardNormal tmp;
         int x=1;
         int i =1;
         int y=Constant.LONGUEUR-1;
@@ -87,15 +87,16 @@ public class BattleRoyale {
                 x=x+1;
                 y=Constant.LONGUEUR-1;
             }
-        }        
-        // on place notre premier participant
+        }
+                        
         tmp = new TrouillardNormal(y,x,carte);
         participants.add(tmp);
         carte.getCarte_Terrain()[y][x].setPerso(tmp);
-        // a partir du premier on place les autres
+        
         while (i<nbr_Perso){         
             int rngY = (int) (Math.random() * 6);
-            int rngX = (int) (Math.random() * 20);
+            int rngX = (int) (Math.random() * 25);
+            
             if (carte.getCarte_Terrain()[y-rngY][x+rngX].getPerso()==null ){
                 if (!(carte.getCarte_Terrain()[y-rngY][x+rngX] instanceof Mer)){
                     System.out.println(x+rngX);
