@@ -44,15 +44,25 @@ public class main {
         //intG= carte.getIntG(); //Toujours réinitialiser l'interface
         //intG.setVisible(true); //Afficher
         //carte.afficher2();
-        
-        BattleRoyale platinum = new BattleRoyale(20);
+        //carte.afficher();
+        //BattleRoyale platinum = new BattleRoyale(10);
         JFrame intG ;
-        intG = platinum.getCarteTerrain().getIntG();
-        intG.setVisible(true);
-        Thread.sleep(1000);
-        //intG.dispose();
-        platinum.nextTurn();
-        intG = platinum.getCarteTerrain().getIntG();
-        intG.setVisible(true);
+        //while(true){
+        Personnage perso1 = new TrouillardNormal(Constant.LARGEUR/2,Constant.LONGUEUR/2,carte);
+        carte.getCarte_Terrain()[Constant.LARGEUR/2][Constant.LONGUEUR/2].setPerso(perso1);
+            intG = carte.getIntG();
+            intG.setVisible(true);
+            Thread.sleep(1000);
+            perso1.jouer();
+            
+            //carte.getCarte_Terrain()[Constant.LARGEUR/2][Constant.LONGUEUR/2].setPerso(null);
+            //carte.getCarte_Terrain()[Constant.LARGEUR/2-1][Constant.LONGUEUR/2].setPerso(perso1);
+            //intG.dispose();
+            //platinum.nextTurn();
+            intG = carte.getIntG();
+            intG.setVisible(true);
+        //}
+        
+        
     }  
 }

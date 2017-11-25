@@ -10,8 +10,8 @@ import java.io.FileReader;
 public class Constant {
     
     //Constante pour génération du Terrain
-    public static final int LARGEUR=50;
-    public static final int LONGUEUR=12;
+    public static final int LARGEUR=12;
+    public static final int LONGUEUR=50;
     public static final int ZOOM_RESO = 25;
     public static final String NAMETXTPATH = new java.io.File("").getAbsolutePath() + "\\src\\name.txt";
     public static final String [] TABLEAUNOM = txtToString(NAMETXTPATH) ;

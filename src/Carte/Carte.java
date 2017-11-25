@@ -46,14 +46,9 @@ public class Carte {
      * Methode permettant d'afficher dans la console la carte
      */
     public void afficher(){
-        for (Terrain[] carte1 : carte_Terrain) {
-            for (int j = 0; j < carte1.length; j++) {
-                    if(!(carte1[j] instanceof Mer)){
-                        System.out.print("⬛ ");
-                    }
-                    else{
-                        System.out.print("  ");
-                    }
+        for (int i = 0; i < carte_Terrain.length; i++) {
+            for (int j = 0; j < carte_Terrain[0].length; j++) {
+                    System.out.println(i+""+j);
             }
             System.out.println();
         }
@@ -65,7 +60,7 @@ public class Carte {
     public JFrame getIntG(){
         final JFrame fenetre = new JFrame();
         fenetre.setTitle("Carte");  //Titre de la fenetre
-        fenetre.setSize((Constant.LARGEUR)*Constant.ZOOM_RESO,(Constant.LONGUEUR+2)*Constant.ZOOM_RESO); // Definition de la resolution de la fenêtre
+        fenetre.setSize((Constant.LONGUEUR)*Constant.ZOOM_RESO,(Constant.LARGEUR+2)*Constant.ZOOM_RESO); // Definition de la resolution de la fenêtre
         fenetre.setLocationRelativeTo(null); //Centre la fenetre 
         fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //Permet l'arret du JFrame en cliquand sur la croix rouge
         fenetre.setContentPane(new Panneau()); //Fait appel à la fonction paintComponent de la classe Panneau et lit le JFrame au JPanel
@@ -121,6 +116,7 @@ public class Carte {
                         y+=pas_y; //O passe à la ligne cad on incremente le y
                         x=0;      //Et on reset le x
                     }
+                    
                 }
             }
         }               
@@ -129,29 +125,29 @@ public class Carte {
     /**
      * Methode appellée pour générer la carte
      */
-    private Terrain[][] genererCarte(int longueur,int largeur){
-        carte_Terrain = new Terrain[longueur][largeur];
+    private Terrain[][] genererCarte(int longueur, int largeur){
+        carte_Terrain = new Terrain[largeur][longueur];
         for (Terrain[] carte1 : carte_Terrain) {
-                for (int j = 0; j< largeur; j++) {
+                for (int j = 0; j< longueur; j++) {
                     carte1[j] = new Mer();
                 }
             }
 
-            for( int i=largeur/4; i<(3*largeur)/4; i++){
+            for( int i=longueur/4; i<(3*longueur)/4; i++){
                 int nb = (int) (Math.random() * 3 );
-                for( int t=longueur/4-nb; t<(3*longueur)/4+nb; t++){
+                for( int t=largeur/4-nb; t<(3*largeur)/4+nb; t++){
                     carte_Terrain[t][i]= new Terrain();            
                 }
             }
-            for(int p=longueur/4; p<(3*longueur)/4; p++){
+            for(int p=largeur/4; p<(3*largeur)/4; p++){
                 int rdn = (int) (Math.random()*3);
-                for(int q=largeur/4-rdn; q<(3*largeur)/4+rdn; q++){
+                for(int q=longueur/4-rdn; q<(3*longueur)/4+rdn; q++){
                     carte_Terrain[p][q]= new Terrain();
                 }
             }
             
-        for (int m=0; m<longueur; m++){
-            for (int n=0; n<largeur; n++){
+        for (int m=0; m<largeur; m++){
+            for (int n=0; n<longueur; n++){
                 int type_terrain = (int) (Math.random() * 3);
                 if(!(carte_Terrain[m][n] instanceof Mer)){
 

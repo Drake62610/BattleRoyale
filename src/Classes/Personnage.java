@@ -46,11 +46,11 @@ public class Personnage {
     /**
      * Position x sur la carte (Horizontale)
      */
-    private int position_x;   
+    private int position_y;   
     /**
      * Position y sur la carte (Verticale)
      */
-    private int position_y;   
+    private int position_x;   
     /**
      * Arme que possède le personnage (octroie un bonus de portée et/ou de force)
      */
@@ -73,7 +73,7 @@ public class Personnage {
      * @param position_y Position y du personnage sur la carte générée pour le Battle Royale
      * @param carte
      */
-    public Personnage(int pv, int force, int deplacement, int vitesse, int position_x, int position_y, Carte carte) {
+    public Personnage(int pv, int force, int deplacement, int vitesse, int position_y, int position_x, Carte carte) {
         String[] tabNom = Constant.TABLEAUNOM;
         this.name = tabNom[(int)(Math.random()*(tabNom.length))];
         this.pv = pv;
@@ -143,14 +143,14 @@ public class Personnage {
      * @return
      */
     public int getPosition_x() {
-        return position_x;
+        return position_y;
     }
     /**
      * Getter de la variable position verticale
      * @return
      */
     public int getPosition_y() {
-        return position_y;
+        return position_x;
     }   
     /**
      * Getter de la variable team
@@ -169,7 +169,7 @@ public class Personnage {
         this.pv = pv;
     } 
     /**
-     * Setter pour la variable position_x
+     * Setter pour la variable position_y
      * @param position_x
      */
     
@@ -178,14 +178,14 @@ public class Personnage {
     }
 
     public void setPosition_x(int position_x) {
-        this.position_x = position_x;
+        this.position_y = position_x;
     }
     /**
-     * Setter pour la variable position_y
+     * Setter pour la variable position_x
      * @param position_y
      */
     public void setPosition_y(int position_y) {
-        this.position_y = position_y;
+        this.position_x = position_y;
     }   
     /**
      * Setter pour la variable critique
@@ -297,61 +297,61 @@ public class Personnage {
     public void choixDeplacement(){}
     public void moveSouth(){
         System.out.println("South");
-        if (this.carte.getCarte_Terrain()[this.position_x+1][this.position_y] instanceof Mer){
+        if (this.carte.getCarte_Terrain()[this.position_y+1][this.position_x] instanceof Mer){
             throw new UnsupportedOperationException("Un personnage essaie de marcher sur l'eau !");
         }
         else{
-            this.carte.getCarte_Terrain()[this.position_x][this.position_y].setPerso(null);
-            this.carte.getCarte_Terrain()[this.position_x+1][this.position_y].setPerso(this);
-            position_x++;
+            this.carte.getCarte_Terrain()[this.position_y][this.position_x].setPerso(null);
+            this.carte.getCarte_Terrain()[this.position_y+1][this.position_x].setPerso(this);
+            position_y++;
         }
     }
     public void moveNorth(){
         System.out.println("North");
-        if (this.carte.getCarte_Terrain()[this.position_x-1][this.position_y] instanceof Mer){
+        if (this.carte.getCarte_Terrain()[this.position_y-1][this.position_x] instanceof Mer){
             throw new UnsupportedOperationException("Un personnage essaie de marcher sur l'eau !");
         }
         else{
-            this.carte.getCarte_Terrain()[this.position_x][this.position_y].setPerso(null);
-            this.carte.getCarte_Terrain()[this.position_x-1][this.position_y].setPerso(this);
-            position_x--;
+            this.carte.getCarte_Terrain()[this.position_y][this.position_x].setPerso(null);
+            this.carte.getCarte_Terrain()[this.position_y-1][this.position_x].setPerso(this);
+            position_y--;
         }
     }
     public void moveWest(){
         System.out.println("West");
-        if (this.carte.getCarte_Terrain()[this.position_x][this.position_y-1] instanceof Mer){
+        if (this.carte.getCarte_Terrain()[this.position_y][this.position_x-1] instanceof Mer){
             throw new UnsupportedOperationException("Un personnage essaie de marcher sur l'eau !");
         }
         else{
-            this.carte.getCarte_Terrain()[this.position_x][this.position_y].setPerso(null);
-            this.carte.getCarte_Terrain()[this.position_x][this.position_y-1].setPerso(this);
-            position_y--;
+            this.carte.getCarte_Terrain()[this.position_y][this.position_x].setPerso(null);
+            this.carte.getCarte_Terrain()[this.position_y][this.position_x-1].setPerso(this);
+            position_x--;
         }
     }
     public void moveEast(){
         System.out.println("East");
-        if (this.carte.getCarte_Terrain()[this.position_x][this.position_y+1] instanceof Mer){
+        if (this.carte.getCarte_Terrain()[this.position_y][this.position_x+1] instanceof Mer){
             throw new UnsupportedOperationException("Un personnage essaie de marcher sur l'eau !");
         }
         else{
-            this.carte.getCarte_Terrain()[this.position_x][this.position_y].setPerso(null);
-            this.carte.getCarte_Terrain()[this.position_x][this.position_y+1].setPerso(this);
-            position_y++;
+            this.carte.getCarte_Terrain()[this.position_y][this.position_x].setPerso(null);
+            this.carte.getCarte_Terrain()[this.position_y][this.position_x+1].setPerso(this);
+            position_x++;
         }
     }
     public void dontMove(){System.out.println("Nothing");}
     public void moveRandom(){
         int rdm = (int)(Math.random()*(6));
-        if (rdm == 0 && carte.getCarte_Terrain()[position_x-1][position_y].accecible(this)){
+        if (rdm == 0 && carte.getCarte_Terrain()[position_y-1][position_x].accecible(this)){
             moveNorth();
         }
-        else if (rdm == 1 && carte.getCarte_Terrain()[position_x+1][position_y].accecible(this)){
+        else if (rdm == 1 && carte.getCarte_Terrain()[position_y+1][position_x].accecible(this)){
             moveSouth();            
         }
-        else if (rdm == 2 && carte.getCarte_Terrain()[position_x][position_y+1].accecible(this)){
+        else if (rdm == 2 && carte.getCarte_Terrain()[position_y][position_x+1].accecible(this)){
             moveEast();
         }
-        else if (rdm == 3 && carte.getCarte_Terrain()[position_x][position_y-1].accecible(this)){
+        else if (rdm == 3 && carte.getCarte_Terrain()[position_y][position_x-1].accecible(this)){
             moveWest();
         }
         else if (rdm == 4){
