@@ -165,12 +165,10 @@ public class Carte {
                         default:
                             carte_Terrain[m][n]= new Plaine();
                             break;
-
                     }
                 }
             }
         }
-    
         return carte_Terrain;
     }
 }

@@ -266,8 +266,15 @@ public class Personnage {
     }
     
     public void jouer(){
-        this.phaseDeplacement();
-        this.phaseAction();
+        if (team == null){
+            this.phaseDeplacement();
+            this.phaseAction();
+        }
+        else{
+            if (team.getLeader() == this){
+                team.jouer();
+            }
+        }
     }
     
     public void choixDeplacement(){}

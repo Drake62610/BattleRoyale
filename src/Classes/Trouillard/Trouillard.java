@@ -14,4 +14,5 @@ public interface Trouillard {
      * @param carte
      */
     void seCamoufler(Carte carte);
+    boolean isHidden();
 }

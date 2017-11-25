@@ -97,16 +97,16 @@ public class Team {
          return -1;
     }
     
-        void deplacementHaut(){
-        if (this.leader.getCarte().getCarte_Terrain()[this.getLeader().getPosition_x()+1][this.getLeader().getPosition_y()] instanceof Mer){
-            //throw Exception
-        }
-        else{
-            this.leader.getCarte().getCarte_Terrain()[this.getLeader().getPosition_x()][this.getLeader().getPosition_y()].setPerso(null);
-            this.leader.getCarte().getCarte_Terrain()[this.getLeader().getPosition_x()+1][this.getLeader().getPosition_y()].setPerso(this);
-        }
+    void moveNorth(){
+    if (this.leader.getCarte().getCarte_Terrain()[this.getLeader().getPosition_x()+1][this.getLeader().getPosition_y()] instanceof Mer){
+        //throw Exception
     }
-    void deplacementBas(){
+    else{
+        this.leader.getCarte().getCarte_Terrain()[this.getLeader().getPosition_x()][this.getLeader().getPosition_y()].setPerso(null);
+        this.leader.getCarte().getCarte_Terrain()[this.getLeader().getPosition_x()+1][this.getLeader().getPosition_y()].setPerso(this);
+    }
+    }
+    void moveSouth(){
         if (this.leader.getCarte().getCarte_Terrain()[this.getLeader().getPosition_x()][this.getLeader().getPosition_y()] instanceof Mer){
             //throw Exception
         }
@@ -115,7 +115,7 @@ public class Team {
             this.leader.getCarte().getCarte_Terrain()[this.getLeader().getPosition_x()-1][this.getLeader().getPosition_y()].setPerso(this);
         }
     }
-    void deplacementGauche(){
+    void moveWest(){
         if (this.leader.getCarte().getCarte_Terrain()[this.getLeader().getPosition_x()][this.getLeader().getPosition_y()-1] instanceof Mer){
             //throw Exception
         }
@@ -134,11 +134,7 @@ public class Team {
         }
     }
     
-    public void phaseDeplacement(){
-        
-    }
-    
-    public void phaseAction(){
+    public void jouer(){
         //Le leader fait l'action pour le groupe
         //SI il y a des soigneurs dans les non actifs ils soignent
     }
@@ -147,4 +143,5 @@ public class Team {
         leader.enquaisser(dmg);
     }
 
+    
 }  

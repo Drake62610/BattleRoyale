@@ -17,7 +17,8 @@ public class BattleRoyale {
     private Carte carteTerrain;
 
     public BattleRoyale(int nbParticipant) {
-        //Generer la carte
+        carteTerrain = new Carte(Constant.LARGEUR,Constant.LONGUEUR);
+        this.deploiement(nbParticipant, carteTerrain);
         //Generer les personnages sur la cartes
         //Distribuer les armes
     }
@@ -32,6 +33,9 @@ public class BattleRoyale {
     
     public void nextTurn(){
         //Parcourt la liste des vivants et joue leurs tours
+        for(int i=0;i<participants.size();i++){
+            
+        }
         //Checker les morts et les ajouter à la liste tout en les suprimant des participants
         //Restreint la zone
         //Checker de nouveau les morts ? Ou le faire en dur à voir

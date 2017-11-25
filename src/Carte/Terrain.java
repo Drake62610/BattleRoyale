@@ -1,5 +1,7 @@
 package Carte;
 
+import Classes.Trouillard.Trouillard;
+
 /**
  * Projet JAVA Semestre1 M1
  * @author MATTE FLORIAN, MARISSAL LOIC
@@ -49,6 +51,9 @@ public class Terrain {
      * @return si le terrain est piègé ou non.
      */
     public Object getPerso() {
+        if (perso instanceof Trouillard && ((Trouillard)perso).){
+            
+        }
         return perso;
     }
     /**

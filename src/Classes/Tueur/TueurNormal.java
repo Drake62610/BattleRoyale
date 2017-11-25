@@ -9,7 +9,6 @@ import Carte.Carte;
 import Carte.Terrain;
 import Classes.Personnage;
 import Classes.Team;
-import java.util.ArrayList;
 
 public class TueurNormal extends Personnage implements Tueur{
     /**
@@ -82,11 +81,17 @@ public class TueurNormal extends Personnage implements Tueur{
         int x =this.getPosition_x();
         int y = this.getPosition_y();
         Terrain[][] carte = this.getCarte().getCarte_Terrain();
-        if(carte[x][y].getPerso() != null){
-            this.attaquer((Personnage)carte[x][y].getPerso());
+        if(carte[x+1][y].getPerso() != null){
+            this.attaquer((Personnage)carte[x+1][y].getPerso());
         }
-        else if(carte[x][y].getPerso() != null){
-            this.attaquer(carte[x][y].getPerso());
+        else if(carte[x-1][y].getPerso() != null){
+            this.attaquer(carte[x-1][y].getPerso());
+        }
+        else if(carte[x][y+1].getPerso() != null){
+            this.attaquer(carte[x][y+1].getPerso());
+        }
+        else if(carte[x][y-1].getPerso() != null){
+            this.attaquer(carte[x][y-1].getPerso());
         }
     }
     

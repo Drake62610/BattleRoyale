@@ -38,6 +38,11 @@ public class TrouillardNormal extends Personnage implements Trouillard {
         }
     }
 
+    @Override
+    public boolean isHidden() {
+        return hidden;
+    }
+
     public void setHidden(boolean hidden) {
         this.hidden = hidden;
     }

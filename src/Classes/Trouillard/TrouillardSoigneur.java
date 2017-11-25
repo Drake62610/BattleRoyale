@@ -23,6 +23,11 @@ public class TrouillardSoigneur extends Soigneur implements Trouillard {
         hidden = false;
     }
 
+    @Override
+    public boolean isHidden() {
+        return hidden;
+    }
+    
     /**
      * Pour l'instant il ne peut se cacher que dans la Forêt
      * @param carte 
