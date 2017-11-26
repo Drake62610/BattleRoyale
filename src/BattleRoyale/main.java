@@ -24,7 +24,7 @@ public class main {
         
         JFrame intG ;
         //while(true){
-        BattleRoyale platinum = new BattleRoyale(10);
+        BattleRoyale platinum = new BattleRoyale(0,0,0,3,4,1,2);
             intG = platinum.getCarteTerrain().getIntG();
             intG.setVisible(true);
             Thread.sleep(1000);
