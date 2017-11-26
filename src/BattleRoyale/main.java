@@ -32,14 +32,7 @@ public class main {
             intG = platinum.getCarteTerrain().getIntG();
             intG.setVisible(true);
             int i= 0;
-        while(i<100){    
-            //Thread.sleep(1000);
-            platinum.nextTurn();
-            intG = platinum.getCarteTerrain().getIntG();
-            intG.setVisible(true);
-            i++;
-        }
-        i=0;
+
         //}
         
         

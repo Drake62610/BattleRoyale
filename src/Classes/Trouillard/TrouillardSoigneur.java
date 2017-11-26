@@ -40,10 +40,10 @@ public class TrouillardSoigneur extends Soigneur implements Trouillard {
         }
     }
     
-    /**
+/**
      * Le trouillard cherche à se cacher dans les forêts et fuis sans réfléchir dès qu'une personne se trouve à coté de lui
      */
-@Override
+    @Override
     public void choixDeplacement() { //Trouver solution pour avoir un mouvement cohérant (2 deplacements)
         int x = this.getPosition_x();
         int y = this.getPosition_y();
