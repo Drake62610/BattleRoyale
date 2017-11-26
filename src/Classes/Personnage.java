@@ -242,16 +242,18 @@ public class Personnage {
         int dmg = force;
         if((int)(Math.random()*100)<this.getCritique()){
             this.parler("COUP CRITIQUE");
-            dmg = force *2;
+            dmg = force * 2;
         }
         if (cible instanceof Personnage){
+            this.parler("Aya !");
             ((Personnage) cible).enquaisser(dmg);
         }
         else if (cible instanceof Team){
+            this.parler("Vous ne me faites pas peur avec votre team, prennez ça ! Aya !");
             ((Team)cible).enquaisser(dmg);
         }
         else{
-            throw new UnsupportedOperationException("Un personnage essaie de marcher sur l'eau !");
+            throw new UnsupportedOperationException("Il y a un Alien sur le Terrain");
         }
         
         //Notion de coup critique
@@ -269,6 +271,11 @@ public class Personnage {
             if(this.team != null){
                 team.removeMember(this);
             }
+            else{
+                carte.getCarte_Terrain()[position_y][position_x].setPerso(null);
+            }
+            
+            
             
         }
         else{

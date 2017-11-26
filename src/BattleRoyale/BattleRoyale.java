@@ -22,11 +22,13 @@ public class BattleRoyale {
     private ArrayList <Personnage> participants = new ArrayList <Personnage>();  
     private ArrayList <Personnage> morts = new ArrayList <Personnage>(); 
     private Carte carteTerrain;
+    private int tour;
     
     
     public BattleRoyale(int nbr_soigneur, int nbr_piegeur, int nbr_normal,
     int nbr_trouillard, int nbr_tueur, int nbr_pacifiste, int nbr_traitre) {
         carteTerrain = new Carte(Constant.LONGUEUR,Constant.LARGEUR);
+        tour = 0;
         this.deploiement(carteTerrain, nbr_soigneur, nbr_piegeur, nbr_normal,
              nbr_trouillard, nbr_tueur,nbr_pacifiste,nbr_traitre);
         Collections.sort(participants, new Comparator<Personnage>() {
@@ -58,18 +60,21 @@ public class BattleRoyale {
     }
     
     public void nextTurn(){
+        ArrayList <Personnage> mortDuTour = new ArrayList <Personnage>(); 
+        System.out.println("**************");
+        System.out.println("DEBUT DU TOUR "+tour);
+        System.out.println("**************");
         //Parcourt la liste des vivants et joue leurs tours
         for(int i=0;i<participants.size();i++){
             participants.get(i).jouer();
         }
         //Checker les morts et les ajouter à la liste tout en les suprimant des 
         Personnage tmp;
-        System.out.println("Sont mort ce tour :");
         for(int i=0;i<participants.size();i++){
             tmp = participants.get(i);            
             if(tmp.getPv()==0){
-                System.out.println(tmp.getName() + ", ");
-                morts.add(tmp);
+                //System.out.println(tmp.getName() + " est mort ce tour.");
+                mortDuTour.add(tmp);
                 participants.remove(i);
             }
         }
@@ -77,7 +82,20 @@ public class BattleRoyale {
         //Checker de nouveau les morts ? Ou le faire en dur à voir non implementé pour l'instant
         //Annonce les zones en danger du prochian tour non implémenté pour l'instant
         //Recapitule les morts fait au dessus
-        //this.pause();
+        
+        System.out.println("Résumé du tour" + tour);
+        System.out.println("Sont mort ce tour :");
+        if(!mortDuTour.isEmpty()){
+            for(int i=0;i<mortDuTour.size();i++){
+                System.out.println("    "+ mortDuTour.get(i));
+            }
+            morts.addAll(mortDuTour);
+        }
+        System.out.println("");
+        System.out.println("Il reste " + participants.size() +" participants.");
+        System.out.println(morts.size() + " ont déjà succombé.");
+        this.pause();
+        tour ++;        
     }
     public void deploiement(Carte carte, int nbr_soigneur, int nbr_piegeur, int nbr_normal,
                 int nbr_trouillard, int nbr_tueur, int nbr_pacifiste, int nbr_traitre){
@@ -105,7 +123,7 @@ public class BattleRoyale {
             int rngX = (int) (Math.random() * Constant.LONGUEUR/2+3 +1); 
             if (carte_terrain[1+rngY][x+rngX].getPerso()==null ){
                 if (!(carte_terrain[1+rngY][x+rngX] instanceof Mer)){
-                    int rng_type_perso = (int) (Math.random() * 3);
+                    int rng_type_perso = (int) (Math.random() * 4);
                     if (rng_type_perso == 0){
                     tmp = new PacifisteNormal(1+rngY,x+rngX,carte);
                     participants.add(tmp);

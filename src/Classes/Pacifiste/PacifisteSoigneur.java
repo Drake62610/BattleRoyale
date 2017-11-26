@@ -24,7 +24,7 @@ public class PacifisteSoigneur extends Soigneur implements Pacifiste {
         super(5+(int)(Math.random()*(10-5)) //PV
                 ,1 + (int)(Math.random()*(3-1))//Force
                 ,1                        //Deplacement
-                ,2                        //Vitesse
+                ,1                        //Vitesse
                 ,position_x, position_y,carte);
         this.raison = (int)(Math.random()*(90-50)); //Pourcentage de chance maximum : 90, Minimum : 50
     }

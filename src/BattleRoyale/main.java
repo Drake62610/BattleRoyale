@@ -25,14 +25,15 @@ public class main {
         JFrame intG ;
         //while(true){
         BattleRoyale platinum = new BattleRoyale(0,0,0,3,4,1,2);
-            intG = platinum.getCarteTerrain().getIntG();
-            intG.setVisible(true);
+        
+        int i= 0;
+        while(i<100){    
             Thread.sleep(1000);
             platinum.nextTurn();
             intG = platinum.getCarteTerrain().getIntG();
             intG.setVisible(true);
-            int i= 0;
-
+            i++;
+        }
         //}
         
         

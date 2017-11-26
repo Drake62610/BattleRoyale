@@ -102,55 +102,6 @@ public class Team {
          return -1;
     }
     
-    void moveEast(){
-        if (this.leader.getCarte().getCarte_Terrain()[this.getLeader().getPosition_x()+1][this.getLeader().getPosition_y()] instanceof Mer){
-            //throw Exception
-        }
-        else{
-            this.leader.getCarte().getCarte_Terrain()[this.getLeader().getPosition_x()][this.getLeader().getPosition_y()].setPerso(null);
-            this.leader.getCarte().getCarte_Terrain()[this.getLeader().getPosition_x()+1][this.getLeader().getPosition_y()].setPerso(this);
-            for(int i=0;i<membres.size();i++){
-                membres.get(i).setPosition_x(membres.get(i).getPosition_x()+1);
-            }
-        }
-    }
-    void moveWest(){
-        if (this.leader.getCarte().getCarte_Terrain()[this.getLeader().getPosition_x()][this.getLeader().getPosition_y()] instanceof Mer){
-            //throw Exception
-        }
-        else{
-            this.leader.getCarte().getCarte_Terrain()[this.getLeader().getPosition_x()][this.getLeader().getPosition_y()].setPerso(null);
-            this.leader.getCarte().getCarte_Terrain()[this.getLeader().getPosition_x()-1][this.getLeader().getPosition_y()].setPerso(this);
-            for(int i=0;i<membres.size();i++){
-                membres.get(i).setPosition_x(membres.get(i).getPosition_x()-1);
-            }
-        }
-    }
-    void moveNorth(){
-        if (this.leader.getCarte().getCarte_Terrain()[this.getLeader().getPosition_x()][this.getLeader().getPosition_y()-1] instanceof Mer){
-            //throw Exception
-        }
-        else{
-            this.leader.getCarte().getCarte_Terrain()[this.getLeader().getPosition_x()][this.getLeader().getPosition_y()].setPerso(null);
-            this.leader.getCarte().getCarte_Terrain()[this.getLeader().getPosition_x()][this.getLeader().getPosition_y()-1].setPerso(this);
-            for(int i=0;i<membres.size();i++){
-                membres.get(i).setPosition_y(membres.get(i).getPosition_y()-1);
-            }
-        }
-    }
-    void moveSouth(){
-        if (this.leader.getCarte().getCarte_Terrain()[this.getLeader().getPosition_x()][this.getLeader().getPosition_y()+1] instanceof Mer){
-            //throw Exception
-        }
-        else{
-            this.leader.getCarte().getCarte_Terrain()[this.getLeader().getPosition_x()][this.getLeader().getPosition_y()].setPerso(null);
-            this.leader.getCarte().getCarte_Terrain()[this.getLeader().getPosition_x()][this.getLeader().getPosition_y()+1].setPerso(this);
-            for(int i=0;i<membres.size();i++){
-                membres.get(i).setPosition_y(membres.get(i).getPosition_y()+1);
-            }
-        }
-    }
-    
     public void jouer(){
         //Phase deplacement
         leader.choixDeplacement();

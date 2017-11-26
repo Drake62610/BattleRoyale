@@ -19,7 +19,7 @@ public class PacifisteNormal extends Personnage implements Pacifiste {
         super(5+(int)(Math.random()*(10-5)) //PV
                 ,1 + (int)(Math.random()*(3-1))//Force
                 ,1                        //Deplacement
-                ,2                        //Vitesse
+                ,1                        //Vitesse
                 ,position_x, position_y,carte);
         this.raison = 100; //Un pacifiste normal est en fait un diplomate qui saura ralier la première personne qu'il croise
     }
@@ -145,6 +145,4 @@ public class PacifisteNormal extends Personnage implements Pacifiste {
             else{this.raisonner((Team)carte[x][y-1].getPerso());}
         }
     }
-    
-    
 }

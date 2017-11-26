@@ -20,9 +20,9 @@ public class TrouillardNormal extends Personnage implements Trouillard {
 
     public TrouillardNormal(int position_x, int position_y, Carte carte) {
         super(5+(int)(Math.random()*(5-1)) //PV
-                ,0                          //Force
-                ,2                        //Deplacement
-                ,4                        //Vitesse
+                ,0                         //Force
+                ,2                         //Deplacement
+                ,4                         //Vitesse
                 ,position_x, position_y,carte);
         hidden = false;
     }
@@ -55,12 +55,6 @@ public class TrouillardNormal extends Personnage implements Trouillard {
         int x = this.getPosition_x();
         int y = this.getPosition_y();
         Terrain[][] carte = this.getCarte().getCarte_Terrain();
-        try{
-            boolean a = (carte[x][y].getPerso() != null &&!carte[x][y].getPerso().equals(this));
-        }
-        catch (Exception e){
-            System.out.println("coucou");
-        }
         if(carte[x][y].getPerso() != null && !carte[x][y].getPerso().equals(this)){ //Si quelqun est dans sa forêt alors qu'il est caché
             this.dontMove(); //Il ne bouge pas et reste caché
         }

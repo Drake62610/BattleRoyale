@@ -12,5 +12,5 @@ public interface Traitre {
      *
      * @param team
      */
-    void trahir(Team team);
+    void trahir();
 }

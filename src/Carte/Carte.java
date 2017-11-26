@@ -2,11 +2,15 @@ package Carte;
 
 import BattleRoyale.Constant;
 import BattleRoyale.main;
+import Classes.Pacifiste.Pacifiste;
 import Classes.Pacifiste.PacifisteNormal;
 import Classes.Personnage;
 import Classes.Team;
+import Classes.Traitre.Traitre;
 import Classes.Traitre.TraitreNormal;
+import Classes.Trouillard.Trouillard;
 import Classes.Trouillard.TrouillardNormal;
+import Classes.Tueur.Tueur;
 import Classes.Tueur.TueurNormal;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -108,10 +112,10 @@ public class Carte {
                     //If there is a Personnage
                     if(carte1[j].getPerso(1) != null){
                         //Set color
-                        if(carte1[j].getPerso(1) instanceof PacifisteNormal){g.setColor(Color.YELLOW);}
-                        if(carte1[j].getPerso(1) instanceof TrouillardNormal){g.setColor(Color.PINK);}
-                        if(carte1[j].getPerso(1) instanceof TueurNormal){g.setColor(Color.RED);}
-                        if(carte1[j].getPerso(1) instanceof TraitreNormal){g.setColor(Color.white);}
+                        if(carte1[j].getPerso(1) instanceof Pacifiste){g.setColor(Color.YELLOW);}
+                        if(carte1[j].getPerso(1) instanceof Trouillard){g.setColor(Color.PINK);}
+                        if(carte1[j].getPerso(1) instanceof Tueur){g.setColor(Color.RED);}
+                        if(carte1[j].getPerso(1) instanceof Traitre){g.setColor(Color.white);}
                         if(carte1[j].getPerso(1) instanceof Team){g.setColor(Color.BLUE);}
                         //Draw
                         g.fillRect((x+x+pas_x)/2,(y+y+pas_y)/2,pas_x/2,pas_y/2);
