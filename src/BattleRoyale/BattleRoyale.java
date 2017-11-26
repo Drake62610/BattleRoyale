@@ -73,10 +73,10 @@ public class BattleRoyale {
         //Checker de nouveau les morts ? Ou le faire en dur à voir non implementé pour l'instant
         //Annonce les zones en danger du prochian tour non implémenté pour l'instant
         //Recapitule les morts fait au dessus
-        this.pause();
+        //this.pause();
     }
     public void deploiement(int nbr_Perso, Carte carte){
-        TrouillardNormal tmp;
+        PacifisteNormal tmp;
         int x=0;
         int i = 1;
         int y= 0 ;
@@ -93,13 +93,9 @@ public class BattleRoyale {
         while (i<nbr_Perso+1){         
             int rngY = (int) (Math.random() * Constant.LARGEUR-3 +1);  //En partant du coté inférieur gauche du rectangle on peut avor de la terre sur LARGEUR-3 blocs
             int rngX = (int) (Math.random() * Constant.LONGUEUR/2+3 +1); 
-            //(int)(Math.random()*(tabNom.length))
-            System.out.println(rngY);
-            System.out.println(rngX);
-            System.out.println("****");
             if (carte_terrain[1+rngY][x+rngX].getPerso()==null ){
                 if (!(carte_terrain[1+rngY][x+rngX] instanceof Mer)){
-                    tmp = new TrouillardNormal(1+rngY,x+rngX,carte);
+                    tmp = new PacifisteNormal(1+rngY,x+rngX,carte);
                     participants.add(tmp);
                     carte_terrain[1+rngY][x+rngX].setPerso(tmp);
                     i = i+1;

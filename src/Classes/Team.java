@@ -26,6 +26,7 @@ public class Team {
         this.leader = leader;
         membres.add(leader);
         leader.setTeam(this);
+        leader.getCarte().getCarte_Terrain()[leader.getPosition_x()][leader.getPosition_y()].setPerso(this);
     }
     //GETTER
     /**
@@ -77,6 +78,10 @@ public class Team {
     public void addMember(Personnage cible){
         membres.add(cible);
         cible.setTeam(this);
+        //Update coordonnées
+        cible.getCarte().getCarte_Terrain()[cible.getPosition_x()][cible.getPosition_y()].setPerso(null);
+        cible.setPosition_x(leader.getPosition_x());
+        cible.setPosition_y(leader.getPosition_y());
     }
     
     /**
@@ -98,13 +103,16 @@ public class Team {
     }
     
     void moveEast(){
-    if (this.leader.getCarte().getCarte_Terrain()[this.getLeader().getPosition_x()+1][this.getLeader().getPosition_y()] instanceof Mer){
-        //throw Exception
-    }
-    else{
-        this.leader.getCarte().getCarte_Terrain()[this.getLeader().getPosition_x()][this.getLeader().getPosition_y()].setPerso(null);
-        this.leader.getCarte().getCarte_Terrain()[this.getLeader().getPosition_x()+1][this.getLeader().getPosition_y()].setPerso(this);
-    }
+        if (this.leader.getCarte().getCarte_Terrain()[this.getLeader().getPosition_x()+1][this.getLeader().getPosition_y()] instanceof Mer){
+            //throw Exception
+        }
+        else{
+            this.leader.getCarte().getCarte_Terrain()[this.getLeader().getPosition_x()][this.getLeader().getPosition_y()].setPerso(null);
+            this.leader.getCarte().getCarte_Terrain()[this.getLeader().getPosition_x()+1][this.getLeader().getPosition_y()].setPerso(this);
+            for(int i=0;i<membres.size();i++){
+                membres.get(i).setPosition_x(membres.get(i).getPosition_x()+1);
+            }
+        }
     }
     void moveWest(){
         if (this.leader.getCarte().getCarte_Terrain()[this.getLeader().getPosition_x()][this.getLeader().getPosition_y()] instanceof Mer){
@@ -113,6 +121,9 @@ public class Team {
         else{
             this.leader.getCarte().getCarte_Terrain()[this.getLeader().getPosition_x()][this.getLeader().getPosition_y()].setPerso(null);
             this.leader.getCarte().getCarte_Terrain()[this.getLeader().getPosition_x()-1][this.getLeader().getPosition_y()].setPerso(this);
+            for(int i=0;i<membres.size();i++){
+                membres.get(i).setPosition_x(membres.get(i).getPosition_x()-1);
+            }
         }
     }
     void moveNorth(){
@@ -122,6 +133,9 @@ public class Team {
         else{
             this.leader.getCarte().getCarte_Terrain()[this.getLeader().getPosition_x()][this.getLeader().getPosition_y()].setPerso(null);
             this.leader.getCarte().getCarte_Terrain()[this.getLeader().getPosition_x()][this.getLeader().getPosition_y()-1].setPerso(this);
+            for(int i=0;i<membres.size();i++){
+                membres.get(i).setPosition_y(membres.get(i).getPosition_y()-1);
+            }
         }
     }
     void moveSouth(){
@@ -131,11 +145,22 @@ public class Team {
         else{
             this.leader.getCarte().getCarte_Terrain()[this.getLeader().getPosition_x()][this.getLeader().getPosition_y()].setPerso(null);
             this.leader.getCarte().getCarte_Terrain()[this.getLeader().getPosition_x()][this.getLeader().getPosition_y()+1].setPerso(this);
+            for(int i=0;i<membres.size();i++){
+                membres.get(i).setPosition_y(membres.get(i).getPosition_y()+1);
+            }
         }
     }
     
     public void jouer(){
-        //Le leader fait l'action pour le groupe
+        //Phase deplacement
+        leader.choixDeplacement();
+        for(int i=0;i<membres.size();i++){ //Tout le monde suit le Leader
+                membres.get(i).setPosition_x(leader.getPosition_x());
+                membres.get(i).setPosition_y(leader.getPosition_y());
+            }
+        leader.getCarte().getCarte_Terrain()[leader.getPosition_x()][leader.getPosition_y()].setPerso(this);
+        
+        leader.phaseAction();
         //SI il y a des soigneurs dans les non actifs ils soignent
     }
     

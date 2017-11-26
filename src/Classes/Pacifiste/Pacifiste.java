@@ -1,6 +1,7 @@
 package Classes.Pacifiste;
 
 import Classes.Personnage;
+import Classes.Team;
 
 /**
  * Projet JAVA Semestre1 M1
@@ -14,4 +15,6 @@ public interface Pacifiste {
      * @param cible qui pourrait rejoindre la Team
      */
     abstract void raisonner(Personnage cible);
+    abstract void raisonner(Team cible);
+    abstract int getRaison();
 }

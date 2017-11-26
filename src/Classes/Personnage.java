@@ -342,16 +342,16 @@ public class Personnage {
     public void dontMove(){System.out.println("Nothing");}
     public void moveRandom(){
         int rdm = (int)(Math.random()*(6));
-        if (rdm == 0 && carte.getCarte_Terrain()[position_y-1][position_x].accecible(this)){
+        if (rdm == 0 && carte.getCarte_Terrain()[position_y-1][position_x].accessible(this)){
             moveNorth();
         }
-        else if (rdm == 1 && carte.getCarte_Terrain()[position_y+1][position_x].accecible(this)){
+        else if (rdm == 1 && carte.getCarte_Terrain()[position_y+1][position_x].accessible(this)){
             moveSouth();            
         }
-        else if (rdm == 2 && carte.getCarte_Terrain()[position_y][position_x+1].accecible(this)){
+        else if (rdm == 2 && carte.getCarte_Terrain()[position_y][position_x+1].accessible(this)){
             moveEast();
         }
-        else if (rdm == 3 && carte.getCarte_Terrain()[position_y][position_x-1].accecible(this)){
+        else if (rdm == 3 && carte.getCarte_Terrain()[position_y][position_x-1].accessible(this)){
             moveWest();
         }
         else if (rdm == 4){

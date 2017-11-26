@@ -69,37 +69,37 @@ public class TrouillardNormal extends Personnage implements Trouillard {
         }
         else{
             //Sinon priorités aux forêts vides aux alentours
-            if (carte[x+1][y] instanceof Foret && carte[x+1][y].accecible(this)){
+            if (carte[x+1][y] instanceof Foret && carte[x+1][y].accessible(this)){
                 hidden = false;
                 this.moveSouth();
             }
-            else if (carte[x-1][y] instanceof Foret && carte[x-1][y].accecible(this)){
+            else if (carte[x-1][y] instanceof Foret && carte[x-1][y].accessible(this)){
                 hidden = false;
                 this.moveNorth();
             } 
-            else if (carte[x][y+1] instanceof Foret && carte[x][y+1].accecible(this)){
+            else if (carte[x][y+1] instanceof Foret && carte[x][y+1].accessible(this)){
                 hidden = false;
                 this.moveEast();
             }
-            else if (carte[x][y-1] instanceof Foret && carte[x][y-1].accecible(this)){
+            else if (carte[x][y-1] instanceof Foret && carte[x][y-1].accessible(this)){
                 hidden = false;
                 this.moveWest();
             }
             //Sinon si il y a quelqu'un il fuit à l'opposé
             else{
-                if(carte[x+1][y].getPerso() != null && carte[x-1][y].accecible(this)){
+                if(carte[x+1][y].getPerso() != null && carte[x-1][y].accessible(this)){
                     hidden = false;
                     this.moveNorth();
                 }
-                else if(carte[x-1][y].getPerso() != null && carte[x+1][y].accecible(this)){
+                else if(carte[x-1][y].getPerso() != null && carte[x+1][y].accessible(this)){
                     hidden = false;
                     this.moveSouth();
                 }
-                else if(carte[x][y+1].getPerso() != null && carte[x][y-1].accecible(this)){
+                else if(carte[x][y+1].getPerso() != null && carte[x][y-1].accessible(this)){
                     hidden = false;
                     this.moveWest();
                 }
-                else if(carte[x][y-1].getPerso() != null && carte[x][y+1].accecible(this)){
+                else if(carte[x][y-1].getPerso() != null && carte[x][y+1].accessible(this)){
                     hidden = false;
                     this.moveEast();
                 }

@@ -59,7 +59,4 @@ public class TraitreNormal extends Personnage implements Traitre {
         }
     }
     
-    public static String choixTraitre(){
-        return "up";
-    }
 }

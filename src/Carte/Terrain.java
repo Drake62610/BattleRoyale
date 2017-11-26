@@ -75,7 +75,7 @@ public class Terrain {
         return dangerImminant;
     }
     
-    public boolean accecible(Personnage perso){
+    public boolean accessible(Personnage perso){
         if (this instanceof Mer){
             return false;
         }
