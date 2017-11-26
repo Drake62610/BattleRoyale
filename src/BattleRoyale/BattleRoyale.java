@@ -10,7 +10,9 @@ import Carte.Mer;
 import Carte.Terrain;
 import Classes.Pacifiste.PacifisteNormal;
 import Classes.Personnage;
+import Classes.Traitre.TraitreNormal;
 import Classes.Trouillard.TrouillardNormal;
+import Classes.Tueur.TueurNormal;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -22,9 +24,11 @@ public class BattleRoyale {
     private Carte carteTerrain;
     
     
-    public BattleRoyale(int nbParticipant) {
+    public BattleRoyale(int nbr_soigneur, int nbr_piegeur, int nbr_normal,
+    int nbr_trouillard, int nbr_tueur, int nbr_pacifiste, int nbr_traitre) {
         carteTerrain = new Carte(Constant.LONGUEUR,Constant.LARGEUR);
-        this.deploiement(nbParticipant, carteTerrain);
+        this.deploiement(carteTerrain, nbr_soigneur, nbr_piegeur, nbr_normal,
+             nbr_trouillard, nbr_tueur,nbr_pacifiste,nbr_traitre);
         Collections.sort(participants, new Comparator<Personnage>() {
             @Override
             public int compare(Personnage tc1, Personnage tc2) {
@@ -75,8 +79,14 @@ public class BattleRoyale {
         //Recapitule les morts fait au dessus
         //this.pause();
     }
-    public void deploiement(int nbr_Perso, Carte carte){
+    public void deploiement(Carte carte, int nbr_soigneur, int nbr_piegeur, int nbr_normal,
+                int nbr_trouillard, int nbr_tueur, int nbr_pacifiste, int nbr_traitre){
+        
+        int nbr_Perso = nbr_trouillard+ nbr_tueur + nbr_pacifiste+ nbr_traitre;
         PacifisteNormal tmp;
+        TraitreNormal tmp1;
+        TrouillardNormal tmp2;
+        TueurNormal tmp3;
         int x=0;
         int i = 1;
         int y= 0 ;
@@ -95,10 +105,32 @@ public class BattleRoyale {
             int rngX = (int) (Math.random() * Constant.LONGUEUR/2+3 +1); 
             if (carte_terrain[1+rngY][x+rngX].getPerso()==null ){
                 if (!(carte_terrain[1+rngY][x+rngX] instanceof Mer)){
+                    int rng_type_perso = (int) (Math.random() * 3);
+                    if (rng_type_perso == 0){
                     tmp = new PacifisteNormal(1+rngY,x+rngX,carte);
                     participants.add(tmp);
                     carte_terrain[1+rngY][x+rngX].setPerso(tmp);
                     i = i+1;
+                    }
+                    if (rng_type_perso == 1){
+                    tmp1 = new TraitreNormal(1+rngY,x+rngX,carte);
+                    participants.add(tmp1);
+                    carte_terrain[1+rngY][x+rngX].setPerso(tmp1);
+                    i = i+1;
+                    }
+                    if (rng_type_perso == 2){
+                    tmp2 = new TrouillardNormal(1+rngY,x+rngX,carte);
+                    participants.add(tmp2);
+                    carte_terrain[1+rngY][x+rngX].setPerso(tmp2);
+                    i = i+1;
+                    }
+                    if (rng_type_perso == 3){
+                    tmp3 = new TueurNormal(1+rngY,x+rngX,carte);
+                    participants.add(tmp3);
+                    carte_terrain[1+rngY][x+rngX].setPerso(tmp3);
+                    i = i+1;
+                    }
+
                 }
             }  
         }
