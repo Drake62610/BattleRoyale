@@ -30,6 +30,8 @@ public class BattleRoyale {
     private Carte carteTerrain;
     private int tour;
     private int zone;
+    private int cadenceTour = 3;
+    
     
     
     public BattleRoyale(int nbr_soigneur, int nbr_piegeur, int nbr_normal,
@@ -105,7 +107,7 @@ public class BattleRoyale {
         System.out.println(morts.size() + " ont déjà succombé.");
         
         
-        if (this.tour%2==0 && this.tour !=0){
+        if (this.tour%cadenceTour==0 && this.tour !=0){
             zone ++;
             this.determine_zone_rouge(this.carteTerrain, this.zone);
             System.out.println("La zone rouge avance !");
