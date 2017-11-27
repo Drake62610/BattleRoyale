@@ -178,4 +178,8 @@ public class Carte {
         }
         return carte_Terrain;
     }
+    
+    public void restreindre(int y, int x){
+        carte_Terrain[y][x].setDangerImminant(true);
+    }
 }
