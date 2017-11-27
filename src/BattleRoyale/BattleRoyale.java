@@ -30,7 +30,6 @@ public class BattleRoyale {
     private Carte carteTerrain;
     private int tour;
     private int zone;
-    private int cote;
     private int cadenceTour = 3;
     
     
@@ -109,7 +108,7 @@ public class BattleRoyale {
         
         if (this.tour%cadenceTour==0 && this.tour !=0){
             zone ++;
-            this.determine_zone_rouge(this.carteTerrain, this.zone);
+            this.determine_zone_rouge();
             System.out.println("La zone rouge avance !");
         }
         
@@ -255,23 +254,29 @@ public class BattleRoyale {
         Scanner scanner = new Scanner(System.in); //Pour les inputs entre tours de jeux
         scanner.nextLine();
     }
-      public void determine_zone_rouge(Carte carte, int tour){
+    public void determine_zone_rouge(){
        
-       Terrain[][] carte_terrain = carte.getCarte_Terrain();
+       Terrain[][] carte_terrain = carteTerrain.getCarte_Terrain();
        
-       cote = max(Constant.LARGEUR, Constant.LONGUEUR);
+       int cote = max(Constant.LARGEUR, Constant.LONGUEUR);
+       int param =3*cote/4+4;       
+       int param2 =cote/4-4;
        
-       
-       for (int i=0; i<cote; i++){
-           if(i<Constant.LONGUEUR && tour<Constant.LARGEUR){
-               carte.restreindre(tour,i);   
+       for (int x=param2;x<param;x++){
+           if (x<Constant.LONGUEUR && Constant.LARGEUR/2-cote/2+zone>0){
+               carteTerrain.restreindre(Constant.LARGEUR/2-cote/2+zone, x);
            }
-           if (cote-tour<Constant.LARGEUR && i<Constant.LONGUEUR){
-               carte.restreindre(cote-tour,i);
+           if(x<Constant.LONGUEUR && Constant.LARGEUR/2+cote/2-zone<Constant.LARGEUR){
+               carteTerrain.restreindre(Constant.LARGEUR/2+cote/2-zone, x);
            }
-                              
-       }             
-   }
+           if(x<Constant.LARGEUR && Constant.LONGUEUR/2-cote/2+zone>0){
+               carteTerrain.restreindre( x-5,Constant.LONGUEUR/2-cote/2+zone);               
+           }
+           if(x<Constant.LARGEUR && Constant.LONGUEUR/2+cote/2-zone<Constant.LONGUEUR){
+               carteTerrain.restreindre( x-5,Constant.LONGUEUR/2+cote/2-zone);
+           }
+        }
+    }
    private int max(int a, int b){
        if (a<b){
            return b;
