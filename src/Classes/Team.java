@@ -91,7 +91,6 @@ public class Team {
      */
     public int findIndex(Personnage cible){
          int i = 0;  
-         System.out.println("On recherche l'objet " + cible + ":");  
          for(i=0;i<membres.size();i++)  
          {  
             if(membres.get(i).equals(cible))  
