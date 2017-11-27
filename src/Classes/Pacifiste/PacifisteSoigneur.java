@@ -103,22 +103,22 @@ public class PacifisteSoigneur extends Soigneur implements Pacifiste {
         if (carte[x+1][y].isDangerImminant()){
             if(carte[x-1][y].accessible(this)){this.moveNorth();}
             else if(carte[x][y+1].accessible(this)){this.moveEast();}
-            else{this.moveWest();}
+            else if(carte[x][y-1].accessible(this)){this.moveWest();}
         }
         else if (carte[x-1][y].isDangerImminant()){
             if(carte[x+1][y].accessible(this)){this.moveSouth();}
             else if(carte[x][y+1].accessible(this)){this.moveEast();}
-            else{this.moveWest();}
+            else if(carte[x][y-1].accessible(this)){this.moveWest();}
         }
         else if (carte[x][y+1].isDangerImminant()){
             if(carte[x][y-1].accessible(this)){this.moveWest();}
             else if(carte[x-1][y].accessible(this)){this.moveNorth();}
-            else{this.moveSouth();}
+            else if(carte[x+1][y].accessible(this)){this.moveSouth();}
         }
         else if (carte[x+1][y-1].isDangerImminant()){
             if(carte[x][y+1].accessible(this)){this.moveEast();}
             else if(carte[x-1][y].accessible(this)){this.moveNorth();}
-            else{this.moveSouth();}
+            else if(carte[x+1][y].accessible(this)){this.moveSouth();}
         }
         else if (carte[x][y].isDangerImminant()){
             if(!(carte[x+1][y].isDangerImminant()) && carte[x+1][y].accessible(this)){this.moveSouth();}
