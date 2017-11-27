@@ -103,11 +103,11 @@ public class BattleRoyale {
         System.out.println(morts.size() + " ont déjà succombé.");
         
         System.out.println("La zone rouge avance !");
-        if (this.tour%2!=0 && this.tour !=0){
+        if (this.tour%2==0 && this.tour !=0){
             this.determine_zone_rouge(this.carteTerrain, this.tour);
         }
         
-        this.pause();
+        //this.pause();
         tour ++;        
     }
     public void deploiement(Carte carte, int nbr_soigneur, int nbr_piegeur, int nbr_normal,
