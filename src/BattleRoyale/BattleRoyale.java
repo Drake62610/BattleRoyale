@@ -9,10 +9,16 @@ import Carte.Carte;
 import Carte.Mer;
 import Carte.Terrain;
 import Classes.Pacifiste.PacifisteNormal;
+import Classes.Pacifiste.PacifisteSoigneur;
 import Classes.Personnage;
 import Classes.Traitre.TraitreNormal;
+import Classes.Traitre.TraitrePiegeur;
+import Classes.Traitre.TraitreSoigneur;
 import Classes.Trouillard.TrouillardNormal;
+import Classes.Trouillard.TrouillardPiegeur;
+import Classes.Trouillard.TrouillardSoigneur;
 import Classes.Tueur.TueurNormal;
+import Classes.Tueur.TueurPiegeur;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -101,10 +107,16 @@ public class BattleRoyale {
                 int nbr_trouillard, int nbr_tueur, int nbr_pacifiste, int nbr_traitre){
         
         int nbr_Perso = nbr_trouillard+ nbr_tueur + nbr_pacifiste+ nbr_traitre;
-        PacifisteNormal tmp;
-        TraitreNormal tmp1;
-        TrouillardNormal tmp2;
-        TueurNormal tmp3;
+        PacifisteNormal tmp00;
+        PacifisteSoigneur tmp01;
+        TraitreNormal tmp10;
+        TraitrePiegeur tmp11;
+        TraitreSoigneur tmp12;
+        TrouillardNormal tmp20;
+        TrouillardPiegeur tmp21;
+        TrouillardSoigneur tmp22;
+        TueurNormal tmp30;
+        TueurPiegeur tmp31;
         int x=0;
         int i = 1;
         int y= 0 ;
@@ -118,37 +130,108 @@ public class BattleRoyale {
                 y=0;
             }
         }
-        while (i<nbr_Perso+1){         
+        while (i<nbr_Perso+1){ 
+            int test = i;
+            int rng_carac_perso =(int) (Math.random() * 2);
             int rngY = (int) (Math.random() * Constant.LARGEUR-3 +1);  //En partant du coté inférieur gauche du rectangle on peut avor de la terre sur LARGEUR-3 blocs
             int rngX = (int) (Math.random() * Constant.LONGUEUR/2+3 +1); 
             if (carte_terrain[1+rngY][x+rngX].getPerso()==null ){
-                if (!(carte_terrain[1+rngY][x+rngX] instanceof Mer)){
+                if (!(carte_terrain[1+rngY][x+rngX] instanceof Mer)){                    
                     int rng_type_perso = (int) (Math.random() * 4);
                     if (rng_type_perso == 0){
-                    tmp = new PacifisteNormal(1+rngY,x+rngX,carte);
-                    participants.add(tmp);
-                    carte_terrain[1+rngY][x+rngX].setPerso(tmp);
-                    i = i+1;
+                        if(rng_carac_perso%2 == 0 && nbr_soigneur>0){
+                            nbr_soigneur=nbr_soigneur-1;
+                            tmp01 = new PacifisteSoigneur(1+rngY,x+rngX,carte);
+                            participants.add(tmp01);
+                            carte_terrain[1+rngY][x+rngX].setPerso(tmp01);
+                            i = i+1;
+                        }
+                        if(rng_carac_perso%2 == 1 && nbr_normal>0){
+                            nbr_normal=nbr_normal-1;
+                            tmp00 = new PacifisteNormal(1+rngY,x+rngX,carte);
+                            participants.add(tmp00);
+                            carte_terrain[1+rngY][x+rngX].setPerso(tmp00);
+                            i = i+1;
+                        }
+                        if (test==i){
+                            tmp00 = new PacifisteNormal(1+rngY,x+rngX,carte);
+                            participants.add(tmp00);
+                            carte_terrain[1+rngY][x+rngX].setPerso(tmp00);
+                            i = i+1;
+                        }                        
                     }
                     if (rng_type_perso == 1){
-                    tmp1 = new TraitreNormal(1+rngY,x+rngX,carte);
-                    participants.add(tmp1);
-                    carte_terrain[1+rngY][x+rngX].setPerso(tmp1);
-                    i = i+1;
+                        if(rng_carac_perso == 0 && nbr_soigneur>0){
+                            tmp12 = new TraitreSoigneur(1+rngY,x+rngX,carte);
+                            participants.add(tmp12);
+                            carte_terrain[1+rngY][x+rngX].setPerso(tmp12);
+                            i = i+1;
+                        }
+                        if(rng_carac_perso == 1 && nbr_normal>0){
+                            tmp10 = new TraitreNormal(1+rngY,x+rngX,carte);
+                            participants.add(tmp10);
+                            carte_terrain[1+rngY][x+rngX].setPerso(tmp10);
+                            i = i+1;
+                        }
+                        if(rng_carac_perso == 2 && nbr_piegeur>0){
+                            tmp11 = new TraitrePiegeur(1+rngY,x+rngX,carte);
+                            participants.add(tmp11);
+                            carte_terrain[1+rngY][x+rngX].setPerso(tmp11);
+                            i = i+1;
+                        }
+                        if (test==i){
+                            tmp10 = new TraitreNormal(1+rngY,x+rngX,carte);
+                            participants.add(tmp10);
+                            carte_terrain[1+rngY][x+rngX].setPerso(tmp10);
+                            i = i+1;
+                        }                                                  
                     }
                     if (rng_type_perso == 2){
-                    tmp2 = new TrouillardNormal(1+rngY,x+rngX,carte);
-                    participants.add(tmp2);
-                    carte_terrain[1+rngY][x+rngX].setPerso(tmp2);
-                    i = i+1;
+                        if(rng_carac_perso == 0 && nbr_soigneur>0){
+                            tmp22 = new TrouillardSoigneur(1+rngY,x+rngX,carte);
+                            participants.add(tmp22);
+                            carte_terrain[1+rngY][x+rngX].setPerso(tmp22);
+                            i = i+1;
+                        }
+                        if(rng_carac_perso == 1 && nbr_normal>0){
+                            tmp20 = new TrouillardNormal(1+rngY,x+rngX,carte);
+                            participants.add(tmp20);
+                            carte_terrain[1+rngY][x+rngX].setPerso(tmp20);
+                            i = i+1;
+                        }
+                        if(rng_carac_perso == 2 && nbr_piegeur>0){
+                            tmp21 = new TrouillardPiegeur(1+rngY,x+rngX,carte);
+                            participants.add(tmp21);
+                            carte_terrain[1+rngY][x+rngX].setPerso(tmp21);
+                            i = i+1;
+                        }
+                        if (test==i){
+                            tmp20 = new TrouillardNormal(1+rngY,x+rngX,carte);
+                            participants.add(tmp20);
+                            carte_terrain[1+rngY][x+rngX].setPerso(tmp20);
+                            i = i+1;
+                        }  
                     }
                     if (rng_type_perso == 3){
-                    tmp3 = new TueurNormal(1+rngY,x+rngX,carte);
-                    participants.add(tmp3);
-                    carte_terrain[1+rngY][x+rngX].setPerso(tmp3);
-                    i = i+1;
+                        if(rng_carac_perso%2 == 0 && nbr_normal>0){
+                            tmp30 = new TueurNormal(1+rngY,x+rngX,carte);
+                            participants.add(tmp30);
+                            carte_terrain[1+rngY][x+rngX].setPerso(tmp30);
+                            i = i+1;
+                        }
+                        if(rng_carac_perso%2 == 1 && nbr_piegeur>0){
+                            tmp31 = new TueurPiegeur(1+rngY,x+rngX,carte);
+                            participants.add(tmp31);
+                            carte_terrain[1+rngY][x+rngX].setPerso(tmp31);
+                            i = i+1;
+                        }
+                        if (test==i){
+                            tmp30 = new TueurNormal(1+rngY,x+rngX,carte);
+                            participants.add(tmp30);
+                            carte_terrain[1+rngY][x+rngX].setPerso(tmp30);
+                            i = i+1;
+                        }                          
                     }
-
                 }
             }  
         }
