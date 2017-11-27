@@ -30,8 +30,8 @@ public class BattleRoyale {
     private Carte carteTerrain;
     private int tour;
     private int zone;
+    private int cote;
     private int cadenceTour = 3;
-    
     
     
     public BattleRoyale(int nbr_soigneur, int nbr_piegeur, int nbr_normal,
@@ -255,21 +255,28 @@ public class BattleRoyale {
         Scanner scanner = new Scanner(System.in); //Pour les inputs entre tours de jeux
         scanner.nextLine();
     }
-   public void determine_zone_rouge(Carte carte, int tour){
+      public void determine_zone_rouge(Carte carte, int tour){
        
        Terrain[][] carte_terrain = carte.getCarte_Terrain();
-       for (int i=0; i<Constant.LONGUEUR; i++){
-          carte.restreindre(0+tour,i); 
-       }
-       for (int i=0; i<Constant.LARGEUR; i++){
-          carte.restreindre(i,0+tour+Constant.LONGUEUR/4-2); 
-       }
-       for (int i=0; i<Constant.LONGUEUR; i++){
-          carte.restreindre(Constant.LARGEUR-tour-1,i); 
-       }
-       for (int i=0; i<Constant.LARGEUR; i++){
-          carte.restreindre(i,3*Constant.LONGUEUR/4-tour+2); 
-       }
        
+       cote = max(Constant.LARGEUR, Constant.LONGUEUR);
+       
+       
+       for (int i=0; i<cote; i++){
+           if(i<Constant.LONGUEUR && tour<Constant.LARGEUR){
+               carte.restreindre(tour,i);   
+           }
+           if (cote-tour<Constant.LARGEUR && i<Constant.LONGUEUR){
+               carte.restreindre(cote-tour,i);
+           }
+                              
+       }             
+   }
+   private int max(int a, int b){
+       if (a<b){
+           return b;
+       }else{
+           return a;
+       }
    }
 }
