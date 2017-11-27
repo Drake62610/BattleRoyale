@@ -38,6 +38,10 @@ public class Terrain {
     public void setPerso(Object perso) {
         this.perso = perso;
     }
+
+    public void setDangerImminant(boolean dangerImminant) {
+        this.dangerImminant = dangerImminant;
+    }
     
 
     //GETTER
