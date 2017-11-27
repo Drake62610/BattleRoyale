@@ -106,6 +106,9 @@ public class Carte {
                     if(carte1[j] instanceof Plaine){
                         g.setColor(Color.green);
                     }
+                    if(carte1[j].isDangerImminant()){
+                        g.setColor(Color.RED);
+                    }
                     //Draw
                     g.fillRect(x,y,pas_x,pas_y);
                     
