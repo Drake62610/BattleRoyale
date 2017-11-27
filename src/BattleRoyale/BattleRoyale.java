@@ -29,12 +29,14 @@ public class BattleRoyale {
     private ArrayList <Personnage> morts = new ArrayList <Personnage>(); 
     private Carte carteTerrain;
     private int tour;
+    private int zone;
     
     
     public BattleRoyale(int nbr_soigneur, int nbr_piegeur, int nbr_normal,
     int nbr_trouillard, int nbr_tueur, int nbr_pacifiste, int nbr_traitre) {
         carteTerrain = new Carte(Constant.LONGUEUR,Constant.LARGEUR);
         tour = 0;
+        zone =0;
         this.deploiement(carteTerrain, nbr_soigneur, nbr_piegeur, nbr_normal,
              nbr_trouillard, nbr_tueur,nbr_pacifiste,nbr_traitre);
         Collections.sort(participants, new Comparator<Personnage>() {
@@ -104,7 +106,8 @@ public class BattleRoyale {
         
         System.out.println("La zone rouge avance !");
         if (this.tour%2==0 && this.tour !=0){
-            this.determine_zone_rouge(this.carteTerrain, this.tour);
+            zone ++;
+            this.determine_zone_rouge(this.carteTerrain, this.zone);
         }
         
         //this.pause();
