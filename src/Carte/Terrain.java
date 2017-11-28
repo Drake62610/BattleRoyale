@@ -78,7 +78,11 @@ public class Terrain {
     public boolean isDangerImminant() {
         return dangerImminant;
     }
-    
+    /**
+     * methode qui determine si une case est accessible ou pas par un personnage
+     * @param perso
+     * @return si oui ou non une case est atteignable
+     */
     public boolean accessible(Personnage perso){
         if (this instanceof Mer){
             return false;

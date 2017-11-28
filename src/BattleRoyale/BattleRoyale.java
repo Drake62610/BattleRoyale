@@ -30,10 +30,10 @@ public class BattleRoyale {
     private Carte carteTerrain;
     private int tour;
     private int zone;
-    private int cadenceTour = 1;
-    
+    private int cadenceTour = 1;    
     /**
-     *
+     *gere le jeu en lui meme : créé les personnages, les deploient sur la carte
+     * et effectue les transitions entre deux tours
      * @param nbr_soigneur
      * @param nbr_piegeur
      * @param nbr_normal
@@ -63,33 +63,30 @@ public class BattleRoyale {
         });
     }
     //Getter
-
     /**
-     *
+     *getter de la variable participants
      * @return
      */
     public ArrayList<Personnage> getParticipants() {
         return participants;
     }
-
     /**
-     *
+     *getter de la variable du nombre de morts
      * @return
      */
     public ArrayList<Personnage> getMorts() {
         return morts;
     }
-
     /**
-     *
+     *getter de la variable carteTerrain
      * @return
      */
     public Carte getCarteTerrain() {
         return carteTerrain;
-    }
-    
+    }    
     /**
-     *
+     *gère les etapes et la fin d'un tour de jeu
+     *gère egalement la zone rouge
      */
     public void nextTurn(){
         ArrayList <Personnage> mortDuTour = new ArrayList <Personnage>(); 
@@ -138,8 +135,7 @@ public class BattleRoyale {
                 participants.remove(i);
             }
         }
-        //Recapitule les morts fait au dessus
-        
+        //Recapitule les morts fait au dessus      
         System.out.println("Résumé du tour" + tour);
         System.out.println("Sont mort ce tour :");
         if(!mortDuTour.isEmpty()){
@@ -147,23 +143,15 @@ public class BattleRoyale {
                 System.out.println("    "+ mortDuTour.get(i));
             }
             morts.addAll(mortDuTour);
-        }
-        
+        }        
         System.out.println("");
         System.out.println("Il reste " + participants.size() +" participants.");
         System.out.println(morts.size() + " ont déjà succombé.");
-        stopwatch =stop();
-        if (stopwatch == 4 || stopwatch == 1){
-            
-        }
-        else{
-        
-        }
         //this.pause();
         tour ++;        
     }
     /**
-     * A partir du nombre de participants et du nombre qe type de personnage que l'on veut
+     * A partir du nombre de participants et du nombre de type de personnage que l'on veut
      * cette fonction va les placer de manière pseudo-aléatoire sur la carte
      * @param carte corresponds a notre carte de jeu
      * @param nbr_soigneur
@@ -177,6 +165,8 @@ public class BattleRoyale {
     
     public void deploiement(Carte carte, int nbr_soigneur, int nbr_piegeur, int nbr_normal,
                 int nbr_trouillard, int nbr_tueur, int nbr_pacifiste, int nbr_traitre){
+        
+        // declaration de nos variables locales 
         
         int nbr_Perso = nbr_trouillard+ nbr_tueur + nbr_pacifiste+ nbr_traitre;
         int x=0;
@@ -197,221 +187,188 @@ public class BattleRoyale {
         Terrain[][] carte_terrain = carte.getCarte_Terrain();
         
         // on recupère notre (0;0) i.e le point le plus en bas a gauche de la carte
+        
+        //bloc permettant de trouver le bout de terre le plus a gauche puis le plus
+        // en bas de notre carte
         while(carte_terrain[y][x] instanceof Mer){
             y++;
             if (y == carte_terrain.length){
                 x=x+1;
                 y=0;
             }
-        }
-        
-        while (i<nbr_Perso+1){ 
-            
+        }        
+        // bloc créant les personnages en fonctions de paramètres d'entrées
+        while (i<nbr_Perso+1){             
+            // variables qui s'incrémentes ou change de valeurs dans le bloc            
             int test = i;
             int rng_carac_perso =(int) (Math.random() * 2);
             int rngY = (int) (Math.random() * Constant.LARGEUR-3 +1);  
-            int rngX = (int) (Math.random() * Constant.LONGUEUR/2+3 +1);
-            
-            if (carte_terrain[1+rngY][x+rngX].getPerso()==null ){
-                
-                if (!(carte_terrain[1+rngY][x+rngX] instanceof Mer)){  
-                    
+            int rngX = (int) (Math.random() * Constant.LONGUEUR/2+3 +1);            
+            //s'il n'y a personne sur une case            
+            if (carte_terrain[1+rngY][x+rngX].getPerso()==null ){                
+                // si ce terrain n'est pas une mer                
+                if (!(carte_terrain[1+rngY][x+rngX] instanceof Mer)){                      
+                    // on créé un nombre entre 0 et 3                    
                     int rng_type_perso = (int) (Math.random() * 4);
-                    
-                    if (rng_type_perso == 0 && nbr_pacifiste>0){
-                        
-                        if(rng_carac_perso%2 == 0 && nbr_soigneur>0){
-                            
+                    // si c'est 0 et que le nombre de pacifiste voulu est superieur a 0
+                    //alors c'est un pacifiste                    
+                    if (rng_type_perso == 0 && nbr_pacifiste>0){                        
+                        //si la variable aléatoire modulo 2 et que le nombre de soigneur desiré et superieur a 0
+                        // alors c'est un pacifiste soigneur                        
+                        if(rng_carac_perso%2 == 0 && nbr_soigneur>0){                            
                             nbr_soigneur=nbr_soigneur-1;
-                            nbr_pacifiste=nbr_pacifiste-1;
-                            
+                            nbr_pacifiste=nbr_pacifiste-1;                            
                             tmp01 = new PacifisteSoigneur(1+rngY,x+rngX,carte);
                             participants.add(tmp01);
                             carte_terrain[1+rngY][x+rngX].setPerso(tmp01);
                             i = i+1;
-                        }
-                        
-                        if(rng_carac_perso%2 == 1 && nbr_normal>0){
-                            
-                            nbr_normal=nbr_normal-1;
-                            nbr_pacifiste=nbr_pacifiste-1;
-                            
-                            tmp00 = new PacifisteNormal(1+rngY,x+rngX,carte);
-                            participants.add(tmp00);
-                            carte_terrain[1+rngY][x+rngX].setPerso(tmp00);
-                            i = i+1;
-                            
-                        }
-                        if (test==i){
-                            
-                            nbr_pacifiste=nbr_pacifiste-1;
-                            nbr_normal = nbr_normal-1;
-                            
-                            tmp00 = new PacifisteNormal(1+rngY,x+rngX,carte);
-                            participants.add(tmp00);
-                            carte_terrain[1+rngY][x+rngX].setPerso(tmp00);
-                            i = i+1;
-                            
                         }                        
-                    }
-                    if (rng_type_perso == 1 && nbr_traitre>0){
-                        
-                        if(rng_carac_perso == 0 && nbr_soigneur>0){
-                            
+                        // idem mais avec le modulo egal à 1 
+                        // et on obtient un pacifiste normal                        
+                        if(rng_carac_perso%2 == 1 && nbr_normal>0){                            
+                            nbr_normal=nbr_normal-1;
+                            nbr_pacifiste=nbr_pacifiste-1;                            
+                            tmp00 = new PacifisteNormal(1+rngY,x+rngX,carte);
+                            participants.add(tmp00);
+                            carte_terrain[1+rngY][x+rngX].setPerso(tmp00);
+                            i = i+1;                            
+                        }                        
+                        // si test est egal à i cela veut dire que l'on a 
+                        // obtenu une erreur et dans ce cas on créé un pacifiste normal
+                        if (test==i){                            
+                            nbr_pacifiste=nbr_pacifiste-1;
+                            nbr_normal = nbr_normal-1;                            
+                            tmp00 = new PacifisteNormal(1+rngY,x+rngX,carte);
+                            participants.add(tmp00);
+                            carte_terrain[1+rngY][x+rngX].setPerso(tmp00);
+                            i = i+1;                            
+                        }                        
+                    }                    
+                    // on recommence avec les traitres le fonctionnement du bloc
+                    // est identique a celui du précedent
+                    if (rng_type_perso == 1 && nbr_traitre>0){                        
+                        if(rng_carac_perso == 0 && nbr_soigneur>0){                            
                             nbr_soigneur=nbr_soigneur-1;
                             nbr_traitre=nbr_traitre-1;
-                            
                             tmp12 = new TraitreSoigneur(1+rngY,x+rngX,carte);
                             participants.add(tmp12);
                             carte_terrain[1+rngY][x+rngX].setPerso(tmp12);
-                            i = i+1;
-                            
+                            i = i+1;                            
                         }
-                        if(rng_carac_perso == 1 && nbr_normal>0){
-                            
+                        if(rng_carac_perso == 1 && nbr_normal>0){                            
                             nbr_traitre=nbr_traitre-1;
-                            nbr_normal=nbr_normal-1;
-                            
+                            nbr_normal=nbr_normal-1;                            
                             tmp10 = new TraitreNormal(1+rngY,x+rngX,carte);
                             participants.add(tmp10);
                             carte_terrain[1+rngY][x+rngX].setPerso(tmp10);
-                            i = i+1;
-                            
+                            i = i+1;                            
                         }
-                        if(rng_carac_perso == 2 && nbr_piegeur>0){
-                            
+                        if(rng_carac_perso == 2 && nbr_piegeur>0){                            
                             nbr_piegeur=nbr_piegeur-1;
-                            nbr_traitre=nbr_traitre-1;
-                            
+                            nbr_traitre=nbr_traitre-1;                            
                             tmp11 = new TraitrePiegeur(1+rngY,x+rngX,carte);
                             participants.add(tmp11);
                             carte_terrain[1+rngY][x+rngX].setPerso(tmp11);
-                            i = i+1;
-                            
+                            i = i+1;                            
                         }
-                        if (test==i){
-                            
+                        if (test==i){                            
                             nbr_traitre=nbr_traitre-1;
-                            nbr_normal=nbr_normal-1;
-                            
+                            nbr_normal=nbr_normal-1;                            
                             tmp10 = new TraitreNormal(1+rngY,x+rngX,carte);
                             participants.add(tmp10);
                             carte_terrain[1+rngY][x+rngX].setPerso(tmp10);
-                            i = i+1;
-                            
+                            i = i+1;                            
                         }                                                  
-                    }
-                    
-                    if (rng_type_perso == 2 && nbr_trouillard>0){
-                        
-                        if(rng_carac_perso == 0 && nbr_soigneur>0){
-                            
+                    }                    
+                    // cette fois ci avec les trouillards                    
+                    if (rng_type_perso == 2 && nbr_trouillard>0){                        
+                        if(rng_carac_perso == 0 && nbr_soigneur>0){                            
                             nbr_trouillard=nbr_trouillard-1;
-                            nbr_soigneur=nbr_soigneur-1;
-                            
+                            nbr_soigneur=nbr_soigneur-1;                            
                             tmp22 = new TrouillardSoigneur(1+rngY,x+rngX,carte);
                             participants.add(tmp22);
                             carte_terrain[1+rngY][x+rngX].setPerso(tmp22);
-                            i = i+1;
-                            
+                            i = i+1;                            
                         }
-                        if(rng_carac_perso == 1 && nbr_normal>0){
-                            
+                        if(rng_carac_perso == 1 && nbr_normal>0){                            
                             nbr_trouillard=nbr_trouillard-1;
-                            nbr_normal=nbr_normal-1;
-                            
+                            nbr_normal=nbr_normal-1;                            
                             tmp20 = new TrouillardNormal(1+rngY,x+rngX,carte);
                             participants.add(tmp20);
                             carte_terrain[1+rngY][x+rngX].setPerso(tmp20);
-                            i = i+1;
-                            
+                            i = i+1;                            
                         }
-                        if(rng_carac_perso == 2 && nbr_piegeur>0){
-                            
+                        if(rng_carac_perso == 2 && nbr_piegeur>0){                            
                             nbr_piegeur=nbr_piegeur-1;
-                            nbr_trouillard=nbr_trouillard-1;
-                            
+                            nbr_trouillard=nbr_trouillard-1;                            
                             tmp21 = new TrouillardPiegeur(1+rngY,x+rngX,carte);
                             participants.add(tmp21);
                             carte_terrain[1+rngY][x+rngX].setPerso(tmp21);
-                            i = i+1;
-                            
+                            i = i+1;                            
                         }
-                        if (test==i){
-                            
+                        if (test==i){                            
                             nbr_trouillard=nbr_trouillard-1;
-                            nbr_normal=nbr_normal-1;
-                            
+                            nbr_normal=nbr_normal-1;                            
                             tmp20 = new TrouillardNormal(1+rngY,x+rngX,carte);
                             participants.add(tmp20);
                             carte_terrain[1+rngY][x+rngX].setPerso(tmp20);
-                            i = i+1;
-                            
+                            i = i+1;                            
                         }  
-                    }
+                    }                    
+                    // et enfin avec les tueurs                    
                     if (rng_type_perso == 3 && nbr_tueur>0){
-                        
                         if(rng_carac_perso%2 == 0 && nbr_normal>0){
-                            
                             nbr_tueur=nbr_tueur-1;
                             nbr_normal=nbr_normal-1;
-                            
                             tmp30 = new TueurNormal(1+rngY,x+rngX,carte);
                             participants.add(tmp30);
                             carte_terrain[1+rngY][x+rngX].setPerso(tmp30);
-                            i = i+1;
-                            
+                            i = i+1;                            
                         }
-                        if(rng_carac_perso%2 == 1 && nbr_piegeur>0){
-                            
+                        if(rng_carac_perso%2 == 1 && nbr_piegeur>0){                            
                             nbr_tueur=nbr_tueur-1;
-                            nbr_normal=nbr_piegeur-1;
-                            
+                            nbr_normal=nbr_piegeur-1;                            
                             tmp31 = new TueurPiegeur(1+rngY,x+rngX,carte);
                             participants.add(tmp31);
                             carte_terrain[1+rngY][x+rngX].setPerso(tmp31);
-                            i = i+1;
-                            
+                            i = i+1;                            
                         }
-                        if (test==i){
-                            
+                        if (test==i){                            
                             nbr_tueur=nbr_tueur-1;
-                            nbr_normal=nbr_normal-1;
-                            
+                            nbr_normal=nbr_normal-1;                            
                             tmp30 = new TueurNormal(1+rngY,x+rngX,carte);
                             participants.add(tmp30);
                             carte_terrain[1+rngY][x+rngX].setPerso(tmp30);
-                            i = i+1;
-                            
+                            i = i+1;                            
                         }                          
                     }
                 }
             }  
         }
     }
-    
     /**
-     *
+     *procèdure permettant de faire une pause a la fin d'un tour de jeu
      */
     public void pause(){
         System.out.println("Appuyez sur Enter pour continuer");
         Scanner scanner = new Scanner(System.in); //Pour les inputs entre tours de jeux
         scanner.nextLine();
     }
-
     /**
-     *
+     *méthode qui créé une zone rouge sur la carte afin de forcer les
+     * participants a se regrouper vers le milieu de la carte
+     * a chaque fois que la metode est appelé la zone rouge augmente de taille
      */
-    public void determine_zone_rouge(){
-       
-       Terrain[][] carte_terrain = carteTerrain.getCarte_Terrain();
-       
+    public void determine_zone_rouge(){       
+       Terrain[][] carte_terrain = carteTerrain.getCarte_Terrain();       
        int grand = max(Constant.LARGEUR, Constant.LONGUEUR);
        int petit = min(Constant.LARGEUR, Constant.LONGUEUR); 
        int param =3*grand/4+4;       
        int param2 =grand/4-4;
-       int stopwatch = 0;
-       int x = param2;
+       int x = param2;       
+       //bloc qui determine si oui ou non une case est en zone rouge ou non
+       //puis si la condition est verifiée on appelle notre methode de restriction
+       //qui defini cettte case comme etant en zone rouge
        while (x<param){
                 if (x<Constant.LONGUEUR && x>=0 && petit/2-grand/2+zone>0 && petit/2-grand/2+zone<Constant.LONGUEUR){
                     carteTerrain.restreindre(petit/2-grand/2+zone, x);
@@ -425,14 +382,15 @@ public class BattleRoyale {
                 if(x-param2<Constant.LARGEUR && x-param2>=0 && zone>=0 && zone<Constant.LONGUEUR){
                     carteTerrain.restreindre(x-param2,grand-zone);
                 }
-                stopwatch = stop();
-                if (stopwatch == 4 || stopwatch == 1){
-                    x=param;
-                }
                 x++;
             }
-       
     }
+    /**
+     * 
+     * @param a
+     * @param b
+     * @return la valeur max entre a et b
+     */
    private int max(int a, int b){
        if (a<b){
            return b;
@@ -440,13 +398,23 @@ public class BattleRoyale {
            return a;
        }
    }
+   /**
+    * 
+    * @param a
+    * @param b
+    * @return  renvoi la valeur minimal entre a et b
+    */
    private int min(int a, int b){
        if (a<b){
            return a;
        }else{
            return b;
        }
-   }
+   }   
+   /**
+    * fonctions permettant d'interrompre l'avancée de la zone rouge
+    * @return le nombre de case ou la zone rouge n'est pas active 
+    */
    private int stop(){
        int nbr=0;
        Terrain[][] carte_terrain = carteTerrain.getCarte_Terrain();

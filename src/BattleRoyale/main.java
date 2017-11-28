@@ -19,13 +19,13 @@ import javax.swing.JFrame;
 public class main {
     /**
      * @param args the command line arguments
+     * @throws java.lang.InterruptedException
      */
     public static void main(String[] args) throws InterruptedException {
         
         JFrame intG ;
         //while(true){
         BattleRoyale platinum = new BattleRoyale(0,0,0,3,4,1,2);
-        
         int i= 0;
         while(i<100){    
             Thread.sleep(1000);
@@ -35,7 +35,5 @@ public class main {
             i++;
         }
         //}
-        
-        
     }  
 }

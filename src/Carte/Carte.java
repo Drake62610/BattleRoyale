@@ -137,34 +137,35 @@ public class Carte {
       }
     
     /**
-     * Methode appellée pour générer la carte
+     * Methode appellée pour générer la carte de jeu de manière pseudo aléatoire
+     * un rectangle de base sera toujours créé mais les contours de l'ile sont variables
      */
     private Terrain[][] genererCarte(int longueur, int largeur){
         carte_Terrain = new Terrain[largeur][longueur];
+        //bloc qui créé le rectangle de base
         for (Terrain[] carte1 : carte_Terrain) {
                 for (int j = 0; j< longueur; j++) {
                     carte1[j] = new Mer();
                 }
             }
-
-            for( int i=longueur/4; i<(3*longueur)/4; i++){
-                int nb = (int) (Math.random() * 3 );
-                for( int t=largeur/4-nb; t<(3*largeur)/4+nb; t++){
-                    carte_Terrain[t][i]= new Terrain();            
+        // bloc qui créé le contour de la carte de manière pseudo aléatoire
+        for( int i=longueur/4; i<(3*longueur)/4; i++){
+            int nb = (int) (Math.random() * 3 );
+            for( int t=largeur/4-nb; t<(3*largeur)/4+nb; t++){
+                carte_Terrain[t][i]= new Terrain();            
                 }
-            }
-            for(int p=largeur/4; p<(3*largeur)/4; p++){
-                int rdn = (int) (Math.random()*3);
-                for(int q=longueur/4-rdn; q<(3*longueur)/4+rdn; q++){
-                    carte_Terrain[p][q]= new Terrain();
+        }
+        for(int p=largeur/4; p<(3*largeur)/4; p++){
+            int rdn = (int) (Math.random()*3);
+            for(int q=longueur/4-rdn; q<(3*longueur)/4+rdn; q++){
+                carte_Terrain[p][q]= new Terrain();
                 }
-            }
-            
+        }            
+        //bloc determinant le type de terrain créé
         for (int m=0; m<largeur; m++){
             for (int n=0; n<longueur; n++){
                 int type_terrain = (int) (Math.random() * 3);
                 if(!(carte_Terrain[m][n] instanceof Mer)){
-
                     switch (type_terrain) {
                         case 0:
                             carte_Terrain[m][n]= new Foret();
@@ -181,7 +182,11 @@ public class Carte {
         }
         return carte_Terrain;
     }
-    
+    /**
+     * methode qui crée un danger sur une case du terrain en fonction de ses coordonnées
+     * @param y coordonnée
+     * @param x coordonnée
+     */
     public void restreindre(int y, int x){
         carte_Terrain[y][x].setDangerImminant(true);
     }

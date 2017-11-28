@@ -3,14 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/PortableGit/Projet/BattleRoyale/src/BattleRoyale/BattleRoyale.java</file>
-            <file>file:/C:/PortableGit/Projet/BattleRoyale/src/Carte/Carte.java</file>
-            <file>file:/C:/PortableGit/Projet/BattleRoyale/src/Classes/Pacifiste/PacifisteNormal.java</file>
-            <file>file:/C:/PortableGit/Projet/BattleRoyale/src/Classes/Pacifiste/Pacifiste.java</file>
-            <file>file:/C:/PortableGit/Projet/BattleRoyale/src/BattleRoyale/main.java</file>
-            <file>file:/C:/PortableGit/Projet/BattleRoyale/src/Classes/Personnage.java</file>
-            <file>file:/C:/PortableGit/Projet/BattleRoyale/src/Classes/Pacifiste/PacifisteSoigneur.java</file>
-            <file>file:/C:/PortableGit/Projet/BattleRoyale/src/Classes/Team.java</file>
+            <file>file:/C:/Program%20Files/Git/Projet/BattleRoyale/src/BattleRoyale/BattleRoyale.java</file>
+            <file>file:/C:/Program%20Files/Git/Projet/BattleRoyale/src/Carte/Carte.java</file>
+            <file>file:/C:/Program%20Files/Git/Projet/BattleRoyale/src/Carte/Terrain.java</file>
+            <file>file:/C:/Program%20Files/Git/Projet/BattleRoyale/src/BattleRoyale/main.java</file>
         </group>
     </open-files>
 </project-private>
