@@ -16,7 +16,7 @@ public class main {
         
         JFrame intG ;
         //while(true){
-        BattleRoyale platinum = new BattleRoyale(0,3,0,3,4,1,2); //nbr_soigneur, nbr_piegeur, nbr_normal, nbr_trouillard
+        BattleRoyale platinum = new BattleRoyale(0,0,0,0,20,0,0); //nbr_soigneur, nbr_piegeur, nbr_normal, nbr_trouillard
         while(platinum.getGagnant() == null){                    //int nbr_tueur int nbr_pacifiste, int nbr_traitre
             platinum.nextTurn();
             intG = platinum.getCarteTerrain().getIntG();

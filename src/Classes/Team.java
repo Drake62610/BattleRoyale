@@ -1,7 +1,5 @@
 package Classes;
 
-
-import Carte.Mer;
 import java.util.ArrayList;
 
 /**
@@ -107,6 +105,18 @@ public class Team {
         for(int i=0;i<membres.size();i++){ //Tout le monde suit le Leader
                 membres.get(i).setPosition_x(leader.getPosition_x());
                 membres.get(i).setPosition_y(leader.getPosition_y());
+                //Et jouent si ils sont soigneurs
+                if (membres.get(i) instanceof Soigneur){
+                    for(int j=0;j<membres.size();j++){
+                        if (membres.get(j).getPVMAX() - membres.get(j).getPv()==0 && i!=j){
+                            ((Soigneur)membres.get(i)).soigner(membres.get(i));
+                            break;
+                        }
+                        else if(membres.get(j).getPVMAX() - membres.get(j).getPv()==0 && i!=j){
+                            ((Soigneur)membres.get(i)).soigner();
+                        }
+                    }
+                }
             }
         leader.getCarte().getCarte_Terrain()[leader.getPosition_x()][leader.getPosition_y()].setPerso(this);
         
