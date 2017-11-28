@@ -118,6 +118,18 @@ public class BattleRoyale {
         //this.pause();
         tour ++;        
     }
+    /**
+     * A partir du nombre de participants, on les positionnent sur la carte
+     * @param carte
+     * @param nbr_soigneur
+     * @param nbr_piegeur
+     * @param nbr_normal
+     * @param nbr_trouillard
+     * @param nbr_tueur
+     * @param nbr_pacifiste
+     * @param nbr_traitre 
+     */
+    
     public void deploiement(Carte carte, int nbr_soigneur, int nbr_piegeur, int nbr_normal,
                 int nbr_trouillard, int nbr_tueur, int nbr_pacifiste, int nbr_traitre){
         
@@ -148,7 +160,7 @@ public class BattleRoyale {
         while (i<nbr_Perso+1){ 
             int test = i;
             int rng_carac_perso =(int) (Math.random() * 2);
-            int rngY = (int) (Math.random() * Constant.LARGEUR-3 +1);  //En partant du coté inférieur gauche du rectangle on peut avor de la terre sur LARGEUR-3 blocs
+            int rngY = (int) (Math.random() * Constant.LARGEUR-3 +1);  
             int rngX = (int) (Math.random() * Constant.LONGUEUR/2+3 +1); 
             if (carte_terrain[1+rngY][x+rngX].getPerso()==null ){
                 if (!(carte_terrain[1+rngY][x+rngX] instanceof Mer)){                    
