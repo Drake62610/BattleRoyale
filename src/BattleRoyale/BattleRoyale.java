@@ -30,7 +30,8 @@ public class BattleRoyale {
     private Carte carteTerrain;
     private int tour;
     private int zone;
-    private int cadenceTour = 1;    
+    private int cadenceTour = 2;    
+    private Object gagnant = null;
     /**
      *gere le jeu en lui meme : créé les personnages, les deploient sur la carte
      * et effectue les transitions entre deux tours
@@ -62,6 +63,7 @@ public class BattleRoyale {
             }
         });
     }
+    
     //Getter
     /**
      *getter de la variable participants
@@ -85,18 +87,35 @@ public class BattleRoyale {
         return carteTerrain;
     }    
     /**
+     * Getter de la variable gagnant
+     * @return 
+     */
+    public Object getGagnant() {
+        return gagnant;
+    }
+    
+    /**
      *gère les etapes et la fin d'un tour de jeu
      *gère egalement la zone rouge
      */
     public void nextTurn(){
         ArrayList <Personnage> mortDuTour = new ArrayList <Personnage>(); 
         int stopwatch;
-        System.out.println("**************");
+        System.out.println("******************");
         System.out.println("DEBUT DU TOUR "+tour);
-        System.out.println("**************");
+        System.out.println("******************");
         //La zone rouge avance, à la fin du tour elle prend effet
         stopwatch =stop();
         if (stopwatch == Constant.LARGEUR+2){
+            if(participants.size()<1){
+                gagnant = this;
+                }
+            else if (participants.get(0).getTeam() == null){
+                gagnant = participants.get(0);
+            }
+            else{
+                gagnant = participants.get(0).getTeam();
+            }
         }
         else if(this.tour%cadenceTour==0 && this.tour !=0){
             zone ++;
@@ -140,7 +159,7 @@ public class BattleRoyale {
         System.out.println("Sont mort ce tour :");
         if(!mortDuTour.isEmpty()){
             for(int i=0;i<mortDuTour.size();i++){
-                System.out.println("    "+ mortDuTour.get(i));
+                System.out.println("    "+ mortDuTour.get(i).getName());
             }
             morts.addAll(mortDuTour);
         }        

@@ -49,10 +49,12 @@ public class TrouillardSoigneur extends Soigneur implements Trouillard {
         int y = this.getPosition_y();
         Terrain[][] carte = this.getCarte().getCarte_Terrain();
         //On regarde si le personnage est en danger
-        if (carte[x+1][y].isDangerImminant()){
-            if(carte[x-1][y].accessible(this)){this.moveNorth();}
-            else if(carte[x][y+1].accessible(this)){this.moveEast();}
-            else if(carte[x][y-1].accessible(this)){this.moveWest();}
+        if (carte[x][y].isDangerImminant()){
+            if(!(carte[x+1][y].isDangerImminant()) && carte[x+1][y].accessible(this)){this.moveSouth();}
+            else if(!(carte[x-1][y].isDangerImminant()) && carte[x-1][y].accessible(this)){this.moveNorth();}
+            else if(!(carte[x][y+1].isDangerImminant()) && carte[x][y+1].accessible(this)){this.moveEast();}
+            else if(!(carte[x][y-1].isDangerImminant()) && carte[x][y-1].accessible(this)){this.moveWest();}
+            else{this.dontMove();}
         }
         else if (carte[x-1][y].isDangerImminant()){
             if(carte[x+1][y].accessible(this)){this.moveSouth();}
@@ -69,12 +71,10 @@ public class TrouillardSoigneur extends Soigneur implements Trouillard {
             else if(carte[x-1][y].accessible(this)){this.moveNorth();}
             else if(carte[x+1][y].accessible(this)){this.moveSouth();}
         }
-        else if (carte[x][y].isDangerImminant()){
-            if(!(carte[x+1][y].isDangerImminant()) && carte[x+1][y].accessible(this)){this.moveSouth();}
-            else if(!(carte[x-1][y].isDangerImminant()) && carte[x-1][y].accessible(this)){this.moveNorth();}
-            else if(!(carte[x][y+1].isDangerImminant()) && carte[x][y+1].accessible(this)){this.moveEast();}
-            else if(!(carte[x][y-1].isDangerImminant()) && carte[x][y-1].accessible(this)){this.moveWest();}
-            else{this.dontMove();}
+        else if (carte[x+1][y].isDangerImminant()){
+            if(carte[x-1][y].accessible(this)){this.moveNorth();}
+            else if(carte[x][y+1].accessible(this)){this.moveEast();}
+            else if(carte[x][y-1].accessible(this)){this.moveWest();}
         }
         else{
             if(carte[x][y].getPerso() != null && !carte[x][y].getPerso().equals(this)){ //Si quelqun est dans sa forêt alors qu'il est caché

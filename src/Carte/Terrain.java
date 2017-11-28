@@ -90,8 +90,11 @@ public class Terrain {
         if (piege && perso instanceof Piegeur){
             return false;
         }
-        if (perso.equals(null)){
+        if (perso == null){
             return false;
+        }
+        if(dangerImminant){
+           return false; 
         }
         return true;
     }

@@ -106,6 +106,9 @@ public class Carte {
                     if(carte1[j] instanceof Plaine){
                         g.setColor(Color.green);
                     }
+                    if(carte1[j].isPiege()){
+                        g.setColor(Color.yellow);
+                    }
                     if(carte1[j].isDangerImminant()){
                         g.setColor(Color.RED);
                     }

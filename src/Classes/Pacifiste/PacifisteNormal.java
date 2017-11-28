@@ -14,7 +14,12 @@ import Classes.Team;
 public class PacifisteNormal extends Personnage implements Pacifiste {
 
     int raison;
-    
+    /**
+     * 
+     * @param position_x
+     * @param position_y
+     * @param carte 
+     */
     public PacifisteNormal(int position_x, int position_y, Carte carte) {
         super(5+(int)(Math.random()*(10-5)) //PV
                 ,1 + (int)(Math.random()*(3-1))//Force
@@ -63,7 +68,7 @@ public class PacifisteNormal extends Personnage implements Pacifiste {
             cible.getLeader().parler("Bien entendu !");
         }
         else{
-            if(cible instanceof Pacifiste && this.raison>((Pacifiste)cible.getLeader()).getRaison()){ //Le nouveau leader est celui avec le plus de raison
+            if(cible instanceof Pacifiste && this.raison>((Pacifiste)cible.getLeader()).getRaison() || !(cible.getLeader() instanceof Pacifiste)){ //Le nouveau leader est celui avec le plus de raison
                 cible.getLeader().parler("Je ne peux pas refuser l'offre d'un Pacifiste comme vous ! Devenez leader à ma place !");
                 this.getTeam().getMembres().addAll(cible.getMembres());
                 cible.getLeader().getCarte().getCarte_Terrain()[cible.getLeader().getPosition_x()][cible.getLeader().getPosition_y()].setPerso(null);
@@ -94,10 +99,12 @@ public class PacifisteNormal extends Personnage implements Pacifiste {
         int y = this.getPosition_y();
         Terrain[][] carte = this.getCarte().getCarte_Terrain();
         //On regarde si le personnage est en danger
-        if (carte[x+1][y].isDangerImminant()){
-            if(carte[x-1][y].accessible(this)){this.moveNorth();}
-            else if(carte[x][y+1].accessible(this)){this.moveEast();}
-            else if(carte[x][y-1].accessible(this)){this.moveWest();}
+        if (carte[x][y].isDangerImminant()){
+            if(!(carte[x+1][y].isDangerImminant()) && carte[x+1][y].accessible(this)){this.moveSouth();}
+            else if(!(carte[x-1][y].isDangerImminant()) && carte[x-1][y].accessible(this)){this.moveNorth();}
+            else if(!(carte[x][y+1].isDangerImminant()) && carte[x][y+1].accessible(this)){this.moveEast();}
+            else if(!(carte[x][y-1].isDangerImminant()) && carte[x][y-1].accessible(this)){this.moveWest();}
+            else{this.dontMove();}
         }
         else if (carte[x-1][y].isDangerImminant()){
             if(carte[x+1][y].accessible(this)){this.moveSouth();}
@@ -114,12 +121,10 @@ public class PacifisteNormal extends Personnage implements Pacifiste {
             else if(carte[x-1][y].accessible(this)){this.moveNorth();}
             else if(carte[x+1][y].accessible(this)){this.moveSouth();}
         }
-        else if (carte[x][y].isDangerImminant()){
-            if(!(carte[x+1][y].isDangerImminant()) && carte[x+1][y].accessible(this)){this.moveSouth();}
-            else if(!(carte[x-1][y].isDangerImminant()) && carte[x-1][y].accessible(this)){this.moveNorth();}
-            else if(!(carte[x][y+1].isDangerImminant()) && carte[x][y+1].accessible(this)){this.moveEast();}
-            else if(!(carte[x][y-1].isDangerImminant()) && carte[x][y-1].accessible(this)){this.moveWest();}
-            else{this.dontMove();}
+        else if (carte[x+1][y].isDangerImminant()){
+            if(carte[x-1][y].accessible(this)){this.moveNorth();}
+            else if(carte[x][y+1].accessible(this)){this.moveEast();}
+            else if(carte[x][y-1].accessible(this)){this.moveWest();}
         }
         else{//Sinon il peut se deplacer normalement
             //Si il est déjà au CaC alors il ne bouge pas pour recruter
