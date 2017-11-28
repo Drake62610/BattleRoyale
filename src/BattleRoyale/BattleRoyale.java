@@ -73,21 +73,40 @@ public class BattleRoyale {
         System.out.println("**************");
         System.out.println("DEBUT DU TOUR "+tour);
         System.out.println("**************");
+        //Restreint la zone
+        this.determine_zone_rouge();
         //Parcourt la liste des vivants et joue leurs tours
         for(int i=0;i<participants.size();i++){
             participants.get(i).jouer();
         }
-        //Checker les morts et les ajouter à la liste tout en les suprimant des 
+        //Checker les morts et les ajouter à la liste tout en les suprimant de la carte
         Personnage tmp;
         for(int i=0;i<participants.size();i++){
             tmp = participants.get(i);            
             if(tmp.getPv()==0){
-                //System.out.println(tmp.getName() + " est mort ce tour.");
                 mortDuTour.add(tmp);
+                participants.remove(i);
+                i--;
+                //tmp.getCarte().getCarte_Terrain()[tmp.getPosition_x()][tmp.getPosition_y()].setPerso(null);
+            }
+        }
+        //Check si des gens sont en zone restreinte
+        for(int i=0;i<participants.size();i++){
+            tmp = participants.get(i);            
+            if(tmp.getCarte().getCarte_Terrain()[tmp.getPosition_x()][tmp.getPosition_y()].isDangerImminant()){
+                tmp.getCarte().getCarte_Terrain()[tmp.getPosition_x()][tmp.getPosition_y()].setPerso(null);
+                System.out.println(tmp.getName() + " a été rattrapé par la zone Rouge.");
+                mortDuTour.add(tmp);
+                for(i=0;i<participants.size();i++)  
+                {  
+                   if(participants.get(i).equals(tmp))  
+                   {  
+                      break;
+                   }  
+                }  
                 participants.remove(i);
             }
         }
-        //Restreint la zone Non implementé pour l'instant
         //Checker de nouveau les morts ? Ou le faire en dur à voir non implementé pour l'instant
         //Annonce les zones en danger du prochian tour non implémenté pour l'instant
         //Recapitule les morts fait au dessus
@@ -96,9 +115,12 @@ public class BattleRoyale {
         System.out.println("Sont mort ce tour :");
         if(!mortDuTour.isEmpty()){
             for(int i=0;i<mortDuTour.size();i++){
-                System.out.println("    "+ mortDuTour.get(i));
+                System.out.println("    "+ mortDuTour.get(i).getName());
             }
             morts.addAll(mortDuTour);
+        }
+        else{
+            System.out.println("Personne !");
         }
         
         System.out.println("");
