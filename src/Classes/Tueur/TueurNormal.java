@@ -121,7 +121,7 @@ public class TueurNormal extends Personnage implements Tueur{
         int y = this.getPosition_y();
         Terrain[][] carte = this.getCarte().getCarte_Terrain();
         if(carte[x+1][y].getPerso() != null){
-            this.attaquer((Personnage)carte[x+1][y].getPerso());
+            this.attaquer(carte[x+1][y].getPerso());
         }
         else if(carte[x-1][y].getPerso() != null){
             this.attaquer(carte[x-1][y].getPerso());

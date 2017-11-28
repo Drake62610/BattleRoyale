@@ -30,11 +30,7 @@ public class Personnage {
     /**
      * Stat de vitesse qui gère l'ordre des tours
      */
-    private int vitesse;
-    /**
-     * Pourcentage d'infliger un coup critique
-     */
-    private int critique;     
+    private int vitesse;    
     /**
      * Nombre de cases maximum que peut parcourir un personnage durant la phase déplacement
      */
@@ -117,13 +113,6 @@ public class Personnage {
         return force;
     }
     /**
-     * Getter de la variable critique
-     * @return
-     */
-    public int getCritique() {
-        return critique;
-    }
-    /**
      * Getter de la variable vitesse
      * @return 
      */
@@ -188,13 +177,6 @@ public class Personnage {
         this.position_x = position_y;
     }   
     /**
-     * Setter pour la variable critique
-     * @param critique
-     */
-    public void setCritique(int critique) {
-        this.critique = critique;
-    }
-    /**
      * Setter pour la variable team
      * @param team
      */
@@ -240,10 +222,6 @@ public class Personnage {
      */
     public void attaquer(Object cible){
         int dmg = force;
-        if((int)(Math.random()*100)<this.getCritique()){
-            this.parler("COUP CRITIQUE");
-            dmg = force * 2;
-        }
         if (cible instanceof Personnage){
             this.parler("Aya !");
             ((Personnage) cible).enquaisser(dmg);
@@ -254,10 +232,7 @@ public class Personnage {
         }
         else{
             throw new UnsupportedOperationException("Il y a un Alien sur le Terrain");
-        }
-        
-        //Notion de coup critique
-        
+        }        
     }
     
     /**
@@ -375,6 +350,12 @@ public class Personnage {
     public void phaseDeplacement(){
         for (int i=0;i<deplacement;i++){
             this.choixDeplacement();
+            if (carte.getCarte_Terrain()[position_y][position_x].isPiege()){
+                int dmg = (int)(1 + Math.random()*(3-1));
+                this.pv = this.pv -dmg;
+                System.out.println(name + " marche dans un piège et perd "+ dmg +".");
+                carte.getCarte_Terrain()[position_y][position_x].setPiege(false);
+            }
         }
     }
     /**

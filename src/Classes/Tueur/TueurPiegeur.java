@@ -115,7 +115,7 @@ public class TueurPiegeur extends Piegeur implements Tueur {
         int y = this.getPosition_y();
         Terrain[][] carte = this.getCarte().getCarte_Terrain();
         if(carte[x+1][y].getPerso() != null){
-            this.attaquer((Personnage)carte[x+1][y].getPerso());
+            this.attaquer(carte[x+1][y].getPerso());
         }
         else if(carte[x-1][y].getPerso() != null){
             this.attaquer(carte[x-1][y].getPerso());
@@ -127,7 +127,11 @@ public class TueurPiegeur extends Piegeur implements Tueur {
             this.attaquer(carte[x][y-1].getPerso());
         }
         else{
-            carte[x][y].setPiege(true);
+            if(Math.random() * ( 100 )< 33){
+                carte[x][y].setPiege(true);
+                System.out.println(this.getName() + " pose un piège ! ");
+            }
+            
         }
     }
     

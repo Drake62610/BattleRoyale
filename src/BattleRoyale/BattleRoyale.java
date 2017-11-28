@@ -156,11 +156,13 @@ public class BattleRoyale {
         }
         //Recapitule les morts fait au dessus      
         System.out.println("Résumé du tour" + tour);
-        System.out.println("Sont mort ce tour :");
-        if(!mortDuTour.isEmpty()){
+        if(!mortDuTour.isEmpty()){            
+            System.out.print("Sont mort ce tour :");
             for(int i=0;i<mortDuTour.size();i++){
-                System.out.println("    "+ mortDuTour.get(i).getName());
+                System.out.println(" "+ mortDuTour.get(i).getName());
             }
+            System.out.println(".");
+            System.out.println("Paix à leurs âmes");
             morts.addAll(mortDuTour);
         }        
         System.out.println("");
