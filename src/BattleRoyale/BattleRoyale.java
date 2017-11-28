@@ -30,7 +30,7 @@ public class BattleRoyale {
     private Carte carteTerrain;
     private int tour;
     private int zone;
-    private int cadenceTour = 3;
+    private int cadenceTour = 1;
     
     
     public BattleRoyale(int nbr_soigneur, int nbr_piegeur, int nbr_normal,
@@ -258,24 +258,32 @@ public class BattleRoyale {
        
        Terrain[][] carte_terrain = carteTerrain.getCarte_Terrain();
        
-       int cote = max(Constant.LARGEUR, Constant.LONGUEUR);
-       int param =3*cote/4+4;       
-       int param2 =cote/4-4;
+       int grand = max(Constant.LARGEUR, Constant.LONGUEUR);
+       int petit = min(Constant.LARGEUR, Constant.LONGUEUR); 
+       int param =3*grand/4+4;       
+       int param2 =grand/4-4;
+       int stopwatch = 0;
+       int x = param2;
+       while (x<param){
+                if (x<Constant.LONGUEUR && petit/2-grand/2+zone>0){
+                    carteTerrain.restreindre(petit/2-grand/2+zone-1, x);
+                }
+                if(x<Constant.LONGUEUR && petit/2+grand/2-zone<Constant.LARGEUR){
+                    carteTerrain.restreindre(petit/2+grand/2-zone, x);
+                }
+                if(x-param2<Constant.LARGEUR && zone<Constant.LONGUEUR ){
+                    carteTerrain.restreindre( x-param2,zone-1);               
+                }
+                if(x-param2<Constant.LARGEUR && zone<Constant.LONGUEUR){
+                    carteTerrain.restreindre(x-param2,grand-zone);
+                }
+                stopwatch = stop();
+                if (stopwatch == 4 || stopwatch == 1){
+                    x=param;
+                }
+                x++;
+            }
        
-       for (int x=param2;x<param;x++){
-           if (x<Constant.LONGUEUR && Constant.LARGEUR/2-cote/2+zone>0){
-               carteTerrain.restreindre(Constant.LARGEUR/2-cote/2+zone, x);
-           }
-           if(x<Constant.LONGUEUR && Constant.LARGEUR/2+cote/2-zone<Constant.LARGEUR){
-               carteTerrain.restreindre(Constant.LARGEUR/2+cote/2-zone, x);
-           }
-           if(x<Constant.LARGEUR && Constant.LONGUEUR/2-cote/2+zone>0){
-               carteTerrain.restreindre( x-5,Constant.LONGUEUR/2-cote/2+zone);               
-           }
-           if(x<Constant.LARGEUR && Constant.LONGUEUR/2+cote/2-zone<Constant.LONGUEUR){
-               carteTerrain.restreindre( x-5,Constant.LONGUEUR/2+cote/2-zone);
-           }
-        }
     }
    private int max(int a, int b){
        if (a<b){
@@ -284,4 +292,24 @@ public class BattleRoyale {
            return a;
        }
    }
+   private int min(int a, int b){
+       if (a<b){
+           return a;
+       }else{
+           return b;
+       }
+   }
+   private int stop(){
+       int nbr=0;
+       Terrain[][] carte_terrain = carteTerrain.getCarte_Terrain();
+       for (int m=0; m<Constant.LARGEUR; m++){
+            for (int n=0; n<Constant.LONGUEUR; n++){
+                if(carte_terrain[m][n].isDangerImminant() == false){
+                    nbr ++;
+                }
+            }
+       }
+        return nbr;
+    }
 }
+
