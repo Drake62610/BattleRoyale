@@ -20,7 +20,7 @@ public class TraitreNormal extends Personnage implements Traitre {
 
     public TraitreNormal(int position_x, int position_y, Carte carte) {
         super(5+(int)(Math.random()*(10-5)) //PV
-                ,2 + (int)(Math.random()*(5-1))//Force
+                ,5 + (int)(Math.random()*(5-1))//Force
                 ,1                        //Deplacement
                 ,3                        //Vitesse
                 ,position_x, position_y,carte);
@@ -38,26 +38,35 @@ public class TraitreNormal extends Personnage implements Traitre {
             Personnage cible = null;
             ArrayList <Personnage> membres = this.getTeam().getMembres();
             for(int i=0;i<membres.size();i++){  
-                if(membres.get(i).getPv()<this.getForce()){ //Un traitre passse à l'action uniquement si il est sur de tuer
-                    if(cible == null){ //Si il n'as pas de cible dans la team alors il prends la personne repérée
-                        cible = membres.get(i);
-                    }
-                    else if(membres.get(i) instanceof Tueur){ //Cas où la personne est une Tueur
-                        if( cible instanceof Tueur && cible.getPv()<membres.get(i).getPv()){ //Si egualitée de classe on préfère tuer la personne avec le plus de PV
-                            cible = membres.get(i);
-                        }//Tuer un Tueur est une priorité car il est le plus dangereux
-                    }
-                    else if(membres.get(i) instanceof Pacifiste){
-                        //TODO
-                    }
-                    else if(membres.get(i) instanceof Trouillard){
-                        //TODO
-                    }
+                if(membres.get(i).getPv()<=this.getForce() && !(membres.get(i).equals(this))){ //Un traitre passse à l'action uniquement si il est sur de tuer
+                    cible = membres.get(i);
+                    break;
                 }
             }
             if (cible != null){
+                System.out.println(this.getName() + " a trahit la team de " + this.getTeam().getLeader().getName() + " en tuant " + cible.getName() + " ! Attention il s'enfuit !");
                 this.attaquer(cible);
-                //this.deplacement(null);
+                this.setTeam(null);
+                // Il s'enfuit !
+                int x =this.getPosition_x();
+                int y = this.getPosition_y();
+                Terrain[][] carte = this.getCarte().getCarte_Terrain();
+                if(carte[x+1][y].accessible(this)){this.moveSouth();
+                    if(carte[x+1][y].accessible(this)){this.moveSouth();}
+                    else if(carte[x][y+1].accessible(this)){this.moveEast();}
+                    else if(carte[x][y-1].accessible(this)){this.moveWest();}}
+                else if(carte[x-1][y].accessible(this)){this.moveNorth();
+                    if(carte[x-1][y].accessible(this)){this.moveNorth();}
+                    else if(carte[x][y+1].accessible(this)){this.moveEast();}
+                    else if(carte[x][y-1].accessible(this)){this.moveWest();}}
+                else if(carte[x][y+1].accessible(this)){this.moveEast();
+                    if(carte[x+1][y].accessible(this)){this.moveSouth();}
+                    else if(carte[x][y+1].accessible(this)){this.moveEast();}
+                    else if(carte[x-1][y].accessible(this)){this.moveNorth();}}
+                else if(carte[x][y-1].accessible(this)){this.moveWest();
+                    if(carte[x+1][y].accessible(this)){this.moveSouth();}
+                    else if(carte[x-1][y].accessible(this)){this.moveNorth();}
+                    else if(carte[x][y-1].accessible(this)){this.moveWest();}}
             }
         }
     }
@@ -141,9 +150,5 @@ public class TraitreNormal extends Personnage implements Traitre {
                 }
             }
         }
-    }
-    @Override
-    public void phaseAction() {
-        this.trahir();
     }
 }

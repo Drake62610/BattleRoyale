@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Scanner;
+import javax.swing.JFrame;
 
 public class BattleRoyale {
     private ArrayList <Personnage> participants = new ArrayList <Personnage>();  
@@ -92,6 +93,26 @@ public class BattleRoyale {
      */
     public Object getGagnant() {
         return gagnant;
+    }
+    
+    public void lancer(int mode) throws InterruptedException{
+        JFrame intG ;
+        while(this.getGagnant() == null){                    //int nbr_tueur int nbr_pacifiste, int nbr_traitre
+            this.nextTurn();
+            if( mode ==1){
+                intG = this.getCarteTerrain().getIntG();
+                intG.setVisible(true);
+                Thread.sleep(500);
+                intG.dispose();
+            }
+            
+            //platinum.pause();
+            //Thread.sleep(500);
+            
+        }
+        
+        System.out.println("Nous avons un gagnant : " + this.getGagnant());
+        //}
     }
     
     /**

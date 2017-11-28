@@ -2,7 +2,6 @@ package Classes;
 
 
 import Carte.Carte;
-import Carte.Terrain;
 
 /**
  * Projet JAVA Semestre1 M1
@@ -26,9 +25,9 @@ public class Piegeur extends Personnage {
     
     /**
      * Permet de poser un piège sur la carte
-     * @param carte Terrain de jeu du battle royale
      */
     public void posePiege(){
+        System.out.println(this.getName() + " pose un piège ! ");
         this.getCarte().getCarte_Terrain()[this.getPosition_x()][this.getPosition_y()].setPiege(true);
     }
 }

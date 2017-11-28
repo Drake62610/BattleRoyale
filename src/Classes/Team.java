@@ -1,5 +1,6 @@
 package Classes;
 
+import Classes.Traitre.Traitre;
 import java.util.ArrayList;
 
 /**
@@ -62,6 +63,7 @@ public class Team {
         membres.remove(this.findIndex(cible));
         cible.setTeam(null);
         if(leader.equals(cible)){ //Si on enlève le leader alors on en élit un nouveau
+            System.out.println(membres.get(0).getName() + " devient le nouveau leader de la team ! Il remplace donc " + leader.getName());
             leader = membres.get(0);
         }
         if(membres.size() == 1){ //Une team de 1 ça n'existe pas !
@@ -74,6 +76,7 @@ public class Team {
      * @param cible 
      */
     public void addMember(Personnage cible){
+        System.out.println(cible.getName()+" rejoint la team de "+ leader.getName());
         membres.add(cible);
         cible.setTeam(this);
         //Update coordonnées
@@ -99,13 +102,16 @@ public class Team {
          return -1;
     }
     
+    /**
+     * Methode qui gerre le tour de jeu d'une Team
+     */
     public void jouer(){
         //Phase deplacement
         leader.choixDeplacement();
         for(int i=0;i<membres.size();i++){ //Tout le monde suit le Leader
                 membres.get(i).setPosition_x(leader.getPosition_x());
                 membres.get(i).setPosition_y(leader.getPosition_y());
-                //Et jouent si ils sont soigneurs
+                //Et jouent leurs action directement si ils sont soigneurs
                 if (membres.get(i) instanceof Soigneur){
                     for(int j=0;j<membres.size();j++){
                         if (membres.get(j).getPVMAX() - membres.get(j).getPv()==0 && i!=j){
@@ -116,14 +122,21 @@ public class Team {
                             ((Soigneur)membres.get(i)).soigner();
                         }
                     }
+                }//Les traitre en profite pour eventuellement passer à l'action...
+                if (membres.get(i) instanceof Traitre){
+                    ((Traitre)membres.get(i)).trahir();
                 }
             }
         leader.getCarte().getCarte_Terrain()[leader.getPosition_x()][leader.getPosition_y()].setPerso(this);
         
+        //Phase action du leader
         leader.phaseAction();
-        //SI il y a des soigneurs dans les non actifs ils soignent
     }
     
+    /**
+     * Dans une team c'est le leader qui prend tout les dégats
+     * @param dmg 
+     */
     public void enquaisser(int dmg){
         leader.enquaisser(dmg);
     }

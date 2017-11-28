@@ -26,7 +26,7 @@ public class PacifisteNormal extends Personnage implements Pacifiste {
                 ,1                        //Deplacement
                 ,1                        //Vitesse
                 ,position_x, position_y,carte);
-        this.raison = (int)(Math.random()*(90-50)); //Un pacifiste normal est en fait un diplomate qui saura ralier la première personne qu'il croise
+        this.raison = 30 + (int)(Math.random()*(30)); 
     }
     @Override
     public int getRaison() {

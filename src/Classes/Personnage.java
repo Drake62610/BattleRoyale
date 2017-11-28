@@ -240,9 +240,10 @@ public class Personnage {
      * @param dmg dommage brut pris par le personnage
      */
     public void enquaisser(int dmg){
-        if(this.getPv()<dmg){
+        if(this.getPv()<=dmg){
             this.setPv(0);
             this.parler("Monde de merde ! x|");
+            System.out.println("Oh non "+ name + " est mort !");
             if(this.team != null){
                 team.removeMember(this);
             }
@@ -264,8 +265,10 @@ public class Personnage {
         if (team == null){
             System.out.println("***************");
             System.out.println("Tour de " + name);
+            System.out.println("");
             System.out.println("Phase de déplacement");
             this.phaseDeplacement();
+            System.out.println("");
             System.out.println("Phase d'action");
             this.phaseAction();
         }
@@ -278,7 +281,7 @@ public class Personnage {
     
     public void choixDeplacement(){}
     public void moveSouth(){
-        System.out.println("South");
+        System.out.println(name + " se dirige vers le Sud");
         if (this.carte.getCarte_Terrain()[this.position_y+1][this.position_x] instanceof Mer){
             throw new UnsupportedOperationException("Un personnage essaie de marcher sur l'eau !");
         }
@@ -289,7 +292,7 @@ public class Personnage {
         }
     }
     public void moveNorth(){
-        System.out.println("North");
+        System.out.println(name + " se dirige vers le Nord");
         if (this.carte.getCarte_Terrain()[this.position_y-1][this.position_x] instanceof Mer){
             throw new UnsupportedOperationException("Un personnage essaie de marcher sur l'eau !");
         }
@@ -300,7 +303,7 @@ public class Personnage {
         }
     }
     public void moveWest(){
-        System.out.println("West");
+        System.out.println(name + " se dirige vers l'Ouest");
         if (this.carte.getCarte_Terrain()[this.position_y][this.position_x-1] instanceof Mer){
             throw new UnsupportedOperationException("Un personnage essaie de marcher sur l'eau !");
         }
@@ -311,7 +314,7 @@ public class Personnage {
         }
     }
     public void moveEast(){
-        System.out.println("East");
+        System.out.println(name + " se dirige vers l'Est");
         if (this.carte.getCarte_Terrain()[this.position_y][this.position_x+1] instanceof Mer){
             throw new UnsupportedOperationException("Un personnage essaie de marcher sur l'eau !");
         }
@@ -321,7 +324,7 @@ public class Personnage {
             position_x++;
         }
     }
-    public void dontMove(){System.out.println("Nothing");}
+    public void dontMove(){System.out.println(name + " ne se déplace pas");;}
     public void moveRandom(){
         int rdm = (int)(Math.random()*(6));
         if (rdm == 0 && carte.getCarte_Terrain()[position_y-1][position_x].accessible(this)){

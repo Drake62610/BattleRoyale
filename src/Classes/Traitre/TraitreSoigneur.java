@@ -44,25 +44,14 @@ public class TraitreSoigneur extends Soigneur implements Traitre {
             ArrayList <Personnage> membres = this.getTeam().getMembres();
             for(int i=0;i<membres.size();i++){  
                 if(membres.get(i).getPv()<this.getForce()){ //Un traitre passse à l'action uniquement si il est sur de tuer
-                    if(cible == null){ //Si il n'as pas de cible dans la team alors il prends la personne repérée
-                        cible = membres.get(i);
-                    }
-                    else if(membres.get(i) instanceof Tueur){ //Cas où la personne est une Tueur
-                        if( cible instanceof Tueur && cible.getPv()<membres.get(i).getPv()){ //Si egualitée de classe on préfère tuer la personne avec le plus de PV
-                            cible = membres.get(i);
-                        }//Tuer un Tueur est une priorité car il est le plus dangereux
-                    }
-                    else if(membres.get(i) instanceof Pacifiste){
-                        //TODO
-                    }
-                    else if(membres.get(i) instanceof Trouillard){
-                        //TODO
-                    }
-                }
+                    cible = membres.get(i);
+                    break;
             }
             if (cible != null){
                 this.attaquer(cible);
-                //this.deplacement(null);
+                this.getTeam().removeMember(this);
+                this.choixDeplacement();
+                }
             }
         }
     }
@@ -147,8 +136,12 @@ public class TraitreSoigneur extends Soigneur implements Traitre {
             }
         }
     }
+    
+    /**
+     * La phase d'action d'un tueur soigneur consiste toujours en se soigner.
+     */
     @Override
     public void phaseAction() {
-        this.trahir();
+        this.soigner();
     }
 }

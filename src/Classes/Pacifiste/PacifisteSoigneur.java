@@ -26,7 +26,7 @@ public class PacifisteSoigneur extends Soigneur implements Pacifiste {
                 ,1                        //Deplacement
                 ,1                        //Vitesse
                 ,position_x, position_y,carte);
-        this.raison = (int)(Math.random()*(90-50)); //Pourcentage de chance maximum : 90, Minimum : 50
+        this.raison = 30 + (int)(Math.random()*(30));
     }
     
     @Override
@@ -180,6 +180,7 @@ public class PacifisteSoigneur extends Soigneur implements Pacifiste {
             if(carte[x][y-1].getPerso() instanceof Personnage){this.raisonner((Personnage)carte[x][y-1].getPerso());}
             else{this.raisonner((Team)carte[x][y-1].getPerso());}
         }
+        this.soigner(); //Il essaie toujours de se soigner
     }
     
     

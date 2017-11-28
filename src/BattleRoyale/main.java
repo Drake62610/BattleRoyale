@@ -16,17 +16,7 @@ public class main {
         
         JFrame intG ;
         //while(true){
-        BattleRoyale platinum = new BattleRoyale(0,0,0,0,20,0,0); //nbr_soigneur, nbr_piegeur, nbr_normal, nbr_trouillard
-        while(platinum.getGagnant() == null){                    //int nbr_tueur int nbr_pacifiste, int nbr_traitre
-            platinum.nextTurn();
-            intG = platinum.getCarteTerrain().getIntG();
-            intG.setVisible(true);
-            //platinum.pause();
-            Thread.sleep(500);
-            intG.dispose();
-        }
-        
-        System.out.println("Nous avons un gagnant : " + platinum.getGagnant());
-        //}
+        BattleRoyale platinum = new BattleRoyale(0,0,0,0,0,10,10); //nbr_soigneur, nbr_piegeur, nbr_normal, nbr_trouillard
+        platinum.lancer(1);
     }  
 }

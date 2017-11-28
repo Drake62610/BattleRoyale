@@ -51,7 +51,9 @@ public class Soigneur extends Personnage{
      * Polymorphisme de la methode soigner pour se l'aplliquer à soi même
      */
     public void soigner(){
-        if (this.getPVMAX()-this.getPv()>=capacité){
+        if (this.getPVMAX() == this.getPv()){//Il ne se passe rien            
+        }
+        else if (this.getPVMAX()-this.getPv()>=capacité){
             System.out.println(this.getName() + " se soigne de "+ capacité + " ! ");
             this.setPv(this.getPv() + capacité);
         }

@@ -128,8 +128,7 @@ public class TueurPiegeur extends Piegeur implements Tueur {
         }
         else{
             if(Math.random() * ( 100 )< 33){
-                carte[x][y].setPiege(true);
-                System.out.println(this.getName() + " pose un piège ! ");
+                this.posePiege();
             }
             
         }
