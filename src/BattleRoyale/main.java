@@ -16,7 +16,7 @@ public class main {
         
         JFrame intG ;
         //while(true){
-        BattleRoyale platinum = new BattleRoyale(0,0,0,0,0,10,10); //nbr_soigneur, nbr_piegeur, nbr_normal, nbr_trouillard
+        BattleRoyale platinum = new BattleRoyale(0,20,0,0,20,0,0); //nbr_soigneur, nbr_piegeur, nbr_normal, nbr_trouillard
         platinum.lancer(1);
     }  
 }
