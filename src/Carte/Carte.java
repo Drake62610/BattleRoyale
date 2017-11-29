@@ -48,7 +48,10 @@ public class Carte {
     public Terrain[][] getCarte_Terrain() {
         return carte_Terrain;
     }
-       
+    
+    public Panneau getPanneau() {
+        return new Panneau();
+    }
     //METHODS
     /**
      * Methode permettant d'afficher dans la console la carte
