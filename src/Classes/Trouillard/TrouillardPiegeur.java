@@ -144,11 +144,11 @@ public class TrouillardPiegeur extends Piegeur implements Trouillard {
         Terrain[][] carte = this.getCarte().getCarte_Terrain();
         if(carte[x][y] instanceof Foret){
             this.seCamoufler();
+            this.posePiege();
         }
-        else if (Math.random() * ( 100 )< 33){
-            carte[x][y].setPiege(true);
-            System.out.println(this.getName() + " pose un piège ! ");
-        }
+        if(Math.random() * ( 100 )< 33 && (carte[x][y-1].accessible(this) || carte[x][y+1].accessible(this) || carte[x-1][y].accessible(this) || carte[x+1][y].accessible(this))){
+                this.posePiege();
+            }
         else{
             this.pleurer();
         }

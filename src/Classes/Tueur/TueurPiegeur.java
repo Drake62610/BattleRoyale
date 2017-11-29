@@ -136,7 +136,7 @@ public class TueurPiegeur extends Piegeur implements Tueur {
             this.attaquer(carte[x][y-1].getPerso());
         }
         else{
-            if(Math.random() * ( 100 )< 33){
+            if(Math.random() * ( 100 )< 33 && (carte[x][y-1].accessible(this) || carte[x][y+1].accessible(this) || carte[x-1][y].accessible(this) || carte[x+1][y].accessible(this))){
                 this.posePiege();
             }
             

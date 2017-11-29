@@ -4,6 +4,7 @@ package Classes;
 import BattleRoyale.Constant;
 import Carte.Carte;
 import Carte.Mer;
+import Classes.Trouillard.TrouillardPiegeur;
 import Exception.WalkOnWaterException;
 
 /**
@@ -354,7 +355,7 @@ public class Personnage {
     public void phaseDeplacement(){
         for (int i=0;i<deplacement;i++){
             this.choixDeplacement();
-            if (carte.getCarte_Terrain()[position_y][position_x].isPiege()){
+            if (carte.getCarte_Terrain()[position_y][position_x].isPiege() && !(this instanceof TrouillardPiegeur)){
                 int dmg = (int)(1 + Math.random()*(3-1));
                 this.enquaisser(dmg);
                 System.out.println(name + " marche dans un piège et perd "+ dmg +".");

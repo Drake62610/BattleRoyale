@@ -2,6 +2,7 @@ package Carte;
 
 import Classes.Personnage;
 import Classes.Piegeur;
+import Classes.Team;
 import Classes.Trouillard.Trouillard;
 
 /**
@@ -29,7 +30,11 @@ public class Terrain {
      * @param piege
      */
     public void setPiege(boolean piege) {
-        this.piege = piege;
+        if(!this.piege){
+            if(perso instanceof Personnage){ System.out.println(((Personnage)perso).getName() + " pose un piège ! ");}
+            if(perso instanceof Team){ System.out.println(((Team)perso).getLeader().getName() + " pose un piège ! ");}
+            this.piege = piege;
+        }
     }
     /**
      * Setter pour la variable Perso
@@ -78,6 +83,7 @@ public class Terrain {
     public boolean isDangerImminant() {
         return dangerImminant;
     }
+    
     /**
      * methode qui determine si une case est accessible ou pas par un personnage
      * @param perso
@@ -87,7 +93,10 @@ public class Terrain {
         if (this instanceof Mer){
             return false;
         }
-        if (piege && perso instanceof Piegeur){
+        Terrain[][] carte = perso.getCarte().getCarte_Terrain();
+        int x = perso.getPosition_x();
+        int y = perso.getPosition_y();
+        if (piege && perso instanceof Piegeur && (!carte[x][y-1].isDangerImminant() || !carte[x][y+1].isDangerImminant() || !carte[x-1][y].isDangerImminant() || !carte[x+1][y].isDangerImminant())){
             return false;
         }
         if (perso == null){

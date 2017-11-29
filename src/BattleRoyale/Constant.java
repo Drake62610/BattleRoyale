@@ -1,7 +1,9 @@
 package BattleRoyale;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 
 /**
  * Projet JAVA Semestre1 M1
@@ -29,7 +31,7 @@ public class Constant {
     /**
      *
      */
-    public static final String NAMETXTPATH = new java.io.File("").getAbsolutePath() + "\\sc\\name.txt";
+    public static final String NAMETXTPATH = new java.io.File("").getAbsolutePath() + "\\src\\name.txt";
 
     /**
      *
@@ -74,8 +76,16 @@ public static String[] txtToString(String path){
             }
         return tab;
         }
-    catch(Exception e){
-        System.out.println(e);
+    catch(FileNotFoundException e){
+        System.out.println("Il semble y avoir un problème lors de l'ouverte, tout le monde s'appellera donc John Smith");
+        String[] tab = new String[1];
+        tab[0] = "John Smith";
+        return tab;
+    }
+    catch(IOException e){
+        System.out.println("Veuillez vérifier le contenue de name. Convention : ");
+        System.out.println("1ere ligne -> nombre de noms à prendre dans le fichier");
+        System.out.println("2eme et plus -> un nom par ligne");
         return null;
     }
 }

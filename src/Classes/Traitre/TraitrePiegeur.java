@@ -187,10 +187,12 @@ public class TraitrePiegeur extends Piegeur implements Traitre {
 
     @Override
     public void phaseAction() {
+        int x =this.getPosition_x();
+        int y = this.getPosition_y();
+        Terrain[][] carte = this.getCarte().getCarte_Terrain();
         this.trahir();
-        if(Math.random() * ( 100 )< 33){
-            this.getCarte().getCarte_Terrain()[this.getPosition_x()][this.getPosition_y()].setPiege(true);
-            System.out.println(this.getName() + " pose un piège ! ");
-        }
+        if(Math.random() * ( 100 )< 33 && (carte[x][y-1].accessible(this) || carte[x][y+1].accessible(this) || carte[x-1][y].accessible(this) || carte[x+1][y].accessible(this))){
+                this.posePiege();
+            }
     }
 }
