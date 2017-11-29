@@ -44,26 +44,37 @@ public class TraitreNormal extends Personnage implements Traitre {
                 }
             }
             if (cible != null){
-                System.out.println(this.getName() + " a trahit la team de " + this.getTeam().getLeader().getName() + " en tuant " + cible.getName() + " ! Attention il s'enfuit !");
-                this.attaquer(cible);
+                String tmp1 = cible.getTeam().getLeader().getName();
+                String tmp2 = cible.getName();
+                this.getTeam().removeMember(this); // IL retourne sa veste
+                this.attaquer(cible);              //Et attque
+                System.out.println(this.getName() + " a trahit la team de " + tmp1 + " en tuant " + tmp2 + " !");
                 this.setTeam(null);
-                // Il s'enfuit !
+                System.out.println("Attention le traitre s'enfuit ! ");
                 int x =this.getPosition_x();
                 int y = this.getPosition_y();
                 Terrain[][] carte = this.getCarte().getCarte_Terrain();
                 if(carte[x+1][y].accessible(this)){this.moveSouth();
+                    x = this.getPosition_x();
+                    y = this.getPosition_y();
                     if(carte[x+1][y].accessible(this)){this.moveSouth();}
                     else if(carte[x][y+1].accessible(this)){this.moveEast();}
                     else if(carte[x][y-1].accessible(this)){this.moveWest();}}
                 else if(carte[x-1][y].accessible(this)){this.moveNorth();
+                    x = this.getPosition_x();
+                    y = this.getPosition_y();
                     if(carte[x-1][y].accessible(this)){this.moveNorth();}
                     else if(carte[x][y+1].accessible(this)){this.moveEast();}
                     else if(carte[x][y-1].accessible(this)){this.moveWest();}}
                 else if(carte[x][y+1].accessible(this)){this.moveEast();
+                    x = this.getPosition_x();
+                    y = this.getPosition_y();
                     if(carte[x+1][y].accessible(this)){this.moveSouth();}
                     else if(carte[x][y+1].accessible(this)){this.moveEast();}
                     else if(carte[x-1][y].accessible(this)){this.moveNorth();}}
                 else if(carte[x][y-1].accessible(this)){this.moveWest();
+                    x = this.getPosition_x();
+                    y = this.getPosition_y();
                     if(carte[x+1][y].accessible(this)){this.moveSouth();}
                     else if(carte[x-1][y].accessible(this)){this.moveNorth();}
                     else if(carte[x][y-1].accessible(this)){this.moveWest();}}

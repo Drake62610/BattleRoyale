@@ -62,12 +62,16 @@ public class Team {
     public void removeMember(Personnage cible){
         membres.remove(this.findIndex(cible));
         cible.setTeam(null);
-        if(leader.equals(cible)){ //Si on enlève le leader alors on en élit un nouveau
+        if(leader.equals(cible) && membres.size()>1){ //Si on enlève le leader alors on en élit un nouveau
             System.out.println(membres.get(0).getName() + " devient le nouveau leader de la team ! Il remplace donc " + leader.getName());
             leader = membres.get(0);
         }
+        else if(leader.equals(cible) && membres.size() == 1){ //Si on enlève le leader et qu'il ne reste que lui alors on détruit la team
+            leader.getCarte().getCarte_Terrain()[leader.getPosition_x()][leader.getPosition_y()].setPerso(null);
+        }
         if(membres.size() == 1){ //Une team de 1 ça n'existe pas !
             leader.setTeam(null);
+            leader.getCarte().getCarte_Terrain()[leader.getPosition_x()][leader.getPosition_y()].setPerso(leader);
         }
     }
     
@@ -108,6 +112,7 @@ public class Team {
     public void jouer(){
         //Phase deplacement
         leader.choixDeplacement();
+        leader.getCarte().getCarte_Terrain()[leader.getPosition_x()][leader.getPosition_y()].setPerso(this);
         for(int i=0;i<membres.size();i++){ //Tout le monde suit le Leader
                 membres.get(i).setPosition_x(leader.getPosition_x());
                 membres.get(i).setPosition_y(leader.getPosition_y());
@@ -127,7 +132,7 @@ public class Team {
                     ((Traitre)membres.get(i)).trahir();
                 }
             }
-        leader.getCarte().getCarte_Terrain()[leader.getPosition_x()][leader.getPosition_y()].setPerso(this);
+        
         
         //Phase action du leader
         leader.phaseAction();
