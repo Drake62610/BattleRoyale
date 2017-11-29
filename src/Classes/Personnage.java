@@ -4,6 +4,7 @@ package Classes;
 import BattleRoyale.Constant;
 import Carte.Carte;
 import Carte.Mer;
+import Exception.WalkOnWaterException;
 
 /**
  * Projet JAVA Semestre1 M1
@@ -280,10 +281,10 @@ public class Personnage {
     }
     
     public void choixDeplacement(){}
-    public void moveSouth(){
+    public void moveSouth() throws WalkOnWaterException{
         System.out.println(name + " se dirige vers le Sud");
         if (this.carte.getCarte_Terrain()[this.position_y+1][this.position_x] instanceof Mer){
-            throw new UnsupportedOperationException("Un personnage essaie de marcher sur l'eau !");
+            throw new WalkOnWaterException();
         }
         else{
             this.carte.getCarte_Terrain()[this.position_y][this.position_x].setPerso(null);
@@ -291,10 +292,10 @@ public class Personnage {
             position_y++;
         }
     }
-    public void moveNorth(){
+    public void moveNorth() throws WalkOnWaterException{
         System.out.println(name + " se dirige vers le Nord");
         if (this.carte.getCarte_Terrain()[this.position_y-1][this.position_x] instanceof Mer){
-            throw new UnsupportedOperationException("Un personnage essaie de marcher sur l'eau !");
+            throw new WalkOnWaterException();
         }
         else{
             this.carte.getCarte_Terrain()[this.position_y][this.position_x].setPerso(null);
@@ -302,10 +303,10 @@ public class Personnage {
             position_y--;
         }
     }
-    public void moveWest(){
+    public void moveWest() throws WalkOnWaterException{
         System.out.println(name + " se dirige vers l'Ouest");
         if (this.carte.getCarte_Terrain()[this.position_y][this.position_x-1] instanceof Mer){
-            throw new UnsupportedOperationException("Un personnage essaie de marcher sur l'eau !");
+            throw new WalkOnWaterException();
         }
         else{
             this.carte.getCarte_Terrain()[this.position_y][this.position_x].setPerso(null);
@@ -313,10 +314,10 @@ public class Personnage {
             position_x--;
         }
     }
-    public void moveEast(){
+    public void moveEast() throws WalkOnWaterException{
         System.out.println(name + " se dirige vers l'Est");
         if (this.carte.getCarte_Terrain()[this.position_y][this.position_x+1] instanceof Mer){
-            throw new UnsupportedOperationException("Un personnage essaie de marcher sur l'eau !");
+            throw new WalkOnWaterException();
         }
         else{
             this.carte.getCarte_Terrain()[this.position_y][this.position_x].setPerso(null);
@@ -325,7 +326,7 @@ public class Personnage {
         }
     }
     public void dontMove(){System.out.println(name + " ne se déplace pas");;}
-    public void moveRandom(){
+    public void moveRandom() throws WalkOnWaterException{
         int rdm = (int)(Math.random()*(6));
         if (rdm == 0 && carte.getCarte_Terrain()[position_y-1][position_x].accessible(this)){
             moveNorth();

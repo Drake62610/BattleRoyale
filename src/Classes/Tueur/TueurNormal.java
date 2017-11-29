@@ -10,6 +10,7 @@ import Carte.Carte;
 import Carte.Terrain;
 import Classes.Personnage;
 import Classes.Team;
+import Exception.WalkOnWaterException;
 
 public class TueurNormal extends Personnage implements Tueur{
     /**
@@ -56,62 +57,70 @@ public class TueurNormal extends Personnage implements Tueur{
         int y = this.getPosition_y();
         Terrain[][] carte = this.getCarte().getCarte_Terrain();
         //On regarde si le personnage est en danger
-        if (carte[x][y].isDangerImminant()){
-            if(!(carte[x+1][y].isDangerImminant()) && carte[x+1][y].accessible(this)){this.moveSouth();}
-            else if(!(carte[x-1][y].isDangerImminant()) && carte[x-1][y].accessible(this)){this.moveNorth();}
-            else if(!(carte[x][y+1].isDangerImminant()) && carte[x][y+1].accessible(this)){this.moveEast();}
-            else if(!(carte[x][y-1].isDangerImminant()) && carte[x][y-1].accessible(this)){this.moveWest();}
-            else{this.dontMove();}
-        }
-        else if (carte[x-1][y].isDangerImminant()){
-            if(carte[x+1][y].accessible(this)){this.moveSouth();}
-            else if(carte[x][y+1].accessible(this)){this.moveEast();}
-            else if(carte[x][y-1].accessible(this)){this.moveWest();}
-        }
-        else if (carte[x][y+1].isDangerImminant()){
-            if(carte[x][y-1].accessible(this)){this.moveWest();}
-            else if(carte[x-1][y].accessible(this)){this.moveNorth();}
-            else if(carte[x+1][y].accessible(this)){this.moveSouth();}
-        }
-        else if (carte[x+1][y-1].isDangerImminant()){
-            if(carte[x][y+1].accessible(this)){this.moveEast();}
-            else if(carte[x-1][y].accessible(this)){this.moveNorth();}
-            else if(carte[x+1][y].accessible(this)){this.moveSouth();}
-        }
-        else if (carte[x+1][y].isDangerImminant()){
-            if(carte[x-1][y].accessible(this)){this.moveNorth();}
-            else if(carte[x][y+1].accessible(this)){this.moveEast();}
-            else if(carte[x][y-1].accessible(this)){this.moveWest();}
-        }
-        else{
-            //Si il est déjà au CaC alors il ne bouge pas pour attaquer
-            if(carte[x+1][y].getPerso() != null || carte[x-1][y].getPerso() != null || carte[x][y+1].getPerso() != null || carte[x][y-1].getPerso() != null){
-                this.dontMove();
+        try{
+            if (carte[x][y].isDangerImminant()){
+                if(!(carte[x+1][y].isDangerImminant()) && carte[x+1][y].accessible(this)){this.moveSouth();}
+                else if(!(carte[x-1][y].isDangerImminant()) && carte[x-1][y].accessible(this)){this.moveNorth();}
+                else if(!(carte[x][y+1].isDangerImminant()) && carte[x][y+1].accessible(this)){this.moveEast();}
+                else if(!(carte[x][y-1].isDangerImminant()) && carte[x][y-1].accessible(this)){this.moveWest();}
+                else{this.dontMove();}
             }
-            //Si y y quelqun d'atteignable en Haut etc
-            else if(carte[x-1][y+1].getPerso() != null || carte[x-1][y-1].getPerso() != null || (x-2>=0 && carte[x-2][y].getPerso() != null)){
-                if(carte[x-1][y].accessible(this)){this.moveNorth();}
-                else if(carte[x][y+1].accessible(this)){this.moveEast();}
-                else{this.moveWest();}
-            }//En bas
-            else if(carte[x+1][y+1].getPerso() != null || carte[x+1][y-1].getPerso() != null || (x+2<Constant.LARGEUR && carte[x+2][y].getPerso() != null)){
+            else if (carte[x-1][y].isDangerImminant()){
                 if(carte[x+1][y].accessible(this)){this.moveSouth();}
                 else if(carte[x][y+1].accessible(this)){this.moveEast();}
-                else{this.moveWest();}
-            }//A Droite
-            else if(y+2<Constant.LONGUEUR && carte[x][y+2].getPerso() != null){
-                if(carte[x][y+1].accessible(this)){this.moveEast();}
-                else if(carte[x-1][y].accessible(this)){this.moveNorth();}
-                else{this.moveSouth();}
-            }//A Gauche
-            else if(y-2>=0 && carte[x][y-2].getPerso() != null){
+                else if(carte[x][y-1].accessible(this)){this.moveWest();}
+            }
+            else if (carte[x][y+1].isDangerImminant()){
                 if(carte[x][y-1].accessible(this)){this.moveWest();}
                 else if(carte[x-1][y].accessible(this)){this.moveNorth();}
-                else{this.moveSouth();}
+                else if(carte[x+1][y].accessible(this)){this.moveSouth();}
+            }
+            else if (carte[x+1][y-1].isDangerImminant()){
+                if(carte[x][y+1].accessible(this)){this.moveEast();}
+                else if(carte[x-1][y].accessible(this)){this.moveNorth();}
+                else if(carte[x+1][y].accessible(this)){this.moveSouth();}
+            }
+            else if (carte[x+1][y].isDangerImminant()){
+                if(carte[x-1][y].accessible(this)){this.moveNorth();}
+                else if(carte[x][y+1].accessible(this)){this.moveEast();}
+                else if(carte[x][y-1].accessible(this)){this.moveWest();}
             }
             else{
-                this.moveRandom(); //Changer par deplacementrandom (à coder)
+                //Si il est déjà au CaC alors il ne bouge pas pour attaquer
+                if(carte[x+1][y].getPerso() != null || carte[x-1][y].getPerso() != null || carte[x][y+1].getPerso() != null || carte[x][y-1].getPerso() != null){
+                    this.dontMove();
+                }
+                //Si y y quelqun d'atteignable en Haut etc
+                else if(carte[x-1][y+1].getPerso() != null || carte[x-1][y-1].getPerso() != null || (x-2>=0 && carte[x-2][y].getPerso() != null)){
+                    if(carte[x-1][y].accessible(this)){this.moveNorth();}
+                    else if(carte[x][y+1].accessible(this)){this.moveEast();}
+                    else{this.moveWest();}
+                }//En bas
+                else if(carte[x+1][y+1].getPerso() != null || carte[x+1][y-1].getPerso() != null || (x+2<Constant.LARGEUR && carte[x+2][y].getPerso() != null)){
+                    if(carte[x+1][y].accessible(this)){this.moveSouth();}
+                    else if(carte[x][y+1].accessible(this)){this.moveEast();}
+                    else{this.moveWest();}
+                }//A Droite
+                else if(y+2<Constant.LONGUEUR && carte[x][y+2].getPerso() != null){
+                    if(carte[x][y+1].accessible(this)){this.moveEast();}
+                    else if(carte[x-1][y].accessible(this)){this.moveNorth();}
+                    else{this.moveSouth();}
+                }//A Gauche
+                else if(y-2>=0 && carte[x][y-2].getPerso() != null){
+                    if(carte[x][y-1].accessible(this)){this.moveWest();}
+                    else if(carte[x-1][y].accessible(this)){this.moveNorth();}
+                    else{this.moveSouth();}
+                }
+                else{
+                    this.moveRandom(); //Changer par deplacementrandom (à coder)
+                }
             }
+        }
+        catch (WalkOnWaterException ex){
+            this.dontMove();
+            }
+        catch(Exception ex){
+            ex.getMessage();
         }
     }
 

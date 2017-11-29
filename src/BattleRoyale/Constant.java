@@ -29,7 +29,7 @@ public class Constant {
     /**
      *
      */
-    public static final String NAMETXTPATH = new java.io.File("").getAbsolutePath() + "\\src\\name.txt";
+    public static final String NAMETXTPATH = new java.io.File("").getAbsolutePath() + "\\sc\\name.txt";
 
     /**
      *
