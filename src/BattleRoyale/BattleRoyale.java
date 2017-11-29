@@ -147,7 +147,9 @@ public class BattleRoyale {
         }
         //Parcourt la liste des vivants et joue leurs tours
         for(int i=0;i<participants.size();i++){
+            if (participants.get(i).getPv() != 0){ // LES MORTS NE JOUENT PAS
             participants.get(i).jouer();
+            }
         }
         //Checker les morts et les ajouter à la liste tout en les suprimant des 
         Personnage tmp;
@@ -193,6 +195,9 @@ public class BattleRoyale {
         System.out.println("Il reste " + participants.size() +" participants.");
         System.out.println(morts.size() + " ont déjà succombé.");
         System.out.println("******************");
+        if(participants.size() == 1){
+            gagnant = participants.get(0);
+        }
         //this.pause();
         tour ++;        
     }
@@ -358,6 +363,7 @@ public class BattleRoyale {
             }  
         }
     }
+    
     /**
      *procèdure permettant de faire une pause a la fin d'un tour de jeu
      */

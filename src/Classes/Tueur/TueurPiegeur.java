@@ -78,33 +78,37 @@ public class TueurPiegeur extends Piegeur implements Tueur {
             else if(carte[x][y-1].accessible(this)){this.moveWest();}
         }
         else{
-            //Si il est déjà au CaC alors il ne bouge pas pour recruter
+            //Si il est déjà au CaC alors il ne bouge pas pour attaquer
             if(carte[x+1][y].getPerso() != null || carte[x-1][y].getPerso() != null || carte[x][y+1].getPerso() != null || carte[x][y-1].getPerso() != null){
                 this.dontMove();
             }
             //Si y y quelqun d'atteignable en Haut etc
-            else if(carte[x-1][y+1].getPerso() != null || carte[x-1][y-1].getPerso() != null || (x-2>=0 && carte[x-2][y].getPerso() != null)){
+            else if(carte[x-1][y+1].getPerso() != null || carte[x-1][y-1].getPerso() != null || (x-2>=0 && carte[x-2][y].getPerso() != null)){                
                 if(carte[x-1][y].accessible(this)){this.moveNorth();}
                 else if(carte[x][y+1].accessible(this)){this.moveEast();}
-                else{this.moveWest();}
+                else if(carte[x][y-1].accessible(this)){this.moveWest();}
+                else{this.dontMove();}
             }//En bas
             else if(carte[x+1][y+1].getPerso() != null || carte[x+1][y-1].getPerso() != null || (x+2<Constant.LARGEUR && carte[x+2][y].getPerso() != null)){
                 if(carte[x+1][y].accessible(this)){this.moveSouth();}
                 else if(carte[x][y+1].accessible(this)){this.moveEast();}
-                else{this.moveWest();}
+                else if(carte[x][y-1].accessible(this)){this.moveWest();}
+                else{this.dontMove();}
             }//A Droite
             else if(y+2<Constant.LONGUEUR && carte[x][y+2].getPerso() != null){
                 if(carte[x][y+1].accessible(this)){this.moveEast();}
                 else if(carte[x-1][y].accessible(this)){this.moveNorth();}
-                else{this.moveSouth();}
+                else if(carte[x+1][y].accessible(this)){this.moveSouth();}
+                else{this.dontMove();}
             }//A Gauche
             else if(y-2>=0 && carte[x][y-2].getPerso() != null){
                 if(carte[x][y-1].accessible(this)){this.moveWest();}
                 else if(carte[x-1][y].accessible(this)){this.moveNorth();}
-                else{this.moveSouth();}
+                else if(carte[x+1][y].accessible(this)){this.moveSouth();}
+                else{this.dontMove();}
             }
             else{
-                this.moveRandom(); //Changer par deplacementrandom (à coder)
+                this.moveRandom(); 
             }
         }
     }

@@ -355,7 +355,7 @@ public class Personnage {
             this.choixDeplacement();
             if (carte.getCarte_Terrain()[position_y][position_x].isPiege()){
                 int dmg = (int)(1 + Math.random()*(3-1));
-                this.pv = this.pv -dmg;
+                this.enquaisser(dmg);
                 System.out.println(name + " marche dans un piège et perd "+ dmg +".");
                 carte.getCarte_Terrain()[position_y][position_x].setPiege(false);
             }
