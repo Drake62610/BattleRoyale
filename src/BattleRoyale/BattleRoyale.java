@@ -97,13 +97,15 @@ public class BattleRoyale {
     
     public void lancer(int mode) throws InterruptedException{
         JFrame intG ;
+        intG = this.getCarteTerrain().getIntG();
         while(this.getGagnant() == null){                    //int nbr_tueur int nbr_pacifiste, int nbr_traitre
             this.nextTurn();
             if( mode ==1){
-                intG = this.getCarteTerrain().getIntG();
+                
+                intG.setContentPane(this.carteTerrain.getPanneau());
                 intG.setVisible(true);
                 Thread.sleep(500);
-                intG.dispose();
+                //intG.dispose();
             }
             
             //platinum.pause();
