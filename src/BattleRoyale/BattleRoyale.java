@@ -244,10 +244,10 @@ public class BattleRoyale {
             }
         }        
         // bloc créant les personnages en fonctions de paramètres d'entrées
-        while (i<nbr_Perso+1){             
+        while (i<=nbr_Perso){             
             // variables qui s'incrémentes ou change de valeurs dans le bloc            
             int test = i;
-            int rng_carac_perso =(int) (Math.random() * 2);
+            int rng_carac_perso =(int) (Math.random() * 3);
             int rngY = (int) (Math.random() * Constant.LARGEUR-3 +1);  
             int rngX = (int) (Math.random() * Constant.LONGUEUR/2+3 +1);            
             //s'il n'y a personne sur une case            
@@ -255,10 +255,10 @@ public class BattleRoyale {
                 // si ce terrain n'est pas une mer                
                 if (!(carte_terrain[1+rngY][x+rngX] instanceof Mer)){                      
                     // on créé un nombre entre 0 et 3                    
-                    int rng_type_perso = (int) (Math.random() * 4);
+                   // int rng_type_perso = (int) (Math.random() * 4);
                     // si c'est 0 et que le nombre de pacifiste voulu est superieur a 0
                     //alors c'est un pacifiste                    
-                    if (rng_type_perso == 0 && nbr_pacifiste>0){                        
+                    if (nbr_pacifiste>0){                        
                         //si la variable aléatoire modulo 2 et que le nombre de soigneur desiré et superieur a 0
                         // alors c'est un pacifiste soigneur                        
                         if(rng_carac_perso%2 == 0 && nbr_soigneur>0){                            
@@ -278,21 +278,11 @@ public class BattleRoyale {
                             participants.add(tmp00);
                             carte_terrain[1+rngY][x+rngX].setPerso(tmp00);
                             i = i+1;                            
-                        }                        
-                        // si test est egal à i cela veut dire que l'on a 
-                        // obtenu une erreur et dans ce cas on créé un pacifiste normal
-                        if (test==i){                            
-                            nbr_pacifiste=nbr_pacifiste-1;
-                            nbr_normal = nbr_normal-1;                            
-                            tmp00 = new PacifisteNormal(1+rngY,x+rngX,carte);
-                            participants.add(tmp00);
-                            carte_terrain[1+rngY][x+rngX].setPerso(tmp00);
-                            i = i+1;                            
-                        }                        
+                        }                                                                                                                               
                     }                    
                     // on recommence avec les traitres le fonctionnement du bloc
                     // est identique a celui du précedent
-                    if (rng_type_perso == 1 && nbr_traitre>0){                        
+                    if ( nbr_traitre>0){                        
                         if(rng_carac_perso == 0 && nbr_soigneur>0){                            
                             nbr_soigneur=nbr_soigneur-1;
                             nbr_traitre=nbr_traitre-1;
@@ -316,18 +306,10 @@ public class BattleRoyale {
                             participants.add(tmp11);
                             carte_terrain[1+rngY][x+rngX].setPerso(tmp11);
                             i = i+1;                            
-                        }
-                        if (test==i){                            
-                            nbr_traitre=nbr_traitre-1;
-                            nbr_normal=nbr_normal-1;                            
-                            tmp10 = new TraitreNormal(1+rngY,x+rngX,carte);
-                            participants.add(tmp10);
-                            carte_terrain[1+rngY][x+rngX].setPerso(tmp10);
-                            i = i+1;                            
-                        }                                                  
+                        }                                            
                     }                    
                     // cette fois ci avec les trouillards                    
-                    if (rng_type_perso == 2 && nbr_trouillard>0){                        
+                    if ( nbr_trouillard>0){                        
                         if(rng_carac_perso == 0 && nbr_soigneur>0){                            
                             nbr_trouillard=nbr_trouillard-1;
                             nbr_soigneur=nbr_soigneur-1;                            
@@ -352,17 +334,9 @@ public class BattleRoyale {
                             carte_terrain[1+rngY][x+rngX].setPerso(tmp21);
                             i = i+1;                            
                         }
-                        if (test==i){                            
-                            nbr_trouillard=nbr_trouillard-1;
-                            nbr_normal=nbr_normal-1;                            
-                            tmp20 = new TrouillardNormal(1+rngY,x+rngX,carte);
-                            participants.add(tmp20);
-                            carte_terrain[1+rngY][x+rngX].setPerso(tmp20);
-                            i = i+1;                            
-                        }  
                     }                    
                     // et enfin avec les tueurs                    
-                    if (rng_type_perso == 3 && nbr_tueur>0){
+                    if ( nbr_tueur>0){
                         if(rng_carac_perso%2 == 0 && nbr_normal>0){
                             nbr_tueur=nbr_tueur-1;
                             nbr_normal=nbr_normal-1;
@@ -373,20 +347,12 @@ public class BattleRoyale {
                         }
                         if(rng_carac_perso%2 == 1 && nbr_piegeur>0){                            
                             nbr_tueur=nbr_tueur-1;
-                            nbr_normal=nbr_piegeur-1;                            
+                            nbr_piegeur=nbr_piegeur-1;                            
                             tmp31 = new TueurPiegeur(1+rngY,x+rngX,carte);
                             participants.add(tmp31);
                             carte_terrain[1+rngY][x+rngX].setPerso(tmp31);
                             i = i+1;                            
-                        }
-                        if (test==i){                            
-                            nbr_tueur=nbr_tueur-1;
-                            nbr_normal=nbr_normal-1;                            
-                            tmp30 = new TueurNormal(1+rngY,x+rngX,carte);
-                            participants.add(tmp30);
-                            carte_terrain[1+rngY][x+rngX].setPerso(tmp30);
-                            i = i+1;                            
-                        }                          
+                        }                  
                     }
                 }
             }  
