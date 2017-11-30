@@ -147,7 +147,7 @@ public class BattleRoyale {
         System.out.println("******************");
         //La zone rouge avance, à la fin du tour elle prend effet
         stopwatch =stop();
-        if (stopwatch == Constant.LARGEUR+2){
+        if (stopwatch == 1){
             if(participants.size()<1){
                 gagnant = this;
                 }
@@ -417,16 +417,20 @@ public class BattleRoyale {
        while (x<param){
                 if (x<Constant.LONGUEUR && x>=0 && petit/2-grand/2+zone>0 && petit/2-grand/2+zone<Constant.LONGUEUR){
                     carteTerrain.restreindre(petit/2-grand/2+zone, x);
+                    carteTerrain.restreindre(0, x);
                 }
                 if(x<Constant.LONGUEUR && x>=0 && petit/2+grand/2-zone>=0 && petit/2+grand/2-zone<Constant.LARGEUR){
                     carteTerrain.restreindre(petit/2+grand/2-zone, x);
+                    
                 }
                 if(x-param2<Constant.LARGEUR && x-param2>=0 && zone>=0&& zone<Constant.LONGUEUR ){
-                    carteTerrain.restreindre( x-param2,zone);               
+                    carteTerrain.restreindre( x-param2,zone); 
+                    carteTerrain.restreindre(x-param2, 0);
                 }
                 if(x-param2<Constant.LARGEUR && x-param2>=0 && zone>=0 && zone<Constant.LONGUEUR){
                     carteTerrain.restreindre(x-param2,grand-zone);
                 }
+                
                 x++;
             }
     }
