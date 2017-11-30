@@ -3,7 +3,6 @@ package BattleRoyale;
 import Exception.InitialisationPersonnageException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JFrame;
 
 /**
  * Projet JAVA Semestre1 M1
@@ -17,13 +16,16 @@ public class main {
      */
     public static void main(String[] args) throws InterruptedException {
         
-        JFrame intG ;
-        //while(true){
+        //Création d'un battleroyale appelé "platinum"
         BattleRoyale platinum;
         try {
-            platinum = new BattleRoyale(20,0,0,0,20,0,0); //nbr_soigneur, nbr_piegeur, nbr_normal, nbr_trouillard
+            //initialisation de platinum
+            platinum = new BattleRoyale(5,3,15,3,8,5,7); //nbr_soigneur, nbr_piegeur, nbr_normal, 
+                                                          //nbr_trouillard,nbr_tueur,nbr_pacifiste,nbr_traitre
+            //On lance le jeu
             platinum.lancer(1);
-        } catch (InitialisationPersonnageException ex) {
+            //platinum.pause();
+        } catch (InitialisationPersonnageException ex) {//Exception intervennant lors de l'initialisation 
             Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
         }
         

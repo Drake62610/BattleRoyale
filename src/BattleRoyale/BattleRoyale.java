@@ -25,19 +25,20 @@ import java.util.Comparator;
 import java.util.Scanner;
 import javax.swing.JFrame;
 import Exception.InitialisationPersonnageException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class BattleRoyale {
-    private ArrayList <Personnage> participants = new ArrayList <Personnage>();  
-    private ArrayList <Personnage> morts = new ArrayList <Personnage>(); 
+    private ArrayList <Personnage> participants = new ArrayList <>();  
+    private ArrayList <Personnage> morts = new ArrayList <>(); 
     private Carte carteTerrain;
     private int tour;
     private int zone;
     private int cadenceTour = 2;    
     private Object gagnant = null;
+    
+    //CONSTRUCTOR
     /**
-     *gere le jeu en lui meme : créé les personnages, les deploient sur la carte
+     * Constucteur de la classe BattleRoyale avec tout les paramètres possible.
+     * Gere le jeu en lui meme : créé les personnages, les deploient sur la carte
      * et effectue les transitions entre deux tours
      * @param nbr_soigneur
      * @param nbr_piegeur
@@ -46,12 +47,16 @@ public class BattleRoyale {
      * @param nbr_tueur
      * @param nbr_pacifiste
      * @param nbr_traitre
+     * @throws Exception.InitialisationPersonnageException
      */
     public BattleRoyale(int nbr_soigneur, int nbr_piegeur, int nbr_normal,
     int nbr_trouillard, int nbr_tueur, int nbr_pacifiste, int nbr_traitre) throws InitialisationPersonnageException {
         carteTerrain = new Carte(Constant.LONGUEUR,Constant.LARGEUR);
         tour = 0;
         zone =0;
+        if(nbr_soigneur+nbr_piegeur+nbr_normal < nbr_trouillard+ nbr_tueur + nbr_pacifiste + nbr_traitre){
+            throw new InitialisationPersonnageException("La somme des classes ne correspond pas à la somme des caractéristiques");
+        }
         this.deploiement(carteTerrain, nbr_soigneur, nbr_piegeur, nbr_normal,
                     nbr_trouillard, nbr_tueur,nbr_pacifiste,nbr_traitre);
         Collections.sort(participants, new Comparator<Personnage>() {
@@ -67,6 +72,14 @@ public class BattleRoyale {
             }
         });
     }
+
+    /**
+     * Constructeur de la classe BattleRoyale avec une config de base
+     * @throws InitialisationPersonnageException 
+     */
+    public BattleRoyale() throws InitialisationPersonnageException {
+        this(5,3,15,3,8,5,7); //Une config de base que j'aime bien
+    }    
     
     //Getter
     /**
@@ -77,14 +90,14 @@ public class BattleRoyale {
         return participants;
     }
     /**
-     *getter de la variable du nombre de morts
+     * Getter de la variable du nombre de morts
      * @return
      */
     public ArrayList<Personnage> getMorts() {
         return morts;
     }
     /**
-     *getter de la variable carteTerrain
+     * Getter de la variable carteTerrain
      * @return
      */
     public Carte getCarteTerrain() {
@@ -98,31 +111,33 @@ public class BattleRoyale {
         return gagnant;
     }
     
+    /**
+     * Lancer permet de lance rle BattleRoyale, suivre son déroulement et l'arréter quand il se termine
+     * @param mode Si mode = 0 alors on est en full text, si mode = 1 alors on ajoute l'interface graphique (JPanel + JFrame donc limitée)
+     * @throws InterruptedException 
+     */
     public void lancer(int mode) throws InterruptedException{
         JFrame intG ;
-        intG = this.getCarteTerrain().getIntG();
-        while(this.getGagnant() == null){                    //int nbr_tueur int nbr_pacifiste, int nbr_traitre
-            this.nextTurn();
-            if( mode ==1){
-                
-                intG.setContentPane(this.carteTerrain.getPanneau());
-                intG.setVisible(true);
+        intG = this.getCarteTerrain().getIntG(); //On récupère l'interface en créant une fenêtre
+        if( mode ==1){intG.setVisible(true);} //On affiche une première fois pour l'innitialisation
+        while(this.getGagnant() == null){                   
+            this.nextTurn(); //On joue un tour entier
+            if( mode ==1){ //Si mode graphique alors on afiiche
+                intG.setContentPane(this.carteTerrain.getPanneau()); //Renvoit la classe Panneau de Carte, cela permet
+                intG.setVisible(true); // Permet d'afficher la fenêtre
                 Thread.sleep(500);
-                //intG.dispose();
             }
-            
-            //platinum.pause();
-            //Thread.sleep(500);
-            
         }
-        
-        System.out.println("Nous avons un gagnant : " + this.getGagnant());
-        //}
+        System.out.println("Nous avons un gagnant : " + this.getGagnant() + " qui est un " + this.getClass());
     }
     
     /**
-     *gère les etapes et la fin d'un tour de jeu
-     *gère egalement la zone rouge
+     * Gère les étapes et la fin d'un tour de jeu : 
+     *  -Faire avancer la zone rouge
+     *  -Faire jouer tout le monde
+     *  -Ajouter à la liste des morts ceux qui ont 0 PV
+     *  -Tuer les personnages en zone rouge et les ajouter à la liste des morts
+     *  -Recapitulation du tour
      */
     public void nextTurn(){
         ArrayList <Personnage> mortDuTour = new ArrayList <Personnage>(); 
@@ -164,7 +179,6 @@ public class BattleRoyale {
                 participants.remove(i);
             }
         }
-        //Activer la zone rouge
         //Check si des gens sont en zone restreinte
         for(int i=0;i<participants.size();i++){
             tmp = participants.get(i);            
@@ -204,9 +218,11 @@ public class BattleRoyale {
         //this.pause();
         tour ++;        
     }
+    
     /**
      * A partir du nombre de participants et du nombre de type de personnage que l'on veut
      * cette fonction va les placer de manière pseudo-aléatoire sur la carte
+     * Mettre le nombre de participants à l'argument 1,2,3 va activer une génération aléatoire des soigneurs/piégeurs/normaux
      * @param carte corresponds a notre carte de jeu
      * @param nbr_soigneur
      * @param nbr_piegeur
@@ -216,7 +232,6 @@ public class BattleRoyale {
      * @param nbr_pacifiste
      * @param nbr_traitre 
      */
-    
     public void deploiement(Carte carte, int nbr_soigneur, int nbr_piegeur, int nbr_normal,
                 int nbr_trouillard, int nbr_tueur, int nbr_pacifiste, int nbr_traitre) throws InitialisationPersonnageException{
         
@@ -375,15 +390,17 @@ public class BattleRoyale {
     }
     
     /**
-     *procèdure permettant de faire une pause a la fin d'un tour de jeu
+     * Methode permettant de faire une pause, 
+     * la suite du programme reprends lorsque l'utilisateur appuiera sur une touche dans la console
      */
     public void pause(){
         System.out.println("Appuyez sur Enter pour continuer");
         Scanner scanner = new Scanner(System.in); //Pour les inputs entre tours de jeux
         scanner.nextLine();
     }
+    
     /**
-     *méthode qui créé une zone rouge sur la carte afin de forcer les
+     * Méthode qui créé une zone rouge sur la carte afin de forcer les
      * participants a se regrouper vers le milieu de la carte
      * a chaque fois que la metode est appelé la zone rouge augmente de taille
      */

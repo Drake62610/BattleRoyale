@@ -1,21 +1,13 @@
 package Carte;
 
 import BattleRoyale.Constant;
-import BattleRoyale.main;
 import Classes.Pacifiste.Pacifiste;
-import Classes.Pacifiste.PacifisteNormal;
-import Classes.Personnage;
 import Classes.Team;
 import Classes.Traitre.Traitre;
-import Classes.Traitre.TraitreNormal;
 import Classes.Trouillard.Trouillard;
-import Classes.Trouillard.TrouillardNormal;
 import Classes.Tueur.Tueur;
-import Classes.Tueur.TueurNormal;
 import java.awt.Color;
 import java.awt.Graphics;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -75,7 +67,6 @@ public class Carte {
         fenetre.setLocationRelativeTo(null); //Centre la fenetre 
         fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //Permet l'arret du JFrame en cliquand sur la croix rouge
         fenetre.setContentPane(new Panneau()); //Fait appel à la fonction paintComponent de la classe Panneau et lit le JFrame au JPanel
-        fenetre.setVisible(true); //Fait apparaitre la fenêtre
         return fenetre;
     }
     

@@ -10,5 +10,4 @@ public class InitialisationPersonnageException extends Exception {
     public InitialisationPersonnageException(String string) {
         super(string);
     }
-    
 }
