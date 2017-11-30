@@ -24,6 +24,9 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Scanner;
 import javax.swing.JFrame;
+import Exception.InitialisationPersonnageException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class BattleRoyale {
     private ArrayList <Personnage> participants = new ArrayList <Personnage>();  
@@ -45,12 +48,12 @@ public class BattleRoyale {
      * @param nbr_traitre
      */
     public BattleRoyale(int nbr_soigneur, int nbr_piegeur, int nbr_normal,
-    int nbr_trouillard, int nbr_tueur, int nbr_pacifiste, int nbr_traitre) {
+    int nbr_trouillard, int nbr_tueur, int nbr_pacifiste, int nbr_traitre) throws InitialisationPersonnageException {
         carteTerrain = new Carte(Constant.LONGUEUR,Constant.LARGEUR);
         tour = 0;
         zone =0;
         this.deploiement(carteTerrain, nbr_soigneur, nbr_piegeur, nbr_normal,
-                         nbr_trouillard, nbr_tueur,nbr_pacifiste,nbr_traitre);
+                    nbr_trouillard, nbr_tueur,nbr_pacifiste,nbr_traitre);
         Collections.sort(participants, new Comparator<Personnage>() {
             @Override
             public int compare(Personnage tc1, Personnage tc2) {
@@ -215,7 +218,7 @@ public class BattleRoyale {
      */
     
     public void deploiement(Carte carte, int nbr_soigneur, int nbr_piegeur, int nbr_normal,
-                int nbr_trouillard, int nbr_tueur, int nbr_pacifiste, int nbr_traitre){
+                int nbr_trouillard, int nbr_tueur, int nbr_pacifiste, int nbr_traitre) throws InitialisationPersonnageException{
         
         // declaration de nos variables locales 
         
@@ -360,7 +363,14 @@ public class BattleRoyale {
                         }                  
                     }
                 }
-            }  
+            }
+            //Check les exceptions
+            if (nbr_pacifiste > 0 && nbr_normal + nbr_soigneur == 0){
+                throw new InitialisationPersonnageException("Vous avez mis trop de pacifistes");
+            }
+            if (nbr_tueur > 0 && nbr_normal + nbr_piegeur == 0){
+                throw new InitialisationPersonnageException("Vous avez mis trop de tueurs");
+            }
         }
     }
     

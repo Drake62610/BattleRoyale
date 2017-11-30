@@ -1,5 +1,8 @@
 package BattleRoyale;
 
+import Exception.InitialisationPersonnageException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 
 /**
@@ -16,7 +19,13 @@ public class main {
         
         JFrame intG ;
         //while(true){
-        BattleRoyale platinum = new BattleRoyale(0,20,0,0,20,0,0); //nbr_soigneur, nbr_piegeur, nbr_normal, nbr_trouillard
-        platinum.lancer(1);
+        BattleRoyale platinum;
+        try {
+            platinum = new BattleRoyale(20,0,0,0,20,0,0); //nbr_soigneur, nbr_piegeur, nbr_normal, nbr_trouillard
+            platinum.lancer(1);
+        } catch (InitialisationPersonnageException ex) {
+            Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }  
 }
