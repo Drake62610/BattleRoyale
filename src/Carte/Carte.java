@@ -6,6 +6,7 @@ import Classes.Team;
 import Classes.Traitre.Traitre;
 import Classes.Trouillard.Trouillard;
 import Classes.Tueur.Tueur;
+import Exception.InitialisationCarteException;
 import java.awt.Color;
 import java.awt.Graphics;
 import javax.swing.JFrame;
@@ -22,14 +23,15 @@ public class Carte {
     //CONSTRUCTOR
     /**
      * CONSTRUCTEUR de la classe Carte, prends en paramètre la longueur et la largeur de la map à générer
-     * @param longueur
-     * @param largeur
+     * @param longueur longueur doit être plus grand que largeur
+     * @param largeur  largeur doit être plus petit que longueur
+     * @throws Exception.InitialisationCarteException
      */
-    public Carte(int longueur,int largeur) {
-        //Génération aléatoire du terrain
+    public Carte(int longueur,int largeur) throws InitialisationCarteException {
+        if(longueur<largeur){
+            throw new InitialisationCarteException("LONGUEUR et LARGEUR invalid, veuillez vérifier les paramètre de la classe CONSTANT");
+        }
         carte_Terrain = this.genererCarte(longueur, largeur);
-        
-        //Constante de Carte qui contiendra
     }
 
     //GETTER
@@ -40,25 +42,31 @@ public class Carte {
     public Terrain[][] getCarte_Terrain() {
         return carte_Terrain;
     }
-    
+    /**
+     * Getter de la classe Panneau qui génère un JPanel pour l'interface graphique
+     * @return UNe nouvelle instance de la classe Panneau
+     */
     public Panneau getPanneau() {
         return new Panneau();
     }
+    
     //METHODS
     /**
      * Methode permettant d'afficher dans la console la carte
+     * Utilisée au début du projet, plus maintenant
      */
     public void afficher(){
         for (int i = 0; i < carte_Terrain.length; i++) {
             for (int j = 0; j < carte_Terrain[0].length; j++) {
-                    System.out.println(i+""+j);
+                    System.out.println("8");
             }
             System.out.println();
         }
     }
     
     /**
-     * Methode permettant d'afficher dans une fenetre à part la carte à l'iade de JFrame et JPanel
+     * Initialise un JFrame
+     * @return Renvoie le JFrame initialisée
      */
     public JFrame getIntG(){
         final JFrame fenetre = new JFrame();
@@ -74,7 +82,6 @@ public class Carte {
      * Classe gerrant la génération de la carte en utilisant un JPanel
      */
     public class Panneau extends JPanel { 
-
         /**
          * Methode appelée lors de la creation d'une instance Panneau
          * @param g sera généré automatiquement grace à JPanel, cet objet sert nottament au traçage de figure dans la fenêtre
@@ -179,8 +186,9 @@ public class Carte {
         }
         return carte_Terrain;
     }
+    
     /**
-     * methode qui crée un danger sur une case du terrain en fonction de ses coordonnées
+     * Methode qui crée un danger sur une case du terrain en fonction de ses coordonnées
      * @param y coordonnée
      * @param x coordonnée
      */

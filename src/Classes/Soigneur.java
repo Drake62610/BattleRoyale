@@ -7,9 +7,10 @@ import Carte.Carte;
  * Projet JAVA Semestre1 M1
  * @author MATTE FLORIAN, MARISSAL LOIC
  */
+
 public class Soigneur extends Personnage{
     //Variable de classe
-    private int capacité; //Capacité de soin qui intervient lors du gain de PV de la methode soigner()
+    private final int capacité; //Capacité de soin qui intervient lors du gain de PV de la methode soigner()
 
     //CONSTRUCTOR
     /**
@@ -37,11 +38,11 @@ public class Soigneur extends Personnage{
      * Permet de soigner un Personnage en fonction de la capacité de soin du soigneur
      */
     public void soigner(Personnage Ami){
-        if (Ami.getPVMAX()-Ami.getPv()>=capacité){
-            Ami.setPv(Ami.getPv()+capacité);
+        if (Ami.getPVMAX()-Ami.getPv()>=capacité){ //Si la capacité est inférieure à la distance pv -- pvactuel du personnage à soigner
+            Ami.setPv(Ami.getPv()+capacité); //On reset les pv du personnage
             System.out.println(this.getName() + " a soigné "+Ami.getName()+" de "+ capacité + " !");
         }
-        else{
+        else{ //Sinon on reset avec les PVMAX directement
             System.out.println(this.getName() + " a soigné "+Ami.getName()+" de "+ Integer.toString(Ami.getPVMAX()-Ami.getPv()) + " !");
             Ami.setPv(Ami.getPVMAX());
         }
@@ -49,6 +50,7 @@ public class Soigneur extends Personnage{
     
     /**
      * Polymorphisme de la methode soigner pour se l'aplliquer à soi même
+     * La même logique est appliquée
      */
     public void soigner(){
         if (this.getPVMAX() == this.getPv()){//Il ne se passe rien            

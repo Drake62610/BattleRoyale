@@ -11,7 +11,7 @@ import java.util.logging.Logger;
 
 public class main {
     /**
- * @param args the command line arguments
+     * @param args the command line arguments
      * @throws java.lang.InterruptedException
      */
     public static void main(String[] args) throws InterruptedException {

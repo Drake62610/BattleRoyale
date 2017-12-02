@@ -10,7 +10,7 @@ import Carte.Carte;
 public class Piegeur extends Personnage {
 
     /**
-     * Classe Piegeur possede le même constructeur que la classe Personnage, les statisitque sont établie en bas d'arbres
+     * Classe Piegeur possede le même constructeur que la classe Personnage, les statistiques sont établie en bas d'arbres
      * @param pv
      * @param force
      * @param deplacement
@@ -24,7 +24,7 @@ public class Piegeur extends Personnage {
     }
     
     /**
-     * Permet de poser un piège sur la carte
+     * Permet de poser un piège sur un Terrain de la Carte
      */
     public void posePiege(){
         System.out.println(this.getName() + " pose un piège ! ");

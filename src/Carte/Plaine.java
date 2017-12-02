@@ -5,6 +5,4 @@ package Carte;
  * @author MATTE FLORIAN, MARISSAL LOIC
  */
 public class Plaine extends Terrain{
-    
-   
 }

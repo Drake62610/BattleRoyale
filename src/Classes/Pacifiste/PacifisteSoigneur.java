@@ -13,14 +13,18 @@ import Classes.Soigneur;
 import Classes.Team;
 import Exception.WalkOnWaterException;
 
-/**
- *
- * @author ISEN
- */
 public class PacifisteSoigneur extends Soigneur implements Pacifiste {
-
+    //VARIABLE DE CLASSE
+    /**
+     * raison est utilisé lors de l'appel de "raisonner", elle détermine le pourcentage de réussite de la capacité
+     */
     int raison;
-    
+    /**
+     * Constructeur de la Classe Pacifiste
+     * @param position_x
+     * @param position_y
+     * @param carte 
+     */    
     public PacifisteSoigneur(int position_x, int position_y, Carte carte) {
         super(5+(int)(Math.random()*(10-5)) //PV
                 ,1 + (int)(Math.random()*(3-1))//Force
@@ -29,13 +33,20 @@ public class PacifisteSoigneur extends Soigneur implements Pacifiste {
                 ,position_x, position_y,carte);
         this.raison = 30 + (int)(Math.random()*(30));
     }
-    
+    //GETTER
+    /**
+     * Getter de la variable raison
+     * @return 
+     */      
     @Override
     public int getRaison() {
         return raison;
     }
-
     
+    /**
+     * Capacité spéciale la classe Pacifiste, permet de convaincre n'importe quelle autre classe de rejoindre sa team ou de créer une team
+     * @param cible qui pourrait rejoindre la Team
+     */  
     @Override
     public void raisonner(Personnage cible) {
         this.parler("Rejoint moi "+ cible.getName() + " !"); //Inspirational speech
@@ -61,7 +72,11 @@ public class PacifisteSoigneur extends Soigneur implements Pacifiste {
             }
         }
     }
-    
+
+    /**
+     * Polymorphisme pour une Team de la capacité de classe Pacifiste "raisonner"
+     * @param cible 
+     */  
     @Override
     public void raisonner(Team cible) {
         this.parler("Rejoint moi "+ cible.getLeader().getName() + "toi et ta Team ! Ensemble nous serons plus fort"); //Inspirational speech
@@ -94,7 +109,11 @@ public class PacifisteSoigneur extends Soigneur implements Pacifiste {
             }
         }
     }
-    
+        
+    /**
+     * Override de phaseDeplacement de la classe Personnage pour le déplacement d'un Pacifiste
+     * Un Pacifiste va tenter de se rapprocher des autres et de les rallier à sa cause !
+     */
     @Override
     public void choixDeplacement() {
         int x =this.getPosition_x();
@@ -156,7 +175,7 @@ public class PacifisteSoigneur extends Soigneur implements Pacifiste {
                     else{this.moveSouth();}
                 }
                 else{
-                    this.moveRandom(); //Changer par deplacementrandom (à coder)
+                    this.moveRandom(); 
                 }
             }    
         }
@@ -167,7 +186,12 @@ public class PacifisteSoigneur extends Soigneur implements Pacifiste {
             ex.getMessage();
         }
     }
-
+    
+    /**
+     * Override de phaseAction de la classe Personnage
+     * Un Pacifiste raisonne les personne autour de lui
+     * Un Soigneur se soigne en plus
+     */
     @Override
     public void phaseAction() {
         int x =this.getPosition_x();

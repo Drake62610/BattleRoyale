@@ -27,6 +27,7 @@ public class Terrain {
     //SETTER
     /**
      * Setter pour la variable piège
+     * Utilisée par les piégeurs (methode setpiege)
      * @param piege
      */
     public void setPiege(boolean piege) {
@@ -38,17 +39,20 @@ public class Terrain {
     }
     /**
      * Setter pour la variable Perso
-     * @param piege
+     * @param perso le personage qui est sur le Terrain
      */
     public void setPerso(Object perso) {
         this.perso = perso;
     }
-
+    /**
+     * Setter de la variable dangerImminant
+     * Utilisé pour la zone rouge
+     * @param dangerImminant 
+     */
     public void setDangerImminant(boolean dangerImminant) {
         this.dangerImminant = dangerImminant;
     }
     
-
     //GETTER
     /**
      * Getter pour la variable piège
@@ -68,10 +72,10 @@ public class Terrain {
         }
         return perso;
     }
-        /**
+    /**
      * Getter pour la variable Personnage
-     * @param i si un paramètre est trouvé alors la requete vient d'un administrateur de la partie qui a le droit de voir les trouillard caché
-     * @return si le terrain est piègé ou non.
+     * @param i si un paramètre est trouvé alors la requete vient d'un administrateur de la partie qui a le droit de voir les trouillards caché
+     * @return 
      */
     public Object getPerso(int i) {
         return perso;
@@ -85,27 +89,28 @@ public class Terrain {
     }
     
     /**
-     * methode qui determine si une case est accessible ou pas par un personnage
+     * Methode qui determine si une case est accessible ou pas par un personnage
      * @param perso
      * @return si oui ou non une case est atteignable
      */
     public boolean accessible(Personnage perso){
-        if (this instanceof Mer){
+        if (this instanceof Mer){ //Un personnage ne peut pas marcher sur l'eau
             return false;
         }
+        //Recupération de variable utile
         Terrain[][] carte = perso.getCarte().getCarte_Terrain();
         int x = perso.getPosition_x();
         int y = perso.getPosition_y();
         if (piege && perso instanceof Piegeur && (!carte[x][y-1].isDangerImminant() || !carte[x][y+1].isDangerImminant() || !carte[x-1][y].isDangerImminant() || !carte[x+1][y].isDangerImminant())){
-            return false;
+            return false; //Un piégeur ne marche pas dans un piège, il le fait uniquement si la zone rouge est proche
         }
-        if (perso == null){
-            return false;
+        if (this.getPerso() != null){ //On ne marche pas sur les cases où il y a déjà quelqun
+            return false;             //Unique cas possible : une case où un trouillard se cache
         }
-        if(dangerImminant){
+        if(dangerImminant){ //Une personne n'iras jamais dans une zone rouge
            return false; 
         }
-        return true;
+        return true; //Si toute ces conditions sont vérifié alors le personnage peut se déplacer sur le Terrain en question
     }
     
 }

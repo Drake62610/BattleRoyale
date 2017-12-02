@@ -7,18 +7,20 @@ package Classes.Traitre;
 
 import BattleRoyale.Constant;
 import Carte.Carte;
-import Carte.Foret;
 import Carte.Terrain;
-import Classes.Pacifiste.Pacifiste;
 import Classes.Personnage;
 import Classes.Team;
-import Classes.Trouillard.Trouillard;
-import Classes.Tueur.Tueur;
 import Exception.WalkOnWaterException;
 import java.util.ArrayList;
 
 public class TraitreNormal extends Personnage implements Traitre {
 
+    /**
+     * Constructeur de la classe Traitre
+     * @param position_x
+     * @param position_y
+     * @param carte sur laquel le personnage se trouve
+     */
     public TraitreNormal(int position_x, int position_y, Carte carte) {
         super(5+(int)(Math.random()*(10-5)) //PV
                 ,5 + (int)(Math.random()*(5-1))//Force

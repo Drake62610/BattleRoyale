@@ -19,6 +19,7 @@ import Classes.Trouillard.TrouillardPiegeur;
 import Classes.Trouillard.TrouillardSoigneur;
 import Classes.Tueur.TueurNormal;
 import Classes.Tueur.TueurPiegeur;
+import Exception.InitialisationCarteException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -50,7 +51,7 @@ public class BattleRoyale {
      * @throws Exception.InitialisationPersonnageException
      */
     public BattleRoyale(int nbr_soigneur, int nbr_piegeur, int nbr_normal,
-    int nbr_trouillard, int nbr_tueur, int nbr_pacifiste, int nbr_traitre) throws InitialisationPersonnageException {
+    int nbr_trouillard, int nbr_tueur, int nbr_pacifiste, int nbr_traitre) throws InitialisationPersonnageException, InitialisationCarteException {
         carteTerrain = new Carte(Constant.LONGUEUR,Constant.LARGEUR);
         tour = 0;
         zone =0;

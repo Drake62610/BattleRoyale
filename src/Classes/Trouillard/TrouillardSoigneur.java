@@ -12,9 +12,16 @@ import Classes.Soigneur;
 import Exception.WalkOnWaterException;
 
 public class TrouillardSoigneur extends Soigneur implements Trouillard {
-
+    /**
+     * Indique aux autres personnage si le Trouillard est visible ou non
+     */
     private boolean hidden = false;
-    
+    /**
+     * Constructeur de la classe Trouillard
+     * @param position_x
+     * @param position_y
+     * @param carte 
+     */    
     public TrouillardSoigneur(int position_x, int position_y, Carte carte) {
         super(5+(int)(Math.random()*(5-1)) //PV
                 ,0                          //Force
@@ -23,29 +30,32 @@ public class TrouillardSoigneur extends Soigneur implements Trouillard {
                 ,position_x, position_y,carte);
         hidden = false;
     }
-
+    
+    //GETTER
+    /**
+     * Getter pour la variable hidden, variable indiquant si un personnage est visible des autres ou non
+     * @return 
+     */
     @Override
     public boolean isHidden() {
         return hidden;
     }
     
+    //SETTER
     /**
-     * Pour l'instant il ne peut se cacher que dans la Forêt
-     * @param carte 
+     * Setter de la variable hidden
+     * @param hidden 
      */
-    @Override
-    public void seCamoufler(Carte carte) {
-        Terrain terrainActuel = carte.getCarte_Terrain()[this.getPosition_x()][this.getPosition_y()];
-        if(terrainActuel instanceof Foret && ((Foret)terrainActuel).seCacher()){
-           hidden = true;            
-        }
+    public void setHidden(boolean hidden) {
+        this.hidden = hidden;
     }
     
+    //METHODS
     /**
      * Le trouillard cherche à se cacher dans les forêts et fuis sans réfléchir dès qu'une personne se trouve à coté de lui
      */
     @Override
-    public void choixDeplacement() { //Trouver solution pour avoir un mouvement cohérant (2 deplacements)
+    public void choixDeplacement() { 
         int x = this.getPosition_x();
         int y = this.getPosition_y();
         Terrain[][] carte = this.getCarte().getCarte_Terrain();
@@ -149,14 +159,16 @@ public class TrouillardSoigneur extends Soigneur implements Trouillard {
             this.pleurer();
         }
     }
-
-    private void seCamoufler() {
+    
+    @Override
+    public void seCamoufler() {
         if(((Foret)this.getCarte().getCarte_Terrain()[this.getPosition_x()][this.getPosition_y()]).seCacher()){
             hidden = true;
         }
     }
 
-    private void pleurer() {
+    @Override
+    public void pleurer() {
         this.parler("NOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOON POURQUOI ??????");
     }
 }

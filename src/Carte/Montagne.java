@@ -10,15 +10,15 @@ public class Montagne extends Terrain{
     
     /**
      * Constructeur de la classe Montagne
-     * genère aléatoirement la pratictabilite d'une montagne entre 0 et 100%
+     * Genère aléatoirement la pratictabilite d'une montagne entre 0 et 100%
+     * La pratictabilité n'as pas été implémenté dans le projet final car jugée inutile
      */
     public Montagne(){
-       
         pratictabilite = (int) (Math.random() * 100 );
    }
    
     /**
-     * Le terrain peut être impraticable
+     * Renvoie si un Personnage arrive 
      * @return True si la capacite d'un joueur à escalader la montagne, False sinon
      */
     public boolean estGrimpable(){

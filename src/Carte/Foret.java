@@ -9,14 +9,15 @@ public class Foret extends Terrain{
     private final int densiteArbre;   //Permet de pouvoir se cacher ou non dans la forêt
 
     /**
-     * Genère aleatoire la densité d'une case foret entre 0 et 100%
+     * Constructeur de la classe Foret
+     * Genère aleatoirement la densité d'une case foret entre 0 et 100%
      */
     public Foret(){
         densiteArbre = (int) (Math.random() * 100 );
     }
         
     /**
-     * 
+     * Indique aux Trouillards si il arrivent à se cacher dans la Forêt
      * @return True si un personnage sur cette case peut se cacher, False sinon
      */
     public boolean seCacher(){

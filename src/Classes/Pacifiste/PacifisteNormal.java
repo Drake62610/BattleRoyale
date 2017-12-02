@@ -13,10 +13,13 @@ import Classes.Team;
 import Exception.WalkOnWaterException;
 
 public class PacifisteNormal extends Personnage implements Pacifiste {
-
+    //VARIABLE DE CLASSE
+    /**
+     * raison est utilisé lors de l'appel de "raisonner", elle détermine le pourcentage de réussite de la capacité
+     */
     int raison;
     /**
-     * 
+     * Constructeur de la Classe Pacifiste
      * @param position_x
      * @param position_y
      * @param carte 
@@ -27,60 +30,71 @@ public class PacifisteNormal extends Personnage implements Pacifiste {
                 ,1                        //Deplacement
                 ,1                        //Vitesse
                 ,position_x, position_y,carte);
-        this.raison = 30 + (int)(Math.random()*(30)); 
+        this.raison = 30 + (int)(Math.random()*(30)); //30% de chance minimum & 60% de chance maximum
     }
+    //GETTER
+    /**
+     * Getter de la variable raison
+     * @return 
+     */
     @Override
     public int getRaison() {
         return raison;
     }
 
-    
+    /**
+     * Capacité spéciale la classe Pacifiste, permet de convaincre n'importe quelle autre classe de rejoindre sa team ou de créer une team
+     * @param cible qui pourrait rejoindre la Team
+     */
     @Override
     public void raisonner(Personnage cible) {
         this.parler("Rejoint moi "+ cible.getName() + " !"); //Inspirational speech
         
         boolean success = false;
-        if((int)(Math.random()*100)<raison){
-            success = true;
-            //Travailler sur la raison ici
+        if((int)(Math.random()*100)<raison){ //Determiner si la capacité fonctionne
+            success = true; //Success
         }
         else{
-            this.parler("Non je ne peux pas vous faire confiance pour le moment");
+            this.parler("Non je ne peux pas vous faire confiance pour le moment"); //Echec :(
         }
-        
         if(success){
-            if(this.getTeam() == null){
+            if(this.getTeam() == null){ //Cas où la personne n'as pas de Team
                 cible.parler("Oui créons une Team dont tu es le leader !");
-                this.setTeam(new Team(this));
-                this.getTeam().addMember(cible);
+                this.setTeam(new Team(this)); //Creation de la team
+                this.getTeam().addMember(cible); //Ajout de la cible à la Team directement
             }
-            else{
-                cible.parler("Oui je veux bien rejoindre ta Team !");
-                this.getTeam().addMember(cible);
+            else{ //Cas où la personne as déjà une Team
+                cible.parler("Oui je veux bien rejoindre ta Team !"); 
+                this.getTeam().addMember(cible); //On l'ajoute directement à la team
             }
         }
     }
     
+    /**
+     * Polymorphisme pour une Team de la capacité de classe Pacifiste "raisonner"
+     * @param cible 
+     */
     @Override
     public void raisonner(Team cible) {
         this.parler("Rejoint moi "+ cible.getLeader().getName() + "toi et ta Team ! Ensemble nous serons plus fort"); //Inspirational speech
 
-        if (this.getTeam() == null){
-            cible.getLeader().parler("Bien entendu !");
+        if (this.getTeam() == null){ //Cas où la personne demandante n'as pas de Team
+            cible.getLeader().parler("Bien entendu !"); //Reussite automatique
+            cible.addMember(this);
         }
-        else{
+        else{//cas où l'autre est plus diplomate
             if(cible instanceof Pacifiste && this.raison>((Pacifiste)cible.getLeader()).getRaison() || !(cible.getLeader() instanceof Pacifiste)){ //Le nouveau leader est celui avec le plus de raison
                 cible.getLeader().parler("Je ne peux pas refuser l'offre d'un Pacifiste comme vous ! Devenez leader à ma place !");
                 this.getTeam().getMembres().addAll(cible.getMembres());
                 cible.getLeader().getCarte().getCarte_Terrain()[cible.getLeader().getPosition_x()][cible.getLeader().getPosition_y()].setPerso(null);
-                //Transfert
+                //Transfert des membres
                 for (int i=0;i<this.getTeam().getMembres().size();i++){
                     this.getTeam().getMembres().get(i).setPosition_x(this.getPosition_x());
                     this.getTeam().getMembres().get(i).setPosition_y(this.getPosition_y());
                     this.getTeam().getMembres().get(i).setTeam(this.getTeam());
                 }                
             }
-            else{
+            else{ //Cas où this est plus diplomate
                 cible.getLeader().parler("Bien sur mais je suis plus qualifié que toi, je reste Leader.");
                 cible.getMembres().addAll(this.getTeam().getMembres());
                 this.getCarte().getCarte_Terrain()[this.getPosition_x()][this.getPosition_y()].setPerso(null);
@@ -94,6 +108,10 @@ public class PacifisteNormal extends Personnage implements Pacifiste {
         }
     }
     
+    /**
+     * Override de phaseDeplacement de la classe Personnage pour le déplacement d'un Pacifiste
+     * Un Pacifiste va tenter de se rapprocher des autres et de les rallier à sa cause !
+     */
     @Override
     public void choixDeplacement() {
         int x =this.getPosition_x();
@@ -155,7 +173,7 @@ public class PacifisteNormal extends Personnage implements Pacifiste {
                     else{this.moveSouth();}
                 }
                 else{
-                    this.moveRandom(); //Changer par deplacementrandom (à coder)
+                    this.moveRandom(); //Sinon il explore
                 }
             } 
             }
@@ -166,12 +184,17 @@ public class PacifisteNormal extends Personnage implements Pacifiste {
             ex.getMessage();
         }
     }
-
+    
+    /**
+     * Override de phaseAction de la classe Personnage
+     * Un Pacifiste raisonne les personne autour de lui
+     */
     @Override
     public void phaseAction() {
         int x =this.getPosition_x();
         int y = this.getPosition_y();
         Terrain[][] carte = this.getCarte().getCarte_Terrain();
+        //Il regarde autour de lui et propose une alliance si il y a quelqu'un
         if(carte[x+1][y].getPerso() != null){
             if(carte[x+1][y].getPerso() instanceof Personnage){this.raisonner((Personnage)carte[x+1][y].getPerso());}
             else{this.raisonner((Team)carte[x+1][y].getPerso());}
