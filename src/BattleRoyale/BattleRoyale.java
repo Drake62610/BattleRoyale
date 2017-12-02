@@ -7,6 +7,8 @@ import Carte.Terrain;
 import Classes.Pacifiste.PacifisteNormal;
 import Classes.Pacifiste.PacifisteSoigneur;
 import Classes.Personnage;
+import Classes.Team;
+import Classes.Traitre.Traitre;
 import Classes.Traitre.TraitreNormal;
 import Classes.Traitre.TraitrePiegeur;
 import Classes.Traitre.TraitreSoigneur;
@@ -129,7 +131,21 @@ public class BattleRoyale {
                 Thread.sleep(500);
             }
         }
-        System.out.println("Nous avons un gagnant : " + this.getGagnant() + " qui est un " + this.getClass());
+        if (gagnant instanceof Team){
+            for(int i=0;i<participants.size();i++){
+                if (participants.get(i) instanceof Traitre){ 
+                    System.out.println("Oh non il y avait un Traitre dans la Team ! Il a empoisonné tout leurs sommeil !");
+                    gagnant = participants.get(i);
+            }
+        }
+        }
+        if (gagnant instanceof Team){
+            System.out.println("Nous avons un gagnant : " + ((Team)this.getGagnant()).getLeader().getName() + " et toute sa Team !");
+            System.out.println(this.getGagnant());
+        }
+        else{
+            System.out.println("Nous avons un gagnant : " + ((Personnage)this.getGagnant()).getName());
+        }
     }
     
     /**
@@ -435,6 +451,7 @@ public class BattleRoyale {
                 x++;
             }
     }
+    
     /**
      * 
      * @param a
@@ -448,6 +465,7 @@ public class BattleRoyale {
            return a;
        }
    }
+   
    /**
     * 
     * @param a
@@ -461,6 +479,7 @@ public class BattleRoyale {
            return b;
        }
    }   
+ 
    /**
     * fonctions permettant d'interrompre l'avancée de la zone rouge
     * @return le nombre de case ou la zone rouge n'est pas active 
