@@ -185,7 +185,7 @@ public class Personnage {
     
     //METHODS
     /**
-     * Overide de la methode toString de la classe Object
+     * Override de la methode toString de la classe Object
      * Présente les principales Stats
      * @return 
      */
@@ -219,7 +219,7 @@ public class Personnage {
         int dmg = force;
         if (cible instanceof Personnage){ //Cas d'attaque sur une personne
             this.parler("Aya !");         
-            ((Personnage) cible).enquaisser(dmg); 
+            ((Personnage) cible).encaisser(dmg); 
         }
         else if (cible instanceof Team){ //Cas d'attaque sur une Team
             this.parler("Vous ne me faites pas peur avec votre team, prennez ça ! Aya !");
@@ -234,7 +234,7 @@ public class Personnage {
      * Methode invoquer lorque le personnage reçoit des dégats, met à jour les PV et gère la mort
      * @param dmg dommage brut pris par le personnage
      */
-    public void enquaisser(int dmg){
+    public void encaisser(int dmg){
         if(this.getPv()<=dmg){ //Cas de mort
             this.setPv(0);
             this.parler("Monde de merde ! x|"); //Mais qu'est ce que ça peut bien vouloir dire ?
@@ -379,7 +379,7 @@ public class Personnage {
             this.choixDeplacement();
             if (carte.getCarte_Terrain()[position_y][position_x].isPiege() && !(this instanceof TrouillardPiegeur)){ //Si le personnage marche dans un pière
                 int dmg = (int)(1 + Math.random()*(4-1));   //On tire un chiffre entre 1 et 3 pour définir les dommage que le piège inflise                                                         //Et n'est pas un TrouillardPiegeur (avantage de Personnalitée)
-                this.enquaisser(dmg);   //Le personnage encaisse les dégats du piège
+                this.encaisser(dmg);   //Le personnage encaisse les dégats du piège
                 System.out.println(name + " marche dans un piège et perd "+ dmg +".");
                 carte.getCarte_Terrain()[position_y][position_x].setPiege(false); //Le piège ayant été activée il devient innutilisable de nouveau
             }

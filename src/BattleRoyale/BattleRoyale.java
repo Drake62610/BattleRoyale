@@ -136,8 +136,8 @@ public class BattleRoyale {
                 if (participants.get(i) instanceof Traitre){ 
                     System.out.println("Oh non il y avait un Traitre dans la Team ! Il a empoisonné tout leurs sommeil !");
                     gagnant = participants.get(i);
+                }
             }
-        }
         }
         if (gagnant instanceof Team){
             System.out.println("Nous avons un gagnant : " + ((Team)this.getGagnant()).getLeader().getName() + " et toute sa Team !");
@@ -230,7 +230,12 @@ public class BattleRoyale {
         System.out.println(morts.size() + " ont déjà succombé.");
         System.out.println("******************");
         if(participants.size() == 1 || (participants.get(0).getTeam()!=null && participants.get(0).getTeam().getMembres().size() == participants.size())){
-            gagnant = participants.get(0);
+            if (participants.get(0).getTeam() == null ){
+                gagnant = participants.get(0);
+            }
+            else{
+                gagnant = participants.get(0).getTeam();
+            }
         }
         //this.pause();
         tour ++;        

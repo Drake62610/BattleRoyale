@@ -19,7 +19,7 @@ import javax.swing.JPanel;
  */
 public class Carte {
     //VARIABLE DE CLASSE
-    Terrain[][] carte_Terrain;  //Contient une île entourée de mer sur lequel le jeus e déroulera
+    private Terrain[][] carte_Terrain;  //Contient une île entourée de mer sur lequel le jeus e déroulera
 
     //CONSTRUCTOR
     /**

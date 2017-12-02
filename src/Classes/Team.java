@@ -150,6 +150,6 @@ public class Team {
      * @param dmg 
      */
     public void enquaisser(int dmg){
-        leader.enquaisser(dmg);
+        leader.encaisser(dmg);
     } 
 }  

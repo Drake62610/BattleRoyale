@@ -37,14 +37,14 @@ public class Soigneur extends Personnage{
     /**
      * Permet de soigner un Personnage en fonction de la capacité de soin du soigneur
      */
-    public void soigner(Personnage Ami){
-        if (Ami.getPVMAX()-Ami.getPv()>=capacité){ //Si la capacité est inférieure à la distance pv -- pvactuel du personnage à soigner
-            Ami.setPv(Ami.getPv()+capacité); //On reset les pv du personnage
-            System.out.println(this.getName() + " a soigné "+Ami.getName()+" de "+ capacité + " !");
+    public void soigner(Personnage ami){
+        if (ami.getPVMAX()-ami.getPv()>=capacité){ //Si la capacité est inférieure à la distance pv -- pvactuel du personnage à soigner
+            ami.setPv(ami.getPv()+capacité); //On reset les pv du personnage
+            System.out.println(this.getName() + " a soigné "+ami.getName()+" de "+ capacité + " !");
         }
-        else{ //Sinon on reset avec les PVMAX directement
-            System.out.println(this.getName() + " a soigné "+Ami.getName()+" de "+ Integer.toString(Ami.getPVMAX()-Ami.getPv()) + " !");
-            Ami.setPv(Ami.getPVMAX());
+        else if (ami.getPVMAX()-ami.getPv()!=0){ //Sinon on reset avec les PVMAX directement
+            System.out.println(this.getName() + " a soigné "+ami.getName()+" de "+ Integer.toString(ami.getPVMAX()-ami.getPv()) + " !");
+            ami.setPv(ami.getPVMAX());
         }
     }
     
@@ -59,7 +59,7 @@ public class Soigneur extends Personnage{
             System.out.println(this.getName() + " se soigne de "+ capacité + " ! ");
             this.setPv(this.getPv() + capacité);
         }
-        else{
+        else if (this.getPVMAX()-this.getPv()!=0){
             System.out.println(this.getName() + " se soigne de "+ Integer.toString(this.getPVMAX()-this.getPv()) + " !");
             this.setPv(this.getPVMAX());
         }
