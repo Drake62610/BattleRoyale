@@ -2,6 +2,7 @@ package Carte;
 
 /**
  * Projet JAVA Semestre1 M1
+ * Terrain montagneux praticable
  * @author MATTE FLORIAN, MARISSAL LOIC
  */
 public class Montagne extends Terrain{

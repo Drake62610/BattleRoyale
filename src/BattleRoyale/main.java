@@ -1,11 +1,13 @@
 package BattleRoyale;
 
+import Exception.InitialisationCarteException;
 import Exception.InitialisationPersonnageException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
  * Projet JAVA Semestre1 M1
+ * Classe main pour lancer un BattleRoyal
  * @author MATTE FLORIAN, MARISSAL LOIC
  */
 
@@ -26,6 +28,8 @@ public class main {
             platinum.lancer(1);
             //platinum.pause();
         } catch (InitialisationPersonnageException ex) {//Exception intervennant lors de l'initialisation 
+            Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InitialisationCarteException ex) {
             Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
         }
         

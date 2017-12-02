@@ -5,6 +5,7 @@ import Carte.Carte;
 
 /**
  * Projet JAVA Semestre1 M1
+ * Interface du comportement Trouillard
  * @author MATTE FLORIAN, MARISSAL LOIC
  */
 public interface Trouillard {

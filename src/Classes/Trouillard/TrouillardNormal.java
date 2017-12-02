@@ -1,8 +1,3 @@
-/**
- * Projet JAVA Semestre1 M1
- *
- * @author MATTE FLORIAN, MARISSAL LOIC
- */
 package Classes.Trouillard;
 
 import Carte.Carte;
@@ -10,7 +5,11 @@ import Carte.Foret;
 import Carte.Terrain;
 import Classes.Personnage;
 import Exception.WalkOnWaterException;
-
+/**
+ * Projet JAVA Semestre1 M1
+ * Classe TrouillardNormal, Personnage basique possédant la caractéristique Trouillard
+ * @author MATTE FLORIAN, MARISSAL LOIC
+ */
 public class TrouillardNormal extends Personnage implements Trouillard {
     /**
      * Indique aux autres personnage si le Trouillard est visible ou non
@@ -144,7 +143,10 @@ public class TrouillardNormal extends Personnage implements Trouillard {
             ex.getMessage();
         }
     }
-
+    
+    /**
+     * Phase Action d'un Trouillard : Continer de se cacher ou de trouver une cachette dans la forêt
+     */
     @Override
     public void phaseAction() {
         int x =this.getPosition_x();
@@ -157,7 +159,10 @@ public class TrouillardNormal extends Personnage implements Trouillard {
             this.pleurer();
         }
     }
-    
+
+    /**
+     * Capacité spéciale la classe Trouillard, permet de se cacher dans les Bois si le terrain le permet
+     */    
     @Override
     public void seCamoufler() {
         if(((Foret)this.getCarte().getCarte_Terrain()[this.getPosition_x()][this.getPosition_y()]).seCacher()){
@@ -169,7 +174,9 @@ public class TrouillardNormal extends Personnage implements Trouillard {
             System.out.println("Je ne trouve pas de cachette");
         }
     }
-
+    /**
+     * Fonction inutile qui fait pousser un cri de peur au Trouillard
+     */
     @Override
     public void pleurer() {
         System.out.println(this.getName() + "craque psychologiquement !");

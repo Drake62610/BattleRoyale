@@ -1,8 +1,3 @@
-/**
- * Projet JAVA Semestre1 M1
- *
- * @author MATTE FLORIAN, MARISSAL LOIC
- */
 package Classes.Pacifiste;
 
 import BattleRoyale.Constant;
@@ -11,7 +6,11 @@ import Carte.Terrain;
 import Classes.Personnage;
 import Classes.Team;
 import Exception.WalkOnWaterException;
-
+/**
+ * Projet JAVA Semestre1 M1
+ * Classe PacifisteNormal, Personnage basique avec la caractéristique Pacifiste
+ * @author MATTE FLORIAN, MARISSAL LOIC
+ */
 public class PacifisteNormal extends Personnage implements Pacifiste {
     //VARIABLE DE CLASSE
     /**

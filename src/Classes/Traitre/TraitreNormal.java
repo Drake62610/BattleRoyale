@@ -1,8 +1,4 @@
-/**
- * Projet JAVA Semestre1 M1
- *
- * @author MATTE FLORIAN, MARISSAL LOIC
- */
+
 package Classes.Traitre;
 
 import BattleRoyale.Constant;
@@ -12,7 +8,11 @@ import Classes.Personnage;
 import Classes.Team;
 import Exception.WalkOnWaterException;
 import java.util.ArrayList;
-
+/**
+ * Projet JAVA Semestre1 M1
+ * Classe TraitreNormal, Personnage basique possédant la caractéristique Traitre
+ * @author MATTE FLORIAN, MARISSAL LOIC
+ */
 public class TraitreNormal extends Personnage implements Traitre {
 
     /**

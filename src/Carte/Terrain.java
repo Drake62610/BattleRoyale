@@ -7,6 +7,7 @@ import Classes.Trouillard.Trouillard;
 
 /**
  * Projet JAVA Semestre1 M1
+ * Classe Terrain, définit toute les caractéristique des Terrains en général
  * @author MATTE FLORIAN, MARISSAL LOIC
  */
 public class Terrain {

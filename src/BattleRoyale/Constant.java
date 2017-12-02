@@ -7,6 +7,7 @@ import java.io.IOException;
 
 /**
  * Projet JAVA Semestre1 M1
+ * Classe contenant toutes les constantes
  * @author MATTE FLORIAN, MARISSAL LOIC
  */
 public class Constant {

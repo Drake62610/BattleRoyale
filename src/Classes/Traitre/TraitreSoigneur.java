@@ -7,20 +7,17 @@ package Classes.Traitre;
 
 import BattleRoyale.Constant;
 import Carte.Carte;
-import Carte.Foret;
 import Carte.Terrain;
-import Classes.Pacifiste.Pacifiste;
 import Classes.Personnage;
 import Classes.Soigneur;
 import Classes.Team;
-import Classes.Trouillard.Trouillard;
-import Classes.Tueur.Tueur;
 import Exception.WalkOnWaterException;
 import java.util.ArrayList;
 
 /**
- *
- * @author ISEN
+ * Projet JAVA Semestre1 M1
+ * Classe Traitre Soigneur, Personnage possédant la caractéristique Traitre qui a l'habilité de soigner
+ * @author MATTE FLORIAN, MARISSAL LOIC
  */
 public class TraitreSoigneur extends Soigneur implements Traitre {
 

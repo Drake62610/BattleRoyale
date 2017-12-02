@@ -1,10 +1,9 @@
+package Classes.Pacifiste;
 /**
  * Projet JAVA Semestre1 M1
- *
+ * Classe Pacifiste Soigneur, Personnage possédant la caractéristique Pacifiste qui a l'habilité de soigner
  * @author MATTE FLORIAN, MARISSAL LOIC
  */
-package Classes.Pacifiste;
-
 import BattleRoyale.Constant;
 import Carte.Carte;
 import Carte.Terrain;

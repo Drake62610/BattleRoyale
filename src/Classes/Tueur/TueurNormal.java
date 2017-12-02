@@ -1,10 +1,9 @@
+package Classes.Tueur;
 /**
  * Projet JAVA Semestre1 M1
- *
+ * Classe Tueur Normal, Personnage standard avec un comportement de Tueur
  * @author MATTE FLORIAN, MARISSAL LOIC
  */
-package Classes.Tueur;
-
 import BattleRoyale.Constant;
 import Carte.Carte;
 import Carte.Terrain;
@@ -15,6 +14,7 @@ import Exception.WalkOnWaterException;
 public class TueurNormal extends Personnage implements Tueur{
     /**
      * Afin de limiter les dégats il ne peut utiliser son attaque spéciale que tout les X tours
+     * Non implémentée car trop fort
      */
     private boolean ravageReady = true;
     /**
@@ -29,7 +29,7 @@ public class TueurNormal extends Personnage implements Tueur{
     }
 
     /**
-     * Override de la methode ravage, elle permet si ravageReady le permet d'attaquer sur un carré autour de lui
+     *Methode non implémentée au final car jugée trop forte
      */
     @Override
     public void ravage() {
@@ -50,7 +50,9 @@ public class TueurNormal extends Personnage implements Tueur{
             }
         }
     }
-
+    /**
+     * Le Tueur cherche à se raprocher des personnes qu'il a en vue pour les attaquer
+     */
     @Override
     public void choixDeplacement() {
         int x =this.getPosition_x();

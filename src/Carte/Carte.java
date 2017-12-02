@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 
 /**
  * Projet JAVA Semestre1 M1
+ * Classe contenant la carte du jeu ainsi que les méthodes pour obtenir une interface graphique
  * @author MATTE FLORIAN, MARISSAL LOIC
  */
 public class Carte {

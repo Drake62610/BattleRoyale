@@ -1,8 +1,3 @@
-/**
- * Projet JAVA Semestre1 M1
- *
- * @author MATTE FLORIAN, MARISSAL LOIC
- */
 package Classes.Trouillard;
 
 import Carte.Carte;
@@ -10,7 +5,11 @@ import Carte.Foret;
 import Carte.Terrain;
 import Classes.Soigneur;
 import Exception.WalkOnWaterException;
-
+/**
+ * Projet JAVA Semestre1 M1
+ * Classe Trouillard Soigneur, Personnage possédant la caractéristique Trouillard qui a l'habilité de soigner
+ * @author MATTE FLORIAN, MARISSAL LOIC
+ */
 public class TrouillardSoigneur extends Soigneur implements Trouillard {
     /**
      * Indique aux autres personnage si le Trouillard est visible ou non
@@ -147,6 +146,10 @@ public class TrouillardSoigneur extends Soigneur implements Trouillard {
         }
     }
 
+    /**
+     * Phase Action d'un Trouillard : Continer de se cacher ou de trouver une cachette dans la forêt
+     * Phase d'action d'un Soigneur : il se soigne
+     */
     @Override
     public void phaseAction() {
         int x =this.getPosition_x();
@@ -159,14 +162,19 @@ public class TrouillardSoigneur extends Soigneur implements Trouillard {
             this.pleurer();
         }
     }
-    
+
+    /**
+     * Capacité spéciale la classe Trouillard, permet de se cacher dans les Bois si le terrain le permet
+     */    
     @Override
     public void seCamoufler() {
         if(((Foret)this.getCarte().getCarte_Terrain()[this.getPosition_x()][this.getPosition_y()]).seCacher()){
             hidden = true;
         }
     }
-
+    /**
+     * Fonction inutile qui fait pousser un cri de peur au Trouillard
+     */
     @Override
     public void pleurer() {
         this.parler("NOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOON POURQUOI ??????");

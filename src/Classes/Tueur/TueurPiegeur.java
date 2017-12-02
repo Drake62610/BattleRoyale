@@ -1,10 +1,10 @@
+
+package Classes.Tueur;
 /**
  * Projet JAVA Semestre1 M1
- *
+ * Classe Tueur Piegeur, Personnage possédant la caractéristique Tueur qui a l'habilité de poser des pièges
  * @author MATTE FLORIAN, MARISSAL LOIC
  */
-package Classes.Tueur;
-
 import BattleRoyale.Constant;
 import Carte.Carte;
 import Carte.Terrain;
@@ -14,9 +14,14 @@ import Classes.Team;
 import Exception.WalkOnWaterException;
 
 public class TueurPiegeur extends Piegeur implements Tueur {
-
+    /**
+     * Afin de limiter les dégats il ne peut utiliser son attaque spéciale que tout les X tours
+     * Non implémentée car trop fort
+     */
     private boolean ravageReady = true;
-    
+    /**
+     * Constructeur de la classe Tueur
+     */        
     public TueurPiegeur(int position_x, int position_y, Carte carte) {
         super(5+(int)(Math.random()*(5-1)) //PV
                 ,5 + (int)(Math.random()*(8-5))//Force
@@ -25,6 +30,9 @@ public class TueurPiegeur extends Piegeur implements Tueur {
                 ,position_x, position_y,carte);
     }
 
+    /**
+     *Methode non implémentée au final car jugée trop forte
+     */
     @Override
     public void ravage() {
         int x = this.getPosition_x();

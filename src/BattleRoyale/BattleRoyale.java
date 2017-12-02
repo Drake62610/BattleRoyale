@@ -1,8 +1,4 @@
-/**
- * Projet JAVA Semestre1 M1
- *
- * @author MATTE FLORIAN, MARISSAL LOIC
- */
+
 package BattleRoyale;
 
 import Carte.Carte;
@@ -26,7 +22,11 @@ import java.util.Comparator;
 import java.util.Scanner;
 import javax.swing.JFrame;
 import Exception.InitialisationPersonnageException;
-
+/**
+ * Projet JAVA Semestre1 M1
+ * Classe BattleRoyale avec les règles
+ * @author MATTE FLORIAN, MARISSAL LOIC
+ */
 public class BattleRoyale {
     private ArrayList <Personnage> participants = new ArrayList <>();  
     private ArrayList <Personnage> morts = new ArrayList <>(); 
@@ -78,7 +78,7 @@ public class BattleRoyale {
      * Constructeur de la classe BattleRoyale avec une config de base
      * @throws InitialisationPersonnageException 
      */
-    public BattleRoyale() throws InitialisationPersonnageException {
+    public BattleRoyale() throws InitialisationPersonnageException, InitialisationCarteException {
         this(5,3,15,3,8,5,7); //Une config de base que j'aime bien
     }    
     
@@ -213,7 +213,7 @@ public class BattleRoyale {
         System.out.println("Il reste " + participants.size() +" participants.");
         System.out.println(morts.size() + " ont déjà succombé.");
         System.out.println("******************");
-        if(participants.size() == 1){
+        if(participants.size() == 1 || (participants.get(0).getTeam()!=null && participants.get(0).getTeam().getMembres().size() == participants.size())){
             gagnant = participants.get(0);
         }
         //this.pause();
